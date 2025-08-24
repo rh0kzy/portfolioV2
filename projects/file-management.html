@@ -1,116 +1,28 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>File Management System - Aymen Belkadi Portfolio</title>
     <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../project-styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        .project-hero {
-            background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
-            padding: 80px 0;
-            text-align: center;
-        }
-        .project-logo {
-            width: 150px;
-            height: 150px;
-            margin: 0 auto 20px;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-        }
-        .project-logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .project-details {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 20px;
-        }
-        .detail-section {
-            margin-bottom: 40px;
-            background: #161b22;
-            padding: 30px;
-            border-radius: 12px;
-            border: 1px solid #30363d;
-        }
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        .tech-tag {
-            background: #238636;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 500;
-        }
-        .feature-list {
-            list-style: none;
-            padding: 0;
-        }
-        .feature-list li {
-            padding: 8px 0;
-            padding-left: 30px;
-            position: relative;
-        }
-        .feature-list li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #238636;
-            font-weight: bold;
-        }
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: #21262d;
-            color: #f0f6fc;
-            padding: 12px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            border: 1px solid #30363d;
-            transition: all 0.3s ease;
-            margin-bottom: 40px;
-        }
-        .back-btn:hover {
-            background: #30363d;
-            border-color: #58a6ff;
-        }
-        .code-block {
-            background: #0d1117;
-            border: 1px solid #30363d;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 15px 0;
-            font-family: 'Courier New', monospace;
-            color: #f0f6fc;
-            overflow-x: auto;
-        }
-    </style>
 </head>
 <body>
     <div class="project-hero">
-        <div class="container">
+        <div class="hero-content">
             <div class="project-logo">
                 <img src="Système de Gestion de Fichiers/getionLogo.jpg" alt="File Management System Logo">
             </div>
-            <h1>Système de Gestion de Fichiers</h1>
-            <p>Simulateur de mémoire secondaire avec allocation dynamique et opérations CRUD</p>
+            <h1 class="project-title">File Management System</h1>
+            <p class="project-subtitle">Système avancé de gestion de fichiers avec interface intuitive et fonctions complètes</p>
             <div class="tech-stack">
-                <span class="tech-tag">C</span>
-                <span class="tech-tag">Data Structures</span>
-                <span class="tech-tag">Memory Management</span>
-                <span class="tech-tag">File Systems</span>
-                <span class="tech-tag">Algorithms</span>
+                <span class="tech-tag orange">C</span>
+                <span class="tech-tag purple">System Programming</span>
+                <span class="tech-tag blue">File Operations</span>
+                <span class="tech-tag">GUI</span>
+                <span class="tech-tag">Performance</span>
             </div>
         </div>
     </div>
@@ -118,181 +30,52 @@
     <div class="project-details project-content">
         <a href="../index.html#projects" class="back-btn">
             <i class="fas fa-arrow-left"></i>
-            Retour au Portfolio
+            Back to Portfolio
         </a>
 
-        <div class="detail-section feature-item">
-            <h2><i class="fas fa-info-circle"></i> Aperçu du Projet</h2>
-            <p>Un système complet de gestion de mémoire secondaire qui simule les opérations de stockage et manipulation de fichiers en langage C. Ce projet démontre une compréhension avancée des structures de données, de l'allocation mémoire et des concepts de systèmes de fichiers à travers une implémentation complète des opérations de gestion de fichiers.</p>
-        </div>
-
-        <div class="detail-section feature-item">
-            <h2><i class="fas fa-laptop-code"></i> Technologies Utilisées</h2>
-            <ul class="feature-list">
-                <li><strong>Langage de Programmation:</strong> C</li>
-                <li><strong>Concepts:</strong> Structures de Données, Gestion Mémoire, Systèmes de Fichiers</li>
-                <li><strong>Outils:</strong> Compilateur GCC, Interface Console</li>
-                <li><strong>Architecture:</strong> Programmation procédurale avancée</li>
-            </ul>
-        </div>
-
-        <div class="detail-section feature-item">
-            <h2><i class="fas fa-star"></i> Fonctionnalités Principales</h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
-                <div>
-                    <h3>🧠 Gestion Dynamique de la Mémoire</h3>
-                    <ul class="feature-list">
-                        <li>Allocation mémoire personnalisée</li>
-                        <li>Tailles de blocs configurables</li>
-                        <li>Table d'allocation pour suivi</li>
-                        <li>Gestion d'erreurs robuste</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>📁 Stratégies d'Organisation Multiple</h3>
-                    <ul class="feature-list">
-                        <li>Organisation Globale: Contiguë vs Liée</li>
-                        <li>Organisation Interne: Triée vs Non-triée</li>
-                        <li>Création flexible avec paramètres utilisateur</li>
-                        <li>Optimisation selon le type d'usage</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>🔄 Opérations CRUD Complètes</h3>
-                    <ul class="feature-list">
-                        <li>Création avec gestion métadonnées</li>
-                        <li>Lecture avec algorithmes de recherche rapide</li>
-                        <li>Mise à jour avec positionnement automatique</li>
-                        <li>Suppression logique et physique</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>⚡ Opérations Mémoire Avancées</h3>
-                    <ul class="feature-list">
-                        <li>Compactage pour éliminer fragmentation</li>
-                        <li>Défragmentation de fichiers</li>
-                        <li>Suppression complète avec désallocation</li>
-                        <li>Renommage avec mise à jour métadonnées</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="detail-section feature-item">
-            <h2><i class="fas fa-code"></i> Implémentation Technique</h2>
-            <h3>Structures de Données</h3>
-            <div class="code-block">
-typedef struct {
-    int id;
-    bool deleted;
-    char data[RECORD_SIZE];
-} Record;
-
-typedef struct {
-    Record records[BLOCK_SIZE];
-    int next_block;
-    int record_count;
-} Block;
-
-typedef struct {
-    char filename[MAX_FILENAME];
-    int first_block;
-    int file_size;
-    bool allocated;
-} FileMetadata;
+        <div class="content-grid">
+            <div class="detail-section feature-item">
+                <h2><i class="fas fa-info-circle"></i> Aperçu du Projet</h2>
+                <p>Description détaillée du projet File Management System sera ajoutée ici avec toutes les fonctionnalités et caractéristiques importantes.</p>
             </div>
 
-            <h3>Algorithmes Clés</h3>
-            <ul class="feature-list">
-                <li><strong>Recherche Binaire:</strong> Pour fichiers triés, complexité O(log n)</li>
-                <li><strong>Recherche Séquentielle:</strong> Pour fichiers non-triés</li>
-                <li><strong>Allocation First-Fit:</strong> Stratégie d'allocation de blocs</li>
-                <li><strong>Compactage Mémoire:</strong> Élimination de la fragmentation externe</li>
-            </ul>
-        </div>
-
-        <div class="detail-section feature-item">
-            <h2><i class="fas fa-terminal"></i> Interface Utilisateur Interactive</h2>
-            <h3>Application Pilotée par Menu</h3>
-            <ul class="feature-list">
-                <li><strong>Navigation Intuitive:</strong> Menu console avec options numérotées</li>
-                <li><strong>Formatage Coloré:</strong> Amélioration de l'expérience utilisateur</li>
-                <li><strong>Rapports d'Erreur:</strong> Validation complète et feedback</li>
-                <li><strong>Visualisation Mémoire:</strong> Affichage en temps réel de l'état</li>
-            </ul>
-
-            <h3>Fonctionnalités d'Interface</h3>
-            <ul class="feature-list">
-                <li>Affichage de l'état de la mémoire</li>
-                <li>Statistiques d'utilisation en temps réel</li>
-                <li>Messages d'erreur détaillés</li>
-                <li>Confirmations d'opérations critiques</li>
-            </ul>
-        </div>
-
-        <div class="detail-section feature-item">
-            <h2><i class="fas fa-chart-bar"></i> Optimisations de Performance</h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
-                <div>
-                    <h3>⚡ Gestion Mémoire</h3>
-                    <ul class="feature-list">
-                        <li>Pool de mémoire pré-allouée</li>
-                        <li>Réutilisation de blocs libérés</li>
-                        <li>Minimisation des appels système</li>
-                        <li>Cache de métadonnées</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>🔍 Algorithmes de Recherche</h3>
-                    <ul class="feature-list">
-                        <li>Index pour accès rapide</li>
-                        <li>Tables de hachage pour ID</li>
-                        <li>Recherche optimisée selon organisation</li>
-                        <li>Cache de résultats fréquents</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>📊 Métriques de Performance</h3>
-                    <ul class="feature-list">
-                        <li>Temps d'accès mesurés</li>
-                        <li>Taux de fragmentation</li>
-                        <li>Utilisation mémoire</li>
-                        <li>Statistiques d'opérations</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>🛠️ Maintenance Système</h3>
-                    <ul class="feature-list">
-                        <li>Compactage automatique</li>
-                        <li>Nettoyage périodique</li>
-                        <li>Vérification d'intégrité</li>
-                        <li>Récupération d'erreurs</li>
-                    </ul>
+            <div class="detail-section feature-item">
+                <h2><i class="fas fa-cogs"></i> Caractéristiques Techniques</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>🏗️ Architecture</h3>
+                        <ul class="feature-list">
+                            <li>Architecture moderne et robuste</li>
+                            <li>Design patterns appropriés</li>
+                            <li>Code maintenable et évolutif</li>
+                            <li>Bonnes pratiques de développement</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3>⚙️ Technologies</h3>
+                        <ul class="feature-list">
+                            <li>Technologies de pointe</li>
+                            <li>Frameworks modernes</li>
+                            <li>Outils de développement avancés</li>
+                            <li>Optimisation des performances</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="detail-section feature-item">
-            <h2><i class="fas fa-graduation-cap"></i> Concepts Académiques Démontrés</h2>
-            <h3>Systèmes d'Exploitation</h3>
-            <ul class="feature-list">
-                <li><strong>Gestion de Mémoire:</strong> Allocation, désallocation, fragmentation</li>
-                <li><strong>Systèmes de Fichiers:</strong> Organisation, métadonnées, indexation</li>
-                <li><strong>Algorithmes de Placement:</strong> First-fit, best-fit, worst-fit</li>
-                <li><strong>Gestion de Ressources:</strong> Allocation et libération efficaces</li>
-            </ul>
-
-            <h3>Structures de Données</h3>
-            <ul class="feature-list">
-                <li>Listes liées pour allocation dynamique</li>
-                <li>Tables de hachage pour recherche rapide</li>
-                <li>Arbres binaires pour organisation triée</li>
-                <li>Files et piles pour gestion de ressources</li>
-            </ul>
+            <div class="detail-section feature-item">
+                <h2><i class="fas fa-images"></i> Captures d'Écran</h2>
+                <div class="screenshots">
+                    <div class="screenshot">
+                        <img src="placeholder.jpg" alt="File Management System Interface" onerror="this.style.display='none'">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <script src="../script.js"></script><script src="../project-animations.js"></script>
+    <script src="../script.js"></script>
+    <script src="../project-animations.js"></script>
 </body>
 </html>
 

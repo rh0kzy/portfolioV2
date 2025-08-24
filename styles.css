@@ -131,8 +131,11 @@ body {
     color: var(--text-primary);
 }
 
-.nav-brand i {
-    font-size: 20px;
+.portfolio-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-accent-fg);
+    letter-spacing: -0.5px;
 }
 
 .nav-menu {
@@ -657,6 +660,53 @@ body {
     margin-bottom: var(--space-4);
 }
 
+.achievements {
+    margin: var(--space-4) 0;
+}
+
+.achievements h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: var(--space-3);
+    color: var(--color-fg-default);
+}
+
+.achievement-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+}
+
+.achievement-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3);
+    background: var(--color-canvas-subtle);
+    border-radius: 8px;
+    border: 1px solid var(--color-border-default);
+    transition: all 0.3s ease;
+}
+
+.achievement-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-color: var(--color-accent-fg);
+}
+
+.achievement-item i {
+    color: var(--color-accent-fg);
+    font-size: 1.2rem;
+    width: 20px;
+    text-align: center;
+}
+
+.achievement-item span {
+    font-weight: 500;
+    color: var(--color-fg-default);
+}
+
 .skills-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -697,6 +747,68 @@ body {
     font-size: 20px;
     font-weight: 600;
     margin-bottom: var(--space-4);
+}
+
+.activity-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+}
+
+.stat-item {
+    background: var(--color-canvas-subtle);
+    padding: var(--space-3);
+    border-radius: 8px;
+    border: 1px solid var(--color-border-default);
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-accent-fg);
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: var(--color-fg-muted);
+}
+
+.contribution-summary {
+    background: var(--color-canvas-subtle);
+    padding: var(--space-3);
+    border-radius: 8px;
+    margin: var(--space-3) 0;
+    border-left: 4px solid var(--color-accent-fg);
+}
+
+.contribution-summary p {
+    margin: 0;
+    color: var(--color-fg-muted);
+    font-style: italic;
+}
+
+.activity-highlights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-2);
+    margin: var(--space-3) 0;
+}
+
+.highlight-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--color-fg-muted);
+    font-size: 0.875rem;
+}
+
+.highlight-item i {
+    color: var(--color-accent-fg);
+    width: 16px;
 }
 
 .contribution-graph {

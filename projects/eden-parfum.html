@@ -1,144 +1,28 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eden Parfum - Aymen Belkadi Portfolio</title>
     <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../project-styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        .project-hero {
-            background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
-            padding: 80px 0;
-            text-align: center;
-        }
-        .project-logo {
-            width: 150px;
-            height: 150px;
-            margin: 0 auto 20px;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-        }
-        .project-logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .project-details {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 20px;
-        }
-        .detail-section {
-            margin-bottom: 40px;
-            background: #161b22;
-            padding: 30px;
-            border-radius: 12px;
-            border: 1px solid #30363d;
-        }
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        .tech-tag {
-            background: #238636;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 500;
-        }
-        .feature-list {
-            list-style: none;
-            padding: 0;
-        }
-        .feature-list li {
-            padding: 8px 0;
-            padding-left: 30px;
-            position: relative;
-        }
-        .feature-list li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #238636;
-            font-weight: bold;
-        }
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: #21262d;
-            color: #f0f6fc;
-            padding: 12px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            border: 1px solid #30363d;
-            transition: all 0.3s ease;
-            margin-bottom: 40px;
-        }
-        .back-btn:hover {
-            background: #30363d;
-            border-color: #58a6ff;
-        }
-        .screenshots {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-        .screenshot {
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid #30363d;
-        }
-        .screenshot img {
-            width: 100%;
-            height: auto;
-        }
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin: 20px 0;
-        }
-        .stat-card {
-            background: #21262d;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            border: 1px solid #30363d;
-        }
-        .stat-number {
-            font-size: 2em;
-            font-weight: bold;
-            color: #58a6ff;
-            display: block;
-        }
-        .stat-label {
-            color: #8b949e;
-            font-size: 0.9em;
-        }
-    </style>
 </head>
 <body>
     <div class="project-hero">
-        <div class="container">
+        <div class="hero-content">
             <div class="project-logo">
                 <img src="EdenParfumWebSite/eden parfum logo.png" alt="Eden Parfum Logo">
             </div>
-            <h1>Eden Parfum - Site E-Commerce</h1>
-            <p>Plateforme e-commerce de luxe pour parfums premium avec 507+ fragrances</p>
+            <h1 class="project-title">Eden Parfum</h1>
+            <p class="project-subtitle">A sophisticated e-commerce website for Algeria's premier luxury perfume retailer</p>
             <div class="tech-stack">
-                <span class="tech-tag">HTML5</span>
-                <span class="tech-tag">CSS3</span>
-                <span class="tech-tag">JavaScript</span>
-                <span class="tech-tag">Responsive Design</span>
-                <span class="tech-tag">SEO Optimized</span>
+                <span class="tech-tag">HTML</span>
+                <span class="tech-tag blue">CSS</span>
+                <span class="tech-tag purple">JavaScript</span>
+                <span class="tech-tag orange">E-commerce</span>
+                <span class="tech-tag">Responsive</span>
             </div>
         </div>
     </div>
@@ -146,126 +30,57 @@
     <div class="project-details project-content">
         <a href="../index.html#projects" class="back-btn">
             <i class="fas fa-arrow-left"></i>
-            Retour au Portfolio
+            Back to Portfolio
         </a>
 
-        <div class="detail-section feature-item">
-            <h2><i class="fas fa-info-circle"></i> Aperçu du Projet</h2>
-            <p>EDEN PARFUM est un site web e-commerce sophistiqué et responsive développé pour le premier détaillant de parfums de luxe d'Algérie. La plateforme présente plus de 507 fragrances premium de marques de renommée mondiale, offrant aux clients une expérience d'achat numérique élégante qui reflète la nature luxueuse de l'entreprise.</p>
-            
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <span class="stat-number">507+</span>
-                    <span class="stat-label">Parfums</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number">50+</span>
-                    <span class="stat-label">Marques Luxe</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number">275</span>
-                    <span class="stat-label">Parfums Femmes</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number">170</span>
-                    <span class="stat-label">Parfums Hommes</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number">62</span>
-                    <span class="stat-label">Parfums Unisexe</span>
+        <div class="content-grid">
+            <div class="detail-section feature-item">
+                <h2><i class="fas fa-info-circle"></i> Aperçu du Projet</h2>
+                <p>Description détaillée du projet Eden Parfum sera ajoutée ici avec toutes les fonctionnalités et caractéristiques importantes.</p>
+            </div>
+
+            <div class="detail-section feature-item">
+                <h2><i class="fas fa-cogs"></i> Caractéristiques Techniques</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>🏗️ Architecture</h3>
+                        <ul class="feature-list">
+                            <li>Architecture moderne et robuste</li>
+                            <li>Design patterns appropriés</li>
+                            <li>Code maintenable et évolutif</li>
+                            <li>Bonnes pratiques de développement</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3>⚙️ Technologies</h3>
+                        <ul class="feature-list">
+                            <li>Technologies de pointe</li>
+                            <li>Frameworks modernes</li>
+                            <li>Outils de développement avancés</li>
+                            <li>Optimisation des performances</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="detail-section">
-            <h2><i class="fas fa-laptop-code"></i> Spécifications Techniques</h2>
-            <ul class="feature-list">
-                <li><strong>Technologies Frontend:</strong> HTML5, CSS3, JavaScript (Vanilla)</li>
-                <li><strong>Design Responsive:</strong> Approche mobile-first avec mises en page adaptatives</li>
-                <li><strong>Performance:</strong> Images optimisées (format AVIF), animations fluides, chargement rapide</li>
-                <li><strong>Compatibilité:</strong> Support des navigateurs modernes avec fallbacks</li>
-                <li><strong>SEO Optimisé:</strong> HTML sémantique, balises meta, données structurées</li>
-            </ul>
-        </div>
-
-        <div class="detail-section">
-            <h2><i class="fas fa-star"></i> Fonctionnalités Principales</h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
-                <div>
-                    <h3>🔍 Système de Catalogue Dynamique</h3>
-                    <ul class="feature-list">
-                        <li>Base de données de 507+ parfums</li>
-                        <li>Filtrage par marque, genre, référence</li>
-                        <li>Recherche en temps réel</li>
-                        <li>Collections catégorisées</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>💫 Interface Interactive</h3>
-                    <ul class="feature-list">
-                        <li>Section héro avec effets 3D</li>
-                        <li>Navigation fluide et défilement</li>
-                        <li>Vitrine de marques interactive</li>
-                        <li>Menu hamburger responsive</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>🔎 Recherche & Filtres Avancés</h3>
-                    <ul class="feature-list">
-                        <li>Recherche multi-paramètres</li>
-                        <li>Menus déroulants dynamiques</li>
-                        <li>Compteur de résultats en temps réel</li>
-                        <li>Fonction "Effacer les filtres"</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>🏪 Intégration Business</h3>
-                    <ul class="feature-list">
-                        <li>Google Maps intégré</li>
-                        <li>WhatsApp Business</li>
-                        <li>Réseaux sociaux (Instagram, TikTok)</li>
-                        <li>Formulaire de contact</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="detail-section">
-            <h2><i class="fas fa-palette"></i> Design & Expérience Utilisateur</h2>
-            <h3>Design Visuel</h3>
-            <ul class="feature-list">
-                <li><strong>Interface moderne:</strong> Esthétique propre et professionnelle</li>
-                <li><strong>Identité de marque:</strong> Branding EDEN PARFUM cohérent</li>
-                <li><strong>Navigation intuitive:</strong> Flux utilisateur optimisé</li>
-                <li><strong>Feedback visuel:</strong> Indicateurs d'état clairs</li>
-            </ul>
-
-            <h3>Fonctionnalités d'Utilisabilité</h3>
-            <ul class="feature-list">
-                <li>Intégration popup des réseaux sociaux</li>
-                <li>Chargement progressif des images</li>
-                <li>Interface multilingue (Français/Arabe)</li>
-                <li>Accessibilité optimisée</li>
-            </ul>
-        </div>
-
-        <div class="detail-section">
-            <h2><i class="fas fa-images"></i> Captures d'Écran</h2>
-            <div class="screenshots">
-                <div class="screenshot">
-                    <img src="EdenParfumWebSite/Eden1.png" alt="Page d'accueil" onerror="this.style.display='none'">
-                </div>
-                <div class="screenshot">
-                    <img src="EdenParfumWebSite/eden2.png" alt="Catalogue de produits" onerror="this.style.display='none'">
-                </div>
-                <div class="screenshot">
-                    <img src="EdenParfumWebSite/eden4.png" alt="Recherche et filtres" onerror="this.style.display='none'">
-                </div>
-                <div class="screenshot">
-                    <img src="EdenParfumWebSite/eden5.png" alt="Version mobile" onerror="this.style.display='none'">
-                </div>
-                <div class="screenshot">
-                    <img src="EdenParfumWebSite/eden6.png" alt="Interface contact" onerror="this.style.display='none'">
+            <div class="detail-section feature-item">
+                <h2><i class="fas fa-images"></i> Screenshots</h2>
+                <div class="screenshots">
+                    <div class="screenshot">
+                        <img src="EdenParfumWebSite/Eden1.png" alt="Eden Parfum Homepage">
+                    </div>
+                    <div class="screenshot">
+                        <img src="EdenParfumWebSite/eden2.png" alt="Eden Parfum Products">
+                    </div>
+                    <div class="screenshot">
+                        <img src="EdenParfumWebSite/eden4.png" alt="Eden Parfum Cart">
+                    </div>
+                    <div class="screenshot">
+                        <img src="EdenParfumWebSite/eden5.png" alt="Eden Parfum Product Details">
+                    </div>
+                    <div class="screenshot">
+                        <img src="EdenParfumWebSite/eden6.png" alt="Eden Parfum Checkout">
+                    </div>
                 </div>
             </div>
         </div>
@@ -275,3 +90,4 @@
     <script src="../project-animations.js"></script>
 </body>
 </html>
+
