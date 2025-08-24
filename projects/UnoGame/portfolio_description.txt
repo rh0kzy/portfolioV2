@@ -1,0 +1,149 @@
+================================================================
+                    UNO GAME - PORTFOLIO PROJECT
+================================================================
+
+PROJECT OVERVIEW:
+-----------------
+A fully functional digital implementation of the classic UNO card game, built in Java with a custom GUI framework. This project demonstrates advanced object-oriented programming principles, custom UI development, and game logic implementation.
+
+TECHNICAL SPECIFICATIONS:
+-------------------------
+• Language: Java (using Java Modules system)
+• Architecture: Model-View-Controller (MVC) pattern
+• GUI: Custom-built framework wrapping Java Swing components
+• Game Logic: Full UNO game rules implementation
+• Players: 1 Human player + 1-3 Computer players (AI)
+• Localization: French language interface
+
+KEY FEATURES IMPLEMENTED:
+------------------------
+✓ Complete UNO card deck (108 cards):
+  - Number cards (0-9) in all 4 colors
+  - Action cards (Skip, Reverse, Draw Two)
+  - Wild cards (Wild, Wild Draw Four)
+
+✓ Full Game Mechanics:
+  - Turn-based gameplay with direction changes
+  - Card matching rules (color/number/action)
+  - Special card effects (skip, reverse, draw cards)
+  - UNO call system with penalties
+  - Win condition detection
+
+✓ Intelligent Computer Players:
+  - Strategic card selection algorithm
+  - Automatic UNO calling
+  - Color preference based on hand composition
+
+✓ Interactive GUI:
+  - Visual card representation with PNG images
+  - Click-to-play card selection
+  - Real-time game state updates
+  - Color selection for wild cards
+  - Player hand display and opponent info
+
+ARCHITECTURE HIGHLIGHTS:
+-----------------------
+
+1. CUSTOM GUI FRAMEWORK:
+   • Created reusable UI components (GFrame, GPanel, GButton, GLabel)
+   • Custom layout managers (GBorderLayout, GFlowLayout)
+   • Component wrapper system for consistent styling
+   • Event-driven architecture with listeners
+
+2. GAME MODEL:
+   • Abstract Card class with specialized implementations
+   • Player hierarchy (Human vs Computer behavior)
+   • Game state management with Observer pattern
+   • Deck management with shuffling and card dealing
+
+3. MODULAR DESIGN:
+   • Java Module system implementation (module-info.java)
+   • Clean package organization by functionality
+   • Separation of concerns (Model/View/Controller)
+   • Extensible architecture for future enhancements
+
+TECHNICAL ACHIEVEMENTS:
+----------------------
+• Object-Oriented Design: Extensive use of inheritance, polymorphism, and encapsulation
+• Design Patterns: MVC, Observer, Factory patterns implementation
+• Event Handling: Custom event system for game state changes
+• Resource Management: Dynamic image loading with fallback mechanisms
+• Error Handling: Robust exception handling and validation
+• Code Organization: Clean, documented, and maintainable codebase
+
+CODE QUALITY FEATURES:
+---------------------
+• Comprehensive documentation and comments
+• Consistent naming conventions
+• Proper exception handling
+• Input validation and error prevention
+• Memory-efficient design
+• Scalable architecture
+
+USER EXPERIENCE:
+---------------
+• Intuitive click-based interface
+• Visual feedback for game actions
+• Clear status messages and game state display
+• Responsive design that adapts to window resizing
+• Smooth gameplay with real-time updates
+
+DEMONSTRATED SKILLS:
+-------------------
+✓ Advanced Java Programming
+✓ Object-Oriented Design & Analysis
+✓ GUI Development (Custom Framework)
+✓ Game Logic Programming
+✓ Design Pattern Implementation
+✓ Event-Driven Programming
+✓ File I/O and Resource Management
+✓ Algorithm Design (AI player logic)
+✓ Software Architecture
+✓ Project Organization & Documentation
+
+POTENTIAL ENHANCEMENTS:
+----------------------
+• Network multiplayer support
+• Game statistics and scoring system
+• Multiple difficulty levels for AI
+• Sound effects and animations
+• Tournament mode
+• Customizable rules and variations
+• Save/load game functionality
+
+PROJECT STRUCTURE:
+-----------------
+UnoGame/
+├── src/
+│   ├── framework/          # Custom GUI framework
+│   │   ├── components/     # Reusable UI components
+│   │   └── layouts/        # Layout managers
+│   ├── model/              # Game logic and data
+│   │   ├── cards/          # Card implementations
+│   │   ├── game/           # Game engine
+│   │   └── players/        # Player types
+│   ├── ui/                 # User interface
+│   │   ├── controllers/    # MVC controllers
+│   │   └── views/          # UI views
+│   ├── resources/          # Game assets (card images)
+│   └── uno/                # Main application
+└── portfolio_description.txt
+
+DEVELOPMENT APPROACH:
+--------------------
+This project showcases a methodical approach to software development:
+1. Requirements analysis and game rule implementation
+2. Architecture design with extensibility in mind
+3. Incremental development with testing at each stage
+4. Code refactoring for maintainability
+5. Documentation and code organization
+
+The UNO Game project demonstrates proficiency in Java development, 
+software architecture, and the ability to create complex, interactive 
+applications from scratch. It represents a complete software solution 
+with custom framework development, game logic implementation, and 
+user interface design.
+
+================================================================
+                        END OF DESCRIPTION
+================================================================
