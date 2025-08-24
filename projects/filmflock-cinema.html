@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FilmFlock Cinema - Aymen Belkadi Portfolio</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .project-hero {
+            background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+            padding: 80px 0;
+            text-align: center;
+        }
+        .project-logo {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+        .project-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .project-details {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        .detail-section {
+            margin-bottom: 40px;
+            background: #161b22;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #30363d;
+        }
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .tech-tag {
+            background: #238636;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        .feature-list li {
+            padding: 8px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #238636;
+            font-weight: bold;
+        }
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #21262d;
+            color: #f0f6fc;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            border: 1px solid #30363d;
+            transition: all 0.3s ease;
+            margin-bottom: 40px;
+        }
+        .back-btn:hover {
+            background: #30363d;
+            border-color: #58a6ff;
+        }
+        .screenshots {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .screenshot {
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #30363d;
+        }
+        .screenshot img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="project-hero">
+        <div class="container">
+            <div class="project-logo">
+                <img src="Cinema/cinemaLogo.jpg" alt="FilmFlock Logo">
+            </div>
+            <h1>FilmFlock - Système de Réservation Cinéma</h1>
+            <p>Système complet de réservation de billets de cinéma avec gestion administrative</p>
+            <div class="tech-stack">
+                <span class="tech-tag">Java</span>
+                <span class="tech-tag">MySQL</span>
+                <span class="tech-tag">Swing</span>
+                <span class="tech-tag">JDBC</span>
+                <span class="tech-tag">Architecture MVC</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="project-details">
+        <a href="../index.html#projects" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+            Retour au Portfolio
+        </a>
+
+        <div class="detail-section">
+            <h2><i class="fas fa-info-circle"></i> Aperçu du Projet</h2>
+            <p>FilmFlock est un système complet de réservation de billets de cinéma développé en Java utilisant l'architecture Model-View-Controller (MVC). Cette application de bureau fournit une solution complète pour la gestion de cinéma, permettant aux clients de parcourir les films, sélectionner les séances, réserver des sièges et traiter les paiements, tout en offrant aux administrateurs un contrôle total sur l'écosystème du cinéma.</p>
+        </div>
+
+        <div class="detail-section">
+            <h2><i class="fas fa-users"></i> Interface Client</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                <div>
+                    <h3>🎬 Navigation des Films</h3>
+                    <ul class="feature-list">
+                        <li>Affichage des affiches et titres</li>
+                        <li>Classification par genre</li>
+                        <li>Durée et restrictions d'âge</li>
+                        <li>Synopsis et descriptions détaillées</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>🎟️ Sélection de Séances</h3>
+                    <ul class="feature-list">
+                        <li>Horaires disponibles</li>
+                        <li>Différents cinémas et salles</li>
+                        <li>Disponibilité en temps réel</li>
+                        <li>Calcul dynamique des prix</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>💺 Sélection de Sièges</h3>
+                    <ul class="feature-list">
+                        <li>Plan interactif de la salle</li>
+                        <li>Codage couleur (Vert: Libre, Rouge: Occupé)</li>
+                        <li>Sélection multiple</li>
+                        <li>Mise à jour en temps réel</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>💳 Traitement des Paiements</h3>
+                    <ul class="feature-list">
+                        <li>Passerelle de paiement sécurisée</li>
+                        <li>Validation de carte de crédit</li>
+                        <li>Support CIB et Eddahabiya</li>
+                        <li>Génération d'e-tickets</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="detail-section">
+            <h2><i class="fas fa-cog"></i> Interface Administrateur</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                <div>
+                    <h3>🏢 Gestion des Cinémas</h3>
+                    <ul class="feature-list">
+                        <li>Opérations CRUD complètes</li>
+                        <li>Gestion de la capacité des salles</li>
+                        <li>Configuration des horaires</li>
+                        <li>Informations de localisation</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>🎭 Gestion des Films</h3>
+                    <ul class="feature-list">
+                        <li>Administration complète du catalogue</li>
+                        <li>Ajout avec métadonnées complètes</li>
+                        <li>Mise à jour des informations</li>
+                        <li>Suppression du contenu obsolète</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>📅 Gestion des Séances</h3>
+                    <ul class="feature-list">
+                        <li>Système de planification dynamique</li>
+                        <li>Attribution films-salles-horaires</li>
+                        <li>Détection de conflits en temps réel</li>
+                        <li>Modification des créneaux</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>📊 Surveillance des Réservations</h3>
+                    <ul class="feature-list">
+                        <li>Vue d'ensemble des réservations</li>
+                        <li>Suivi des statuts et paiements</li>
+                        <li>Génération de rapports</li>
+                        <li>Analyses et statistiques</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="detail-section">
+            <h2><i class="fas fa-database"></i> Architecture Technique</h2>
+            <h3>Modèle de Base de Données</h3>
+            <ul class="feature-list">
+                <li><strong>MySQL:</strong> Base de données relationnelle robuste avec schéma optimisé</li>
+                <li><strong>JDBC:</strong> Gestion efficace des connexions à la base de données</li>
+                <li><strong>Entités:</strong> Films, Cinémas, Salles, Séances, Réservations, Paiements</li>
+            </ul>
+
+            <h3>Interface Utilisateur</h3>
+            <ul class="feature-list">
+                <li><strong>Java Swing:</strong> Interface de bureau avec esthétique moderne</li>
+                <li><strong>Composants personnalisés:</strong> Boutons arrondis, champs de texte stylisés</li>
+                <li><strong>Design professionnel:</strong> Schémas de couleurs et typographie cohérents</li>
+            </ul>
+        </div>
+
+        <div class="detail-section">
+            <h2><i class="fas fa-images"></i> Captures d'Écran</h2>
+            <div class="screenshots">
+                <div class="screenshot">
+                    <img src="Cinema/cinema1.png" alt="Interface Principale" onerror="this.style.display='none'">
+                </div>
+                <div class="screenshot">
+                    <img src="Cinema/cinema2.png" alt="Sélection de Séances" onerror="this.style.display='none'">
+                </div>
+                <div class="screenshot">
+                    <img src="Cinema/cinema3.png" alt="Interface Admin" onerror="this.style.display='none'">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+</html>
