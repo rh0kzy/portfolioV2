@@ -1125,6 +1125,84 @@ footer {
     }
 }
 
+/* Page Transition Animations */
+.page-transition {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.page-transition.loaded {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fade-out {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Staggered animation for project cards */
+.project-card {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.project-card.animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Individual project page animations */
+.project-hero {
+    opacity: 0;
+    transform: scale(0.95);
+    animation: heroFadeIn 0.8s ease forwards;
+}
+
+.project-content {
+    opacity: 0;
+    transform: translateY(40px);
+    animation: contentSlideIn 0.8s ease 0.3s forwards;
+}
+
+.feature-item {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.feature-item.animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@keyframes heroFadeIn {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes contentSlideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Smooth hover transitions for project cards */
+.project-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.6s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
 /* Image responsive styles */
 img {
     max-width: 100%;

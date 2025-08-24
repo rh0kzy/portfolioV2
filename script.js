@@ -422,3 +422,82 @@ const utils = {
 
 // Export utils for potential use in other scripts
 window.portfolioUtils = utils;
+
+// Page transition animations
+document.addEventListener('DOMContentLoaded', function() {
+    // Add page transition class to body
+    document.body.classList.add('page-transition');
+    
+    // Trigger loaded animation after a small delay
+    setTimeout(() => {
+        document.body.classList.add('loaded');
+    }, 100);
+    
+    // Animate project cards on scroll
+    const animateOnScroll = () => {
+        const projectCards = document.querySelectorAll('.project-card');
+        const featureItems = document.querySelectorAll('.feature-item');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('animate');
+                    }, index * 100); // Stagger animation
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+        
+        [...projectCards, ...featureItems].forEach(item => {
+            observer.observe(item);
+        });
+    };
+    
+    animateOnScroll();
+});
+
+// Smooth page transitions for project links
+function handleProjectNavigation() {
+    const projectLinks = document.querySelectorAll('.project-card a');
+    
+    projectLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Add fade out class to current page
+            document.body.classList.add('fade-out');
+            
+            // Store the target URL
+            const targetUrl = this.href;
+            
+            // Navigate after fade out animation
+            setTimeout(() => {
+                window.location.href = targetUrl;
+            }, 300);
+        });
+    });
+}
+
+// Initialize project navigation transitions
+document.addEventListener('DOMContentLoaded', handleProjectNavigation);
+
+// Add loading animation for images
+function addImageLoadingAnimation() {
+    const images = document.querySelectorAll('img');
+    
+    images.forEach(img => {
+        if (!img.complete) {
+            img.style.opacity = '0';
+            img.addEventListener('load', function() {
+                this.style.opacity = '1';
+                this.style.transition = 'opacity 0.5s ease';
+            });
+        }
+    });
+}
+
+// Initialize image animations
+document.addEventListener('DOMContentLoaded', addImageLoadingAnimation);
