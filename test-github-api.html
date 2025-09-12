@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub API Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #0d1117;
+            color: #c9d1d9;
+        }
+        
+        .test-result {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+        
+        .success { border-color: #238636; }
+        .error { border-color: #da3633; }
+        .loading { border-color: #1f6feb; }
+        
+        button {
+            background: #238636;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 8px 4px;
+        }
+        
+        button:hover {
+            background: #2ea043;
+        }
+        
+        pre {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 12px;
+            overflow-x: auto;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>GitHub API Test for rh0kzy</h1>
+    
+    <button onclick="testDirectAPI()">Test Direct API</button>
+    <button onclick="testCORSProxy()">Test CORS Proxy</button>
+    <button onclick="testBothMethods()">Test Both Methods</button>
+    <button onclick="clearResults()">Clear Results</button>
+    
+    <div id="results"></div>
+    
+    <script>
+        const GITHUB_USERNAME = 'rh0kzy';
+        const GITHUB_API_BASE = 'https://api.github.com';
+        
+        function addResult(title, content, type = 'loading') {
+            const resultsDiv = document.getElementById('results');
+            const resultDiv = document.createElement('div');
+            resultDiv.className = `test-result ${type}`;
+            resultDiv.innerHTML = `<h3>${title}</h3><pre>${content}</pre>`;
+            resultsDiv.appendChild(resultDiv);
+            return resultDiv;
+        }
+        
+        function updateResult(resultDiv, content, type) {
+            resultDiv.className = `test-result ${type}`;
+            resultDiv.querySelector('pre').textContent = content;
+        }
+        
+        async function testDirectAPI() {
+            const resultDiv = addResult('Direct GitHub API Test', 'Testing...', 'loading');
+            
+            try {
+                const url = `${GITHUB_API_BASE}/users/${GITHUB_USERNAME}`;
+                console.log('Testing direct API:', url);
+                
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/vnd.github+json',
+                        'User-Agent': 'Portfolio-Test'
+                    }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    const result = {
+                        status: response.status,
+                        login: data.login,
+                        name: data.name,
+                        public_repos: data.public_repos,
+                        followers: data.followers,
+                        created_at: data.created_at
+                    };
+                    updateResult(resultDiv, JSON.stringify(result, null, 2), 'success');
+                } else {
+                    updateResult(resultDiv, `Error: ${response.status} - ${response.statusText}`, 'error');
+                }
+            } catch (error) {
+                updateResult(resultDiv, `Error: ${error.message}`, 'error');
+            }
+        }
+        
+        async function testCORSProxy() {
+            const resultDiv = addResult('CORS Proxy Test', 'Testing...', 'loading');
+            
+            try {
+                const originalUrl = `${GITHUB_API_BASE}/users/${GITHUB_USERNAME}`;
+                const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(originalUrl)}`;
+                console.log('Testing CORS proxy:', proxyUrl);
+                
+                const response = await fetch(proxyUrl);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    const result = {
+                        status: response.status,
+                        login: data.login,
+                        name: data.name,
+                        public_repos: data.public_repos,
+                        followers: data.followers,
+                        created_at: data.created_at,
+                        proxy: 'allorigins.win'
+                    };
+                    updateResult(resultDiv, JSON.stringify(result, null, 2), 'success');
+                } else {
+                    updateResult(resultDiv, `Error: ${response.status} - ${response.statusText}`, 'error');
+                }
+            } catch (error) {
+                updateResult(resultDiv, `Error: ${error.message}`, 'error');
+            }
+        }
+        
+        async function testBothMethods() {
+            const resultDiv = addResult('Combined Test (Direct + Proxy)', 'Testing both methods...', 'loading');
+            
+            const results = [];
+            
+            // Test direct API
+            try {
+                const directUrl = `${GITHUB_API_BASE}/users/${GITHUB_USERNAME}`;
+                const directResponse = await fetch(directUrl, {
+                    headers: { 'Accept': 'application/vnd.github+json' }
+                });
+                results.push({
+                    method: 'Direct API',
+                    status: directResponse.status,
+                    success: directResponse.ok
+                });
+            } catch (error) {
+                results.push({
+                    method: 'Direct API',
+                    error: error.message,
+                    success: false
+                });
+            }
+            
+            // Test proxy
+            try {
+                const originalUrl = `${GITHUB_API_BASE}/users/${GITHUB_USERNAME}`;
+                const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(originalUrl)}`;
+                const proxyResponse = await fetch(proxyUrl);
+                results.push({
+                    method: 'CORS Proxy',
+                    status: proxyResponse.status,
+                    success: proxyResponse.ok
+                });
+            } catch (error) {
+                results.push({
+                    method: 'CORS Proxy',
+                    error: error.message,
+                    success: false
+                });
+            }
+            
+            const success = results.some(r => r.success);
+            updateResult(resultDiv, JSON.stringify(results, null, 2), success ? 'success' : 'error');
+        }
+        
+        function clearResults() {
+            document.getElementById('results').innerHTML = '';
+        }
+    </script>
+</body>
+</html>

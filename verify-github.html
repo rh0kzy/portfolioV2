@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Profile Verification - @rh0kzy</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #0d1117;
+            color: #c9d1d9;
+            line-height: 1.5;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #161b22;
+            border-radius: 8px;
+            border: 1px solid #30363d;
+        }
+        
+        .profile-card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 24px;
+            margin: 20px 0;
+        }
+        
+        .profile-card.success { border-color: #238636; }
+        .profile-card.error { border-color: #da3633; }
+        .profile-card.loading { border-color: #1f6feb; }
+        
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid #30363d;
+        }
+        
+        .profile-info h2 {
+            margin: 0 0 4px 0;
+            color: #f0f6fc;
+        }
+        
+        .profile-info .username {
+            color: #7d8590;
+            font-size: 18px;
+            margin: 0 0 8px 0;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+        
+        .stat-item {
+            background: #0d1117;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #30363d;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2ea043;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #7d8590;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .test-section {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        button {
+            background: #238636;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 8px 4px;
+            font-weight: 500;
+        }
+        
+        button:hover { background: #2ea043; }
+        button:disabled { background: #484f58; cursor: not-allowed; }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #30363d;
+            border-top: 2px solid #1f6feb;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 8px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        pre {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 16px;
+            overflow-x: auto;
+            font-size: 12px;
+            white-space: pre-wrap;
+        }
+        
+        .success-indicator {
+            color: #2ea043;
+            font-weight: bold;
+        }
+        
+        .error-indicator {
+            color: #da3633;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔍 GitHub Profile Verification</h1>
+        <p>Verifying GitHub username: <strong>@rh0kzy</strong></p>
+    </div>
+    
+    <div class="test-section">
+        <h3>🧪 API Connection Tests</h3>
+        <button onclick="runFullVerification()">🚀 Run Full Verification</button>
+        <button onclick="testDirectAPI()">📡 Test Direct API</button>
+        <button onclick="testCORSProxy()">🔗 Test CORS Proxy</button>
+        <button onclick="clearAll()">🗑️ Clear Results</button>
+    </div>
+    
+    <div id="profile-section" style="display: none;">
+        <div class="profile-card" id="profile-card">
+            <div class="profile-header">
+                <img id="avatar" class="avatar" src="" alt="Profile Avatar">
+                <div class="profile-info">
+                    <h2 id="display-name">Loading...</h2>
+                    <p class="username" id="username">@...</p>
+                    <p id="bio">Loading profile...</p>
+                </div>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number" id="repos-count">-</span>
+                    <span class="stat-label">Public Repositories</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="followers-count">-</span>
+                    <span class="stat-label">Followers</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="following-count">-</span>
+                    <span class="stat-label">Following</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="created-date">-</span>
+                    <span class="stat-label">Member Since</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="results-section"></div>
+    
+    <script>
+        const GITHUB_USERNAME = 'rh0kzy';
+        const GITHUB_API_BASE = 'https://api.github.com';
+        
+        function addTestResult(title, content, type = 'loading') {
+            const resultsSection = document.getElementById('results-section');
+            const resultDiv = document.createElement('div');
+            resultDiv.className = 'test-section';
+            resultDiv.innerHTML = `
+                <h3>${title}</h3>
+                <div class="status ${type}">
+                    ${type === 'loading' ? '<span class="loading"></span>' : ''}
+                    <span class="${type}-indicator">${type.toUpperCase()}</span>
+                </div>
+                <pre>${content}</pre>
+            `;
+            resultsSection.appendChild(resultDiv);
+            return resultDiv;
+        }
+        
+        function updateTestResult(resultDiv, content, type) {
+            const statusDiv = resultDiv.querySelector('.status');
+            statusDiv.innerHTML = `<span class="${type}-indicator">${type.toUpperCase()}</span>`;
+            resultDiv.querySelector('pre').textContent = content;
+        }
+        
+        function showProfile(userData) {
+            const profileSection = document.getElementById('profile-section');
+            const profileCard = document.getElementById('profile-card');
+            
+            // Update profile information
+            document.getElementById('avatar').src = userData.avatar_url;
+            document.getElementById('display-name').textContent = userData.name || userData.login;
+            document.getElementById('username').textContent = `@${userData.login}`;
+            document.getElementById('bio').textContent = userData.bio || 'No bio available';
+            
+            // Update stats
+            document.getElementById('repos-count').textContent = userData.public_repos;
+            document.getElementById('followers-count').textContent = userData.followers;
+            document.getElementById('following-count').textContent = userData.following;
+            
+            const createdDate = new Date(userData.created_at);
+            document.getElementById('created-date').textContent = createdDate.getFullYear();
+            
+            // Show profile section
+            profileSection.style.display = 'block';
+            profileCard.className = 'profile-card success';
+        }
+        
+        async function testDirectAPI() {
+            const resultDiv = addTestResult('🔍 Direct GitHub API Test', 'Testing direct connection...', 'loading');
+            
+            try {
+                const url = `${GITHUB_API_BASE}/users/${GITHUB_USERNAME}`;
+                console.log('Testing direct API:', url);
+                
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/vnd.github+json',
+                        'User-Agent': 'Portfolio-Verification'
+                    }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    const result = {
+                        status: '✅ SUCCESS',
+                        method: 'Direct API',
+                        username: data.login,
+                        name: data.name,
+                        public_repos: data.public_repos,
+                        followers: data.followers,
+                        created_at: data.created_at,
+                        profile_url: data.html_url
+                    };
+                    
+                    updateTestResult(resultDiv, JSON.stringify(result, null, 2), 'success');
+                    showProfile(data);
+                    return data;
+                } else {
+                    const error = {
+                        status: '❌ FAILED',
+                        method: 'Direct API',
+                        error_code: response.status,
+                        error_message: response.statusText
+                    };
+                    updateTestResult(resultDiv, JSON.stringify(error, null, 2), 'error');
+                    return null;
+                }
+            } catch (error) {
+                const errorResult = {
+                    status: '❌ FAILED',
+                    method: 'Direct API',
+                    error: error.message,
+                    likely_cause: 'CORS restriction or network issue'
+                };
+                updateTestResult(resultDiv, JSON.stringify(errorResult, null, 2), 'error');
+                return null;
+            }
+        }
+        
+        async function testCORSProxy() {
+            const resultDiv = addTestResult('🔗 CORS Proxy Test', 'Testing proxy connection...', 'loading');
+            
+            try {
+                const originalUrl = `${GITHUB_API_BASE}/users/${GITHUB_USERNAME}`;
+                const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(originalUrl)}`;
+                console.log('Testing CORS proxy:', proxyUrl);
+                
+                const response = await fetch(proxyUrl);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    const result = {
+                        status: '✅ SUCCESS',
+                        method: 'CORS Proxy (allorigins.win)',
+                        username: data.login,
+                        name: data.name,
+                        public_repos: data.public_repos,
+                        followers: data.followers,
+                        created_at: data.created_at,
+                        profile_url: data.html_url
+                    };
+                    
+                    updateTestResult(resultDiv, JSON.stringify(result, null, 2), 'success');
+                    if (!document.getElementById('profile-section').style.display === 'block') {
+                        showProfile(data);
+                    }
+                    return data;
+                } else {
+                    const error = {
+                        status: '❌ FAILED',
+                        method: 'CORS Proxy',
+                        error_code: response.status,
+                        error_message: response.statusText
+                    };
+                    updateTestResult(resultDiv, JSON.stringify(error, null, 2), 'error');
+                    return null;
+                }
+            } catch (error) {
+                const errorResult = {
+                    status: '❌ FAILED',
+                    method: 'CORS Proxy',
+                    error: error.message
+                };
+                updateTestResult(resultDiv, JSON.stringify(errorResult, null, 2), 'error');
+                return null;
+            }
+        }
+        
+        async function runFullVerification() {
+            console.log('🚀 Starting full verification for @' + GITHUB_USERNAME);
+            
+            // Clear previous results
+            clearAll();
+            
+            const summaryDiv = addTestResult('📋 Verification Summary', 'Running comprehensive tests...', 'loading');
+            
+            const results = {
+                username: GITHUB_USERNAME,
+                timestamp: new Date().toISOString(),
+                tests: []
+            };
+            
+            // Test 1: Direct API
+            try {
+                const directResult = await testDirectAPI();
+                results.tests.push({
+                    method: 'Direct API',
+                    success: !!directResult,
+                    data: directResult
+                });
+            } catch (error) {
+                results.tests.push({
+                    method: 'Direct API',
+                    success: false,
+                    error: error.message
+                });
+            }
+            
+            // Small delay between tests
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            // Test 2: CORS Proxy
+            try {
+                const proxyResult = await testCORSProxy();
+                results.tests.push({
+                    method: 'CORS Proxy',
+                    success: !!proxyResult,
+                    data: proxyResult
+                });
+            } catch (error) {
+                results.tests.push({
+                    method: 'CORS Proxy',
+                    success: false,
+                    error: error.message
+                });
+            }
+            
+            // Generate summary
+            const successfulTests = results.tests.filter(t => t.success).length;
+            const totalTests = results.tests.length;
+            
+            const summary = {
+                verification_status: successfulTests > 0 ? '✅ VERIFIED' : '❌ FAILED',
+                username: `@${GITHUB_USERNAME}`,
+                success_rate: `${successfulTests}/${totalTests} methods working`,
+                working_methods: results.tests.filter(t => t.success).map(t => t.method),
+                failed_methods: results.tests.filter(t => !t.success).map(t => t.method),
+                recommendation: successfulTests > 0 
+                    ? 'GitHub profile exists and is accessible via at least one method'
+                    : 'Unable to verify GitHub profile - check username or try again later'
+            };
+            
+            updateTestResult(summaryDiv, JSON.stringify(summary, null, 2), successfulTests > 0 ? 'success' : 'error');
+            
+            console.log('✅ Verification complete:', summary);
+        }
+        
+        function clearAll() {
+            document.getElementById('results-section').innerHTML = '';
+            document.getElementById('profile-section').style.display = 'none';
+        }
+        
+        // Auto-run verification on page load
+        window.addEventListener('load', () => {
+            setTimeout(runFullVerification, 1000);
+        });
+    </script>
+</body>
+</html>
