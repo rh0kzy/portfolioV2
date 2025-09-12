@@ -215,10 +215,85 @@ body {
     border-color: var(--border-default);
 }
 
+.btn-secondary {
+    color: var(--text-primary);
+    background-color: var(--bg-secondary);
+    border-color: var(--border-default);
+}
+
+.btn-secondary:hover {
+    background-color: var(--bg-tertiary);
+    border-color: var(--accent-emphasis);
+    color: var(--accent-emphasis);
+}
+
 /* Hero Section */
 .hero {
     padding: var(--space-8) 0;
     background: linear-gradient(180deg, var(--bg-canvas) 0%, var(--bg-primary) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Coding Symbols Background */
+.coding-symbols {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.coding-symbol {
+    position: absolute;
+    font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
+    font-weight: 600;
+    color: var(--accent-emphasis);
+    opacity: 0.1;
+    animation: float 6s ease-in-out infinite;
+    user-select: none;
+}
+
+.coding-symbol-1 {
+    font-size: 120px;
+    top: 15%;
+    right: 10%;
+    animation-delay: 0s;
+}
+
+.coding-symbol-2 {
+    font-size: 80px;
+    top: 60%;
+    left: 8%;
+    animation-delay: 2s;
+}
+
+.coding-symbol-3 {
+    font-size: 100px;
+    top: 35%;
+    right: 70%;
+    animation-delay: 4s;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+        opacity: 0.1;
+    }
+    25% {
+        transform: translateY(-20px) rotate(2deg);
+        opacity: 0.15;
+    }
+    50% {
+        transform: translateY(-10px) rotate(-1deg);
+        opacity: 0.2;
+    }
+    75% {
+        transform: translateY(-15px) rotate(1deg);
+        opacity: 0.15;
+    }
 }
 
 .profile-section {
@@ -226,6 +301,8 @@ body {
     grid-template-columns: 280px 1fr;
     gap: var(--space-6);
     align-items: start;
+    position: relative;
+    z-index: 2;
 }
 
 /* Responsive profile section */
@@ -233,6 +310,24 @@ body {
     .profile-section {
         grid-template-columns: 220px 1fr;
         gap: var(--space-4);
+    }
+    
+    .coding-symbol-1 {
+        font-size: 80px;
+        top: 10%;
+        right: 5%;
+    }
+    
+    .coding-symbol-2 {
+        font-size: 60px;
+        top: 65%;
+        left: 5%;
+    }
+    
+    .coding-symbol-3 {
+        font-size: 70px;
+        top: 40%;
+        right: 75%;
     }
     
     .profile-image {
