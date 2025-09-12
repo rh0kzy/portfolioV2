@@ -15,13 +15,13 @@
             <div class="project-logo">
                 <img src="cabinetMedicale/cabinetlogo.jpg" alt="Medical Clinic Logo">
             </div>
-            <h1 class="project-title">Medical Clinic</h1>
-            <p class="project-subtitle">Application de gestion complète pour cabinet médical avec système de rendez-vous</p>
+            <h1 class="project-title">Medical Clinic Management System</h1>
+            <p class="project-subtitle">Desktop application for healthcare professionals to manage patient records, appointments, and medical histories efficiently</p>
             <div class="tech-stack">
                 <span class="tech-tag">Java</span>
-                <span class="tech-tag blue">Healthcare</span>
-                <span class="tech-tag orange">Database</span>
-                <span class="tech-tag purple">Management</span>
+                <span class="tech-tag blue">Swing</span>
+                <span class="tech-tag orange">Healthcare</span>
+                <span class="tech-tag purple">OOP</span>
                 <span class="tech-tag">Desktop</span>
             </div>
         </div>
@@ -36,28 +36,231 @@
         <div class="content-grid">
             <div class="detail-section feature-item">
                 <h2><i class="fas fa-info-circle"></i> Aperçu du Projet</h2>
-                <p>Description détaillée du projet Medical Clinic sera ajoutée ici avec toutes les fonctionnalités et caractéristiques importantes.</p>
+                <p>Le projet <strong>"Medical Clinic"</strong> est un système de gestion complet pour un cabinet médical développé en Java. Il permet la gestion des patients, des rendez-vous, des dossiers médicaux et des consultations à travers deux interfaces : une interface console et une interface graphique moderne avec Swing.</p>
+                
+                <p>Le système est conçu pour deux types d'utilisateurs principaux :</p>
+                <ul class="feature-list">
+                    <li><strong>Les SECRÉTAIRES</strong> : gestion administrative des patients et rendez-vous</li>
+                    <li><strong>Les DOCTEURS</strong> : accès aux dossiers médicaux et ajout d'informations cliniques</li>
+                </ul>
+                
+                <div class="project-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">8</span>
+                        <span class="stat-label">Classes OOP</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">2</span>
+                        <span class="stat-label">Types d'Interface</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">5</span>
+                        <span class="stat-label">Fichiers de Données</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">Java/Swing</span>
+                        <span class="stat-label">Technologies</span>
+                    </div>
+                </div>
             </div>
 
             <div class="detail-section feature-item">
-                <h2><i class="fas fa-cogs"></i> Caractéristiques Techniques</h2>
+                <h2><i class="fas fa-sitemap"></i> Architecture du Système</h2>
                 <div class="feature-grid">
                     <div class="feature-card">
-                        <h3>🏗️ Architecture</h3>
+                        <h3>👤 Classe Personne (Parent)</h3>
                         <ul class="feature-list">
-                            <li>Architecture moderne et robuste</li>
-                            <li>Design patterns appropriés</li>
-                            <li>Code maintenable et évolutif</li>
-                            <li>Bonnes pratiques de développement</li>
+                            <li>Attributs : nom, prenom, telephone</li>
+                            <li>Getters/Setters pour tous les attributs</li>
+                            <li>toString() pour l'affichage</li>
+                            <li>Classe de base pour héritage</li>
                         </ul>
                     </div>
                     <div class="feature-card">
-                        <h3>⚙️ Technologies</h3>
+                        <h3>🏥 Classe Patient (Hérite de Personne)</h3>
                         <ul class="feature-list">
-                            <li>Technologies de pointe</li>
-                            <li>Frameworks modernes</li>
-                            <li>Outils de développement avancés</li>
-                            <li>Optimisation des performances</li>
+                            <li>ArrayList&lt;RendezVous&gt; rendezVous</li>
+                            <li>DossierMedical dossierMedical</li>
+                            <li>ajouterRendezVous() & rechercherPatient()</li>
+                            <li>getDossierMedical() pour accès médical</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3>👨‍⚕️ Classe Docteur (Hérite de Personne)</h3>
+                        <ul class="feature-list">
+                            <li>String specialite (spécialisation)</li>
+                            <li>getSpecialite() & setSpecialite()</li>
+                            <li>Accès aux dossiers médicaux</li>
+                            <li>Authentification sécurisée</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3>💼 Classe Secretaire (Hérite de Personne)</h3>
+                        <ul class="feature-list">
+                            <li>Gestion administrative des patients</li>
+                            <li>Planification des rendez-vous</li>
+                            <li>Recherche et suppression de patients</li>
+                            <li>Affichage des listes et rapports</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3>📅 Classe RendezVous</h3>
+                        <ul class="feature-list">
+                            <li>LocalDate date & LocalTime heure</li>
+                            <li>Validation des formats (yyyy-MM-dd)</li>
+                            <li>getDate(), setDate(), getHeure(), setHeure()</li>
+                            <li>Gestion des créneaux horaires</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3>📋 Classe DossierMedical</h3>
+                        <ul class="feature-list">
+                            <li>ArrayList&lt;String&gt; allergies & conditions</li>
+                            <li>ArrayList&lt;Resumerendezvous&gt; resumesRendezvous</li>
+                            <li>addAllergy(), removeAllergy(), addCondition()</li>
+                            <li>ajouterResumeRendezVous() pour historique</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="detail-section feature-item">
+                <h2><i class="fas fa-cogs"></i> Fonctionnalités Principales</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>💻 Interface Console (Version de base)</h3>
+                        <ul class="feature-list">
+                            <li>Menu principal avec 9 options</li>
+                            <li>Ajouter/Afficher/Rechercher/Supprimer patient</li>
+                            <li>Ajouter rendez-vous & résumé consultation</li>
+                            <li>Gestion allergies & conditions médicales</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🖥️ Interface Graphique Swing</h3>
+                        <ul class="feature-list">
+                            <li>MainFrame avec sélection utilisateur</li>
+                            <li>Design avec image de fond personnalisée</li>
+                            <li>Navigation intuitive entre les rôles</li>
+                            <li>Composants graphiques modernes</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3>👩‍💼 Fonctionnalités Secrétaire</h3>
+                        <ul class="feature-list">
+                            <li>Ajout patient avec validation téléphone</li>
+                            <li>Tableau patients avec RDV correspondants</li>
+                            <li>Planification RDV avec validation date/heure</li>
+                            <li>Suppression sécurisée avec fichier temporaire</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3>👨‍⚕️ Fonctionnalités Docteur</h3>
+                        <ul class="feature-list">
+                            <li>Connexion sécurisée avec authentification</li>
+                            <li>Recherche patient avec historique complet</li>
+                            <li>Ajout résumé consultation avec horodatage</li>
+                            <li>Gestion allergies & conditions médicales</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="detail-section feature-item">
+                <h2><i class="fas fa-database"></i> Gestion des Données</h2>
+                <div class="code-example">
+                    <h4>Système de Fichiers Structuré :</h4>
+                    <pre><code>patients.txt     - Format: "Nom, Prenom, Telephone"
+RDV.txt          - Format: "Prenom Nom, Date, Heure"  
+Resume.txt       - Résumés consultations avec séparateurs
+Allergie.txt     - Descriptions allergies par patient
+Condition.txt    - Conditions médicales structurées
+temp_patients.txt- Fichier temporaire suppressions sécurisées
+
+Validation des Données:
+✓ Téléphone: Format français (07/05/06 + 8 chiffres)
+✓ Dates: Format ISO (yyyy-MM-dd)
+✓ Heures: Format 24h (HH:mm)
+✓ Prévention doublons et champs obligatoires</code></pre>
+                </div>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>🔒 Sécurité & Validation</h3>
+                        <ul class="feature-list">
+                            <li>Authentification simple pour docteurs</li>
+                            <li>Validation entrées utilisateur</li>
+                            <li>Prévention injections via formats</li>
+                            <li>Sauvegarde sécurisée avec fichiers temporaires</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🎨 Interface Utilisateur</h3>
+                        <ul class="feature-list">
+                            <li>Thème Century Gothic moderne</li>
+                            <li>Couleurs cohérentes (blanc/bleu)</li>
+                            <li>Messages confirmation/erreur JOptionPane</li>
+                            <li>Navigation intuitive avec boutons retour</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🔍 Recherche Intelligente</h3>
+                        <ul class="feature-list">
+                            <li>Recherche insensible à la casse</li>
+                            <li>Correspondance auto Patient ↔ RDV</li>
+                            <li>Affichage consolidé informations médicales</li>
+                            <li>Recherche simultanée multiples fichiers</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🔄 Gestion Relationnelle</h3>
+                        <ul class="feature-list">
+                            <li>Liaison Patient ↔ Rendez-vous via nom</li>
+                            <li>Association Patient ↔ Dossier médical</li>
+                            <li>Historique complet par patient</li>
+                            <li>Données liées auto-mises à jour</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="detail-section feature-item">
+                <h2><i class="fas fa-code"></i> Architecture Technique</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>🏗️ Patron de Conception</h3>
+                        <ul class="feature-list">
+                            <li>Héritage : Personne → Patient, Docteur, Secretaire</li>
+                            <li>Composition : Patient contient DossierMedical</li>
+                            <li>Encapsulation : Attributs privés avec getters/setters</li>
+                            <li>Polymorphisme : toString() redéfini</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3>⚠️ Gestion des Exceptions</h3>
+                        <ul class="feature-list">
+                            <li>IOException : Erreurs de fichiers</li>
+                            <li>DateTimeParseException : Validation date/heure</li>
+                            <li>NumberFormatException : Données numériques</li>
+                            <li>Try-with-resources : Fermeture automatique</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🎯 Composants Graphiques</h3>
+                        <ul class="feature-list">
+                            <li>JFrame : Fenêtres principales</li>
+                            <li>JComboBox : Sélection patients</li>
+                            <li>JTable : Affichage tabulaire patients</li>
+                            <li>JTextArea : Saisie textes longs</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🚀 Évolutions Possibles</h3>
+                        <ul class="feature-list">
+                            <li>Base de données relationnelle (MySQL)</li>
+                            <li>Chiffrement données sensibles</li>
+                            <li>Interface web ou mobile</li>
+                            <li>Génération rapports PDF</li>
                         </ul>
                     </div>
                 </div>
