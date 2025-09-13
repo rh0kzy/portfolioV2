@@ -1675,3 +1675,50 @@ img {
         height: 100px !important;
     }
 }
+
+/* WhatsApp Success Message Styles */
+.success-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--success-emphasis);
+    color: white;
+    padding: var(--space-4);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 10000;
+    animation: slideInRight 0.3s ease-out;
+    border-left: 4px solid var(--success-fg);
+}
+
+.success-content {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-weight: 500;
+}
+
+.success-content i {
+    font-size: 1.2rem;
+    color: var(--success-fg);
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive success message */
+@media (max-width: 768px) {
+    .success-message {
+        left: 20px;
+        right: 20px;
+        top: 20px;
+    }
+}

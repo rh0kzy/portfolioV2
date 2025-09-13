@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form Debug</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: 0 auto; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input, textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        button { background: #25d366; color: white; padding: 12px 24px; border: none; border-radius: 4px; cursor: pointer; }
+        .debug { background: #f0f0f0; padding: 10px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <h2>Contact Form Debug Test</h2>
+    
+    <form class="contact-form">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+    </form>
+    
+    <div id="debug" class="debug">
+        <strong>Debug Info:</strong><br>
+        <div id="debugContent">Fill the form and click submit to see debug info...</div>
+    </div>
+
+    <script>
+        function formatWhatsAppMessage(name, message) {
+            return `Hello! I'm contacting you through your portfolio website.
+
+👤 *Name:* ${name}
+
+💬 *Message:*
+${message}
+
+---
+Sent from your portfolio contact form`;
+        }
+
+        function initializeWhatsAppIntegration() {
+            const contactForm = document.querySelector('.contact-form');
+            const debugDiv = document.getElementById('debugContent');
+            
+            debugDiv.innerHTML = 'Contact form found: ' + (contactForm ? 'YES' : 'NO') + '<br>';
+            
+            if (!contactForm) {
+                debugDiv.innerHTML += 'ERROR: Contact form not found!<br>';
+                return;
+            }
+            
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                debugDiv.innerHTML = 'Form submitted!<br>';
+                
+                // Get form elements
+                const nameField = document.getElementById('name');
+                const messageField = document.getElementById('message');
+                
+                debugDiv.innerHTML += 'Name field found: ' + (nameField ? 'YES' : 'NO') + '<br>';
+                debugDiv.innerHTML += 'Message field found: ' + (messageField ? 'YES' : 'NO') + '<br>';
+                
+                if (!nameField || !messageField) {
+                    debugDiv.innerHTML += 'ERROR: Form fields not found!<br>';
+                    alert('Error: Form fields not found.');
+                    return;
+                }
+                
+                const name = nameField.value.trim();
+                const message = messageField.value.trim();
+                
+                debugDiv.innerHTML += 'Name value: "' + name + '" (length: ' + name.length + ')<br>';
+                debugDiv.innerHTML += 'Message value: "' + message + '" (length: ' + message.length + ')<br>';
+                
+                if (name === '' || message === '') {
+                    debugDiv.innerHTML += 'VALIDATION FAILED: Empty fields detected<br>';
+                    alert('Please fill in all fields before sending.');
+                    return;
+                }
+                
+                debugDiv.innerHTML += 'VALIDATION PASSED!<br>';
+                
+                const whatsappMessage = formatWhatsAppMessage(name, message);
+                const whatsappNumber = '213699284128';
+                const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+                
+                debugDiv.innerHTML += 'WhatsApp URL generated successfully<br>';
+                debugDiv.innerHTML += '<a href="' + whatsappURL + '" target="_blank">Click here to open WhatsApp</a><br>';
+                
+                // Uncomment this to auto-open WhatsApp
+                // window.open(whatsappURL, '_blank');
+                
+                alert('Form validation successful! Check debug info below.');
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', initializeWhatsAppIntegration);
+    </script>
+</body>
+</html>

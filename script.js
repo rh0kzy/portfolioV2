@@ -1037,3 +1037,143 @@ function addImageLoadingAnimation() {
 
 // Initialize image animations
 document.addEventListener('DOMContentLoaded', addImageLoadingAnimation);
+
+// WhatsApp Integration for Contact Form
+let whatsAppInitialized = false; // Prevent multiple initializations
+
+function initializeWhatsAppIntegration() {
+    if (whatsAppInitialized) {
+        console.log('WhatsApp integration already initialized, skipping...');
+        return;
+    }
+    
+    console.log('initializeWhatsAppIntegration called');
+    const contactForm = document.querySelector('.contact-form');
+    console.log('Contact form element:', contactForm);
+    
+    if (!contactForm) {
+        console.log('Contact form not found');
+        return;
+    }
+    
+    // Remove any existing event listeners to prevent duplicates
+    const newForm = contactForm.cloneNode(true);
+    contactForm.parentNode.replaceChild(newForm, contactForm);
+    
+    console.log('Adding submit event listener to form');
+    newForm.addEventListener('submit', function(e) {
+        console.log('Form submit event fired');
+        e.preventDefault();
+        
+        // Get form data
+        const nameElement = document.getElementById('name');
+        const messageElement = document.getElementById('message');
+        
+        console.log('Name element:', nameElement);
+        console.log('Message element:', messageElement);
+        
+        if (!nameElement || !messageElement) {
+            console.log('Form elements not found');
+            alert('Error: Form elements not found');
+            return;
+        }
+        
+        const name = nameElement.value.trim();
+        const message = messageElement.value.trim();
+        
+        console.log('Name value:', `"${name}"`);
+        console.log('Message value:', `"${message}"`);
+        console.log('Name empty?', name === '');
+        console.log('Message empty?', message === '');
+        
+        // Validate form fields
+        if (name === '' || message === '') {
+            console.log('Validation failed - showing alert');
+            alert('Please fill in all fields before sending.');
+            return;
+        }
+        
+        console.log('Validation passed, proceeding...');
+        
+        // Format message for WhatsApp
+        const whatsappMessage = `New Contact Request
+
+Hi Aymen! Someone reached out through your portfolio website.
+
+
+• Name: ${name}
+
+        Their Message:
+"${message}"
+
+Source: Portfolio Website
+Date: ${new Date().toLocaleDateString()}
+
+Looking forward to connecting! `;
+        
+        // Your WhatsApp number
+        const whatsappNumber = '213699284128';
+        
+        // Create WhatsApp URL
+        const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+        
+        console.log('Opening WhatsApp URL:', whatsappURL.substring(0, 100) + '...');
+        
+        // Open WhatsApp
+        window.open(whatsappURL, '_blank');
+        
+        // Show success message
+        showSuccessMessage();
+        
+        // Don't reset the form immediately - let user see success first
+        setTimeout(() => {
+            newForm.reset();
+            console.log('Form reset after delay');
+        }, 2000);
+    });
+    
+    whatsAppInitialized = true;
+    console.log('Event listener added successfully, initialization complete');
+}
+
+// Format message for WhatsApp
+function formatWhatsAppMessage(name, message) {
+    return `Hello! I'm contacting you through your portfolio website.
+
+� *Name:* ${name}
+
+💬 *Message:*
+${message}
+
+---
+Sent from your portfolio contact form`;
+}
+
+// Show success message
+function showSuccessMessage() {
+    // Create success message element
+    const successMessage = document.createElement('div');
+    successMessage.className = 'success-message';
+    successMessage.innerHTML = `
+        <div class="success-content">
+            <i class="fas fa-check-circle"></i>
+            <span>Redirecting to WhatsApp...</span>
+        </div>
+    `;
+    
+    // Add to page
+    document.body.appendChild(successMessage);
+    
+    // Remove after 3 seconds
+    setTimeout(() => {
+        if (successMessage.parentNode) {
+            successMessage.remove();
+        }
+    }, 3000);
+}
+
+// Initialize WhatsApp integration when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, initializing WhatsApp integration...');
+    initializeWhatsAppIntegration();
+});
