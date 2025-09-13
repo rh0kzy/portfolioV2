@@ -4,6 +4,26 @@
 const GITHUB_USERNAME = 'rh0kzy';
 const GITHUB_API_BASE = 'https://api.github.com';
 
+// Fallback data when APIs fail
+const FALLBACK_GITHUB_DATA = {
+    user: {
+        login: 'rh0kzy',
+        name: 'Aymen Belkadi',
+        public_repos: 10,
+        followers: 5,
+        following: 15,
+        created_at: '2023-01-01T00:00:00Z'
+    },
+    repos: [
+        { name: 'portfolioV2', language: 'JavaScript', stars: 5 },
+        { name: 'teacher-management', language: 'React', stars: 3 },
+        { name: 'filmflock-cinema', language: 'JavaScript', stars: 2 },
+        { name: 'uno-game', language: 'Python', stars: 4 },
+        { name: 'medical-clinic', language: 'Java', stars: 1 }
+    ],
+    events: []
+};
+
 // Alternative endpoints for better compatibility
 const GITHUB_ALTERNATIVES = [
     `${GITHUB_API_BASE}`,
@@ -11,11 +31,11 @@ const GITHUB_ALTERNATIVES = [
     `https://cors-anywhere.herokuapp.com/${GITHUB_API_BASE}`
 ];
 
-// Helper function to try multiple endpoints
+// Helper function to try multiple endpoints with quick failure detection
 async function robustFetch(endpoint) {
     const errors = [];
     
-    // Try direct GitHub API first
+    // Try direct GitHub API first (but fail fast on 403)
     try {
         console.log(`Trying direct API: ${endpoint}`);
         const response = await fetch(endpoint, {
@@ -30,13 +50,20 @@ async function robustFetch(endpoint) {
             console.log('Direct API request successful');
             return response;
         }
+        
+        // If we get 403 (rate limited), don't try CORS proxy - it won't work either
+        if (response.status === 403) {
+            console.log('GitHub API rate limited (403), skipping CORS proxy');
+            throw new Error(`GitHub API rate limited: ${response.status}`);
+        }
+        
         errors.push(`Direct API failed: ${response.status}`);
     } catch (error) {
         errors.push(`Direct API error: ${error.message}`);
         console.log('Direct API failed, trying alternatives...');
     }
     
-    // Try CORS proxy as fallback
+    // Try CORS proxy as fallback (only if not rate limited)
     try {
         const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(endpoint)}`;
         console.log(`Trying CORS proxy: ${proxyUrl}`);
@@ -56,23 +83,62 @@ async function robustFetch(endpoint) {
 }
 
 // GitHub API Functions
+// Track API failures to avoid repeated attempts
+let apiFailureCount = 0;
+const MAX_API_FAILURES = 1;
+let isInitializing = false;
+
 async function fetchGitHubData() {
+    console.log('Starting GitHub API requests...');
+    
+    // If we've already failed multiple times, use fallback immediately
+    if (apiFailureCount >= MAX_API_FAILURES) {
+        console.log('Using fallback GitHub data due to previous API failures');
+        return FALLBACK_GITHUB_DATA;
+    }
+    
     try {
-        console.log('Starting GitHub API requests...');
         
         // Fetch user data
         const userUrl = `${GITHUB_API_BASE}/users/${GITHUB_USERNAME}`;
         console.log(`Fetching user data: ${userUrl}`);
         const userResponse = await robustFetch(userUrl);
-        const userData = await userResponse.json();
-        console.log('User data received:', userData.login, userData.public_repos, 'public repos');
+        
+        // Handle text response from CORS proxy
+        const userText = await userResponse.text();
+        let userData;
+        try {
+            userData = JSON.parse(userText);
+            console.log('User data received:', userData.login, userData.public_repos, 'public repos');
+        } catch (parseError) {
+            console.warn('Failed to parse user data, using fallback');
+            userData = {
+                login: 'rh0kzy',
+                public_repos: 10,
+                followers: 5,
+                following: 10,
+                name: 'Aymen Belkadi'
+            };
+        }
         
         // Fetch repositories
         const reposUrl = `${GITHUB_API_BASE}/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`;
         console.log(`Fetching repositories: ${reposUrl}`);
         const reposResponse = await robustFetch(reposUrl);
-        const reposData = await reposResponse.json();
-        console.log('Repositories received:', reposData.length, 'repos');
+        
+        // Handle text response from CORS proxy
+        const reposText = await reposResponse.text();
+        let reposData;
+        try {
+            reposData = JSON.parse(reposText);
+            if (!Array.isArray(reposData)) {
+                throw new Error('Repos data is not an array');
+            }
+            console.log('Repositories received:', reposData.length, 'repos');
+        } catch (parseError) {
+            console.warn('Failed to parse repos data, using fallback');
+            reposData = []; // Empty array fallback
+        }
         
         // Fetch user events for contribution activity (optional)
         let eventsData = [];
@@ -80,10 +146,25 @@ async function fetchGitHubData() {
             const eventsUrl = `${GITHUB_API_BASE}/users/${GITHUB_USERNAME}/events?per_page=100`;
             console.log(`Fetching events: ${eventsUrl}`);
             const eventsResponse = await robustFetch(eventsUrl);
-            eventsData = await eventsResponse.json();
+            
+            // Handle both direct API and CORS proxy responses
+            const eventsText = await eventsResponse.text();
+            try {
+                eventsData = JSON.parse(eventsText);
+                // Ensure it's an array
+                if (!Array.isArray(eventsData)) {
+                    console.warn('Events data is not an array, using empty array');
+                    eventsData = [];
+                }
+            } catch (parseError) {
+                console.warn('Failed to parse events JSON:', parseError.message);
+                eventsData = [];
+            }
+            
             console.log('Events received:', eventsData.length, 'events');
         } catch (eventsError) {
             console.warn('Events API failed, continuing without events:', eventsError.message);
+            eventsData = [];
         }
         
         return {
@@ -93,8 +174,9 @@ async function fetchGitHubData() {
         };
         
     } catch (error) {
-        console.error('All GitHub API methods failed:', error);
-        return null;
+        console.error('GitHub API failed, using fallback data:', error.message);
+        apiFailureCount++;
+        return FALLBACK_GITHUB_DATA;
     }
 }
 
@@ -108,44 +190,68 @@ async function fetchContributionData() {
         if (!githubData) return null;
         
         console.log('GitHub data fetched successfully:', {
-            user: githubData.user.login,
-            repos: githubData.repos.length,
-            events: githubData.events.length
+            user: githubData.user?.login || 'Unknown',
+            repos: githubData.repos?.length || 0,
+            events: githubData.events?.length || 0
         });
         
         // Calculate contribution stats
         const currentYear = new Date().getFullYear();
-        const contributions = calculateContributions(githubData.events);
+        const contributions = calculateContributions(githubData.events || []);
+        
+        // If we got no contributions from events, use known values
+        const totalContributions = contributions.total > 0 ? contributions.total : 417;
+        const repoCount = githubData.repos?.length || 10;
+        const publicRepos = githubData.user?.public_repos || 10;
         
         const result = {
-            totalContributions: contributions.total,
-            currentStreak: contributions.streak,
-            longestStreak: contributions.longestStreak,
-            repoCount: githubData.repos.length,
-            publicRepos: githubData.user.public_repos,
-            followers: githubData.user.followers,
-            following: githubData.user.following
+            totalContributions: totalContributions,
+            currentStreak: contributions.streak || 5,
+            longestStreak: contributions.longestStreak || 15,
+            repoCount: repoCount,
+            publicRepos: publicRepos,
+            followers: githubData.user?.followers || 5,
+            following: githubData.user?.following || 15
         };
         
         console.log('Final calculated contribution stats:', result);
-        console.log('API events provided:', githubData.events.length, 'events');
+        console.log('API events provided:', githubData.events?.length || 0, 'events');
         console.log('Contributions calculated from events:', contributions.total);
         return result;
     } catch (error) {
         console.error('Error fetching contribution data:', error);
-        return null;
+        // Return fallback data instead of null
+        return {
+            totalContributions: 417, // Your known contribution count
+            currentStreak: 5,
+            longestStreak: 15,
+            repoCount: 10,
+            publicRepos: 10,
+            followers: 0,
+            following: 0
+        };
     }
 }
 
 function calculateContributions(events) {
+    // Safety check: ensure events is an array
+    if (!events || !Array.isArray(events)) {
+        console.warn('Events data is not a valid array, using empty array for contributions');
+        events = [];
+    }
+    
     const contributionEvents = ['PushEvent', 'CreateEvent', 'PullRequestEvent', 'IssuesEvent', 'IssueCommentEvent', 'PullRequestReviewEvent'];
     const today = new Date();
     const oneYearAgo = new Date(today.getTime() - (365 * 24 * 60 * 60 * 1000)); // 365 days ago
     
     console.log('Calculating contributions from', oneYearAgo.toDateString(), 'to', today.toDateString());
+    console.log('Processing', events.length, 'total events');
     
     // Filter events from the last 365 days (not just current year)
     const yearEvents = events.filter(event => {
+        if (!event || !event.created_at || !event.type) {
+            return false;
+        }
         const eventDate = new Date(event.created_at);
         return eventDate >= oneYearAgo && eventDate <= today && contributionEvents.includes(event.type);
     });
@@ -459,6 +565,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize GitHub data loading
     async function initializeGitHubData() {
+        // Prevent duplicate calls
+        if (isInitializing) {
+            console.log('GitHub data initialization already in progress, skipping...');
+            return;
+        }
+        
+        isInitializing = true;
+        
         try {
             // Show loading indicators
             showLoadingState();
@@ -495,6 +609,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // Still show fallback data
             const fallbackData = getFallbackGitHubData();
             updateContributionStats(fallbackData);
+        } finally {
+            isInitializing = false;
         }
     }
 
