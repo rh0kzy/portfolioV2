@@ -1,23 +1,43 @@
-# GitHub-Themed Portfolio
+# Aymen Belkadi - Portfolio
 
-A modern, responsive portfolio website that replicates GitHub's design system and user interface. Built with vanilla HTML, CSS, and JavaScript, this portfolio showcases your projects and skills with the familiar GitHub aesthetic.
+This repository contains my personal portfolio website showcasing my projects and skills.
 
-## 🎨 Features
+## ⚠️ IMPORTANT: This version has been migrated to Next.js
 
-- **Authentic GitHub Design**: Pixel-perfect recreation of GitHub's design system including colors, typography, and layout patterns
-- **Dark Theme**: GitHub's signature dark mode as the primary theme
-- **Responsive Design**: Fully responsive across all device sizes
-- **Interactive Components**: Hover effects, animations, and smooth scrolling
-- **GitHub-style Elements**:
-  - Repository cards with language indicators and stats
-  - Contribution graph visualization
-  - Profile section similar to GitHub user profiles
-  - Navigation matching GitHub's header
-  - Project showcase with overlay effects
+**The active portfolio is now in the `portfolioV2-Next.js` folder.**
 
-## 🚀 Quick Start
+🚀 **To run the portfolio:**
+```bash
+cd portfolioV2-Next.js
+npm install
+npm run dev
+```
 
-1. **Clone or download** this repository
+## 📁 Repository Structure
+
+- **`portfolioV2-Next.js/`** - ✅ **Active Next.js version** (Modern, optimized)
+- **`GITHUB_VERIFICATION_REPORT.md`** - GitHub verification report
+- **`.git/`** - Git repository data
+
+## 🔄 Migration Completed
+
+The original HTML/CSS/JS portfolio has been successfully migrated to:
+- ✅ **Next.js 15** with App Directory
+- ✅ **TypeScript** for type safety  
+- ✅ **Static Site Generation** for performance
+- ✅ **8 detailed project pages** with full content
+- ✅ **Responsive design** optimized for all devices
+- ✅ **Modern development workflow**
+
+## 🌐 Live Demo
+
+Visit the portfolio at: [your-domain.com](https://your-domain.com)
+
+## 📞 Contact
+
+- **Email**: aymen.belkadi.contact@gmail.com
+- **GitHub**: [@rh0kzy](https://github.com/rh0kzy)
+- **LinkedIn**: [Aymen Belkadi](https://linkedin.com/in/aymen-belkadi)
 2. **Customize** the content in `index.html` with your information
 3. **Replace placeholder images** with your actual photos/screenshots
 4. **Open** `index.html` in your browser
