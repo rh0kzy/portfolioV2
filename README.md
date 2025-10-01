@@ -1,256 +1,100 @@
-# Aymen Belkadi - Portfolio
+# Aymen Belkadi - Portfolio (Next.js)
 
-This repository contains my personal portfolio website showcasing my projects and skills.
+A modern, responsive portfolio website built with Next.js 15, showcasing projects and skills with a GitHub-inspired design system.
 
-## ⚠️ IMPORTANT: This version has been migrated to Next.js
+## 🎨 Features
 
-**The active portfolio is now in the `portfolioV2-Next.js` folder.**
+- **Next.js 15**: Built with the latest Next.js features including App Directory and Turbopack
+- **TypeScript**: Fully typed for better development experience
+- **Responsive Design**: Optimized for all device sizes
+- **GitHub-style Design**: Dark theme with authentic GitHub aesthetics
+- **Static Generation**: Pre-rendered pages for optimal performance
+- **Project Showcase**: 8 detailed project pages with comprehensive information
+- **Interactive Components**: Smooth animations and hover effects
 
-🚀 **To run the portfolio:**
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 18+ 
+- npm, yarn, pnpm, or bun
+
+### Installation
+
+1. **Clone the repository**
 ```bash
-cd portfolioV2-Next.js
-npm install
-npm run dev
+git clone https://github.com/rh0kzy/portfolioV2.git
+cd portfolioV2/portfolioV2-Next.js
 ```
 
-## 📁 Repository Structure
+2. **Install dependencies**
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+```
 
-- **`portfolioV2-Next.js/`** - ✅ **Active Next.js version** (Modern, optimized)
-- **`GITHUB_VERIFICATION_REPORT.md`** - GitHub verification report
-- **`.git/`** - Git repository data
+3. **Run the development server**
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+```
 
-## 🔄 Migration Completed
-
-The original HTML/CSS/JS portfolio has been successfully migrated to:
-- ✅ **Next.js 15** with App Directory
-- ✅ **TypeScript** for type safety  
-- ✅ **Static Site Generation** for performance
-- ✅ **8 detailed project pages** with full content
-- ✅ **Responsive design** optimized for all devices
-- ✅ **Modern development workflow**
-
-## 🌐 Live Demo
-
-Visit the portfolio at: [your-domain.com](https://your-domain.com)
-
-## 📞 Contact
-
-- **Email**: aymen.belkadi.contact@gmail.com
-- **GitHub**: [@rh0kzy](https://github.com/rh0kzy)
-- **LinkedIn**: [Aymen Belkadi](https://linkedin.com/in/aymen-belkadi)
-2. **Customize** the content in `index.html` with your information
-3. **Replace placeholder images** with your actual photos/screenshots
-4. **Open** `index.html` in your browser
+4. **Open your browser**
+Navigate to [http://localhost:3000](http://localhost:3000) to see the portfolio.
 
 ## 📁 Project Structure
 
 ```
-portfolioV2/
-├── index.html          # Main HTML file
-├── styles.css          # GitHub-themed CSS styles
-├── script.js           # Interactive JavaScript features
-└── README.md          # This file
+src/
+├── app/
+│   ├── globals.css          # Global styles
+│   ├── layout.tsx           # Root layout component
+│   ├── page.tsx             # Homepage
+│   ├── project-styles.css   # Project page styles
+│   ├── script.js            # Client-side JavaScript
+│   ├── styles.css           # Main styles
+│   └── projects/            # Individual project pages
+│       ├── eden-parfum/
+│       ├── file-management/
+│       ├── filmflock-cinema/
+│       ├── medical-clinic/
+│       ├── radiation-analyzer/
+│       ├── teacher-management/
+│       ├── uno-game/
+│       └── vertex-platform/
+public/
+├── photos/                  # Personal photos and icons
+├── projects/                # Project assets and images
+├── script.js               # Public JavaScript files
+└── project-animations.js   # Animation scripts
 ```
 
-## 🛠️ Customization Guide
+## 🛠️ Built With
 
-### Personal Information
-Edit the following sections in `index.html`:
+- **Next.js 15** - React framework with App Directory
+- **TypeScript** - Type safety and better DX
+- **CSS3** - Modern styling with custom properties
+- **Font Awesome** - Icon library
+- **Inter Font** - Typography
 
-1. **Profile Section** (Line ~35):
-   ```html
-   <h1 class="profile-name">Your Name</h1>
-   <p class="profile-username">@yourusername</p>
-   <p class="profile-bio">Your bio here...</p>
-   ```
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-2. **Contact Information** (Line ~50):
-   ```html
-   <div class="detail-item">
-       <i class="fas fa-envelope"></i>
-       <span>your.email@example.com</span>
-   </div>
-   ```
+## Learn More
 
-3. **Social Links** (Line ~65):
-   ```html
-   <a href="https://github.com/yourusername" class="social-link">
-   ```
+To learn more about Next.js, take a look at the following resources:
 
-### Repository Cards
-Update the repository information (Line ~120):
-```html
-<div class="repo-card">
-    <div class="repo-header">
-        <h3 class="repo-name">
-            <i class="fas fa-book"></i>
-            your-project-name
-        </h3>
-    </div>
-    <p class="repo-description">Project description...</p>
-    <!-- Update language, stars, forks -->
-</div>
-```
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-### Project Showcase
-Replace project information (Line ~200):
-```html
-<div class="project-card">
-    <div class="project-image">
-        <img src="path-to-your-project-image.jpg" alt="Project Name">
-    </div>
-    <div class="project-content">
-        <h3>Project Name</h3>
-        <p>Project description...</p>
-        <div class="project-tags">
-            <span class="tag">Technology</span>
-        </div>
-    </div>
-</div>
-```
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-### Skills Section
-Update your technical skills (Line ~300):
-```html
-<div class="skill-category">
-    <h4>Category Name</h4>
-    <div class="skill-tags">
-        <span class="skill-tag">Skill 1</span>
-        <span class="skill-tag">Skill 2</span>
-    </div>
-</div>
-```
+## Deploy on Vercel
 
-## 🎨 Design System
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-This portfolio uses GitHub's official design tokens:
-
-### Colors
-- **Primary Background**: `#0d1117`
-- **Secondary Background**: `#161b22`
-- **Text Primary**: `#e6edf3`
-- **Text Secondary**: `#7d8590`
-- **Accent Blue**: `#58a6ff`
-- **Border**: `#30363d`
-
-### Typography
-- **Font Family**: Inter (with GitHub fallbacks)
-- **Font Sizes**: 12px - 26px scale
-- **Font Weights**: 300, 400, 500, 600, 700
-
-### Components
-- **Buttons**: GitHub-style primary and outline variants
-- **Cards**: Repository and project cards with hover effects
-- **Forms**: Styled inputs and textareas
-- **Navigation**: Sticky header with smooth scrolling
-
-## 📱 Responsive Breakpoints
-
-- **Desktop**: 1024px and up
-- **Tablet**: 768px - 1023px
-- **Mobile**: 480px - 767px
-- **Small Mobile**: Below 480px
-
-## ✨ Interactive Features
-
-### JavaScript Enhancements
-- **Smooth Scrolling**: Navigation links scroll smoothly to sections
-- **Active Navigation**: Highlights current section in navigation
-- **Repository Search**: Filter repositories by name or language
-- **Contribution Graph**: Generates a GitHub-style activity graph
-- **Form Handling**: Contact form validation and submission
-- **Scroll Animations**: Elements animate into view on scroll
-- **Ripple Effects**: Button click animations
-- **Scroll to Top**: Floating button appears on scroll
-
-### Easter Eggs
-- **Konami Code**: Try the classic cheat code sequence!
-- **Console Messages**: Check the browser console for developer messages
-
-## 🌐 Browser Support
-
-- **Chrome**: 90+
-- **Firefox**: 88+
-- **Safari**: 14+
-- **Edge**: 90+
-
-## 📦 Dependencies
-
-### External Libraries
-- **Font Awesome 6.0.0**: Icons
-- **Google Fonts (Inter)**: Typography
-
-### No Framework Dependencies
-This portfolio is built with vanilla web technologies:
-- HTML5
-- CSS3 (with CSS Grid and Flexbox)
-- ES6+ JavaScript
-
-## 🔧 Advanced Customization
-
-### Adding New Sections
-1. Add HTML section to `index.html`
-2. Add corresponding styles to `styles.css`
-3. Update navigation in header
-4. Add scroll behavior in `script.js`
-
-### Modifying Colors
-Update CSS custom properties in `:root` selector:
-```css
-:root {
-    --bg-primary: #your-color;
-    --text-primary: #your-color;
-    /* ... other variables */
-}
-```
-
-### Adding Animations
-Use the existing animation classes or create new ones:
-```css
-@keyframes yourAnimation {
-    from { /* start state */ }
-    to { /* end state */ }
-}
-```
-
-## 📈 Performance
-
-- **Lightweight**: ~50KB total size
-- **Fast Loading**: Optimized images and minimal dependencies
-- **Smooth Animations**: 60fps animations with CSS transforms
-- **Responsive Images**: Placeholder service for development
-
-## 🚀 Deployment
-
-### GitHub Pages
-1. Push to GitHub repository
-2. Enable GitHub Pages in repository settings
-3. Select source branch (usually `main`)
-
-### Netlify
-1. Connect repository to Netlify
-2. Build command: (none needed)
-3. Publish directory: `/` (root)
-
-### Vercel
-1. Import repository to Vercel
-2. Deploy with zero configuration
-
-## 📄 License
-
-This project is open source and available under the [MIT License](https://opensource.org/licenses/MIT).
-
-## 🤝 Contributing
-
-Feel free to submit issues and pull requests to improve this portfolio template!
-
-## 📞 Support
-
-If you need help customizing this portfolio, please:
-1. Check this README first
-2. Look at the code comments in the files
-3. Open an issue on GitHub
-
----
-
-**Made with ❤️ and GitHub's design system**
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
