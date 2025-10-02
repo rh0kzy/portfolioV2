@@ -66,8 +66,11 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
 };
 
 // Helper function to get nested object values
-const getNestedValue = (obj: any, path: string): string => {
-  return path.split('.').reduce((current, key) => current?.[key], obj) || '';
+const getNestedValue = (obj: Record<string, unknown>, path: string): string => {
+  const value = path.split('.').reduce((current: Record<string, unknown> | unknown, key) => {
+    return typeof current === 'object' && current !== null ? (current as Record<string, unknown>)[key] : undefined;
+  }, obj);
+  return typeof value === 'string' ? value : '';
 };
 
 // Translation data

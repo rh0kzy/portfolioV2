@@ -37,13 +37,14 @@ export default function Home() {
       console.log('Message saved successfully:', messageData);
       setSubmitStatus('Message sent successfully!');
       setFormData({ name: '', email: '', message: '' });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error details:', error);
       
       // Check specific error types
-      if (error.code === 'PERMISSION_DENIED') {
+      const firebaseError = error as { code?: string; message?: string };
+      if (firebaseError.code === 'PERMISSION_DENIED') {
         setSubmitStatus('Permission denied. Please check database rules.');
-      } else if (error.code === 'NETWORK_ERROR' || error.message?.includes('network')) {
+      } else if (firebaseError.code === 'NETWORK_ERROR' || firebaseError.message?.includes('network')) {
         setSubmitStatus('Network error. Please check your connection and try again.');
       } else {
         // For other errors, assume the message was saved since writes are allowed
