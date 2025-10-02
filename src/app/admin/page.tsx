@@ -21,7 +21,6 @@ interface Message {
   timestamp: number;
   read: boolean;
 }
-
 export default function AdminPage() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(true);
@@ -30,6 +29,7 @@ export default function AdminPage() {
   const [loginData, setLoginData] = useState({ email: '', password: '' });
   const [loginError, setLoginError] = useState('');
   const [isLoginLoading, setIsLoginLoading] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   // Check if user is already logged in
   useEffect(() => {
@@ -42,6 +42,18 @@ export default function AdminPage() {
     });
 
     return () => unsubscribe();
+  }, []);
+
+  // Track screen size for responsive design
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   // Load messages when logged in
@@ -114,7 +126,8 @@ export default function AdminPage() {
         alignItems: 'center',
         justifyContent: 'center',
         fontFamily: 'Arial, sans-serif',
-        color: 'white'
+        color: 'white',
+        padding: '20px'
       }}>
         <div style={{
           background: 'rgba(255, 255, 255, 0.05)',
@@ -138,7 +151,7 @@ export default function AdminPage() {
             }}>
               Admin Login
             </h1>
-            <p style={{ color: '#ccc' }}>Enter your credentials to access the admin panel</p>
+            <p style={{ color: '#ccc', fontSize: '14px' }}>Enter your credentials to access the admin panel</p>
           </div>
 
           <form onSubmit={handleLogin}>
@@ -321,12 +334,14 @@ export default function AdminPage() {
           margin: '0 auto',
           padding: '0 20px',
           display: 'flex',
+          flexDirection: isMobile ? 'column' : 'row',
           justifyContent: 'space-between',
-          alignItems: 'center'
+          alignItems: isMobile ? 'flex-start' : 'center',
+          gap: isMobile ? '20px' : '0'
         }}>
           <div>
             <h1 style={{
-              fontSize: '32px',
+              fontSize: isMobile ? '24px' : '32px',
               fontWeight: 'bold',
               background: 'linear-gradient(45deg, #4a90e2, #9b59b6)',
               WebkitBackgroundClip: 'text',
@@ -336,14 +351,23 @@ export default function AdminPage() {
             }}>
               Admin Dashboard
             </h1>
-            <p style={{ color: '#ccc', margin: 0 }}>Manage contact form messages</p>
+            <p style={{ color: '#ccc', margin: 0, fontSize: isMobile ? '14px' : '16px' }}>
+              Manage contact form messages
+            </p>
           </div>
-          <div style={{ display: 'flex', gap: '15px' }}>
+          <div style={{
+            display: 'flex',
+            flexDirection: isMobile ? 'column' : 'row',
+            gap: '15px',
+            width: isMobile ? '100%' : 'auto',
+            alignItems: isMobile ? 'stretch' : 'center'
+          }}>
             <div style={{
               background: 'rgba(255, 255, 255, 0.1)',
               padding: '15px',
               borderRadius: '10px',
-              textAlign: 'center'
+              textAlign: 'center',
+              flex: isMobile ? '1' : 'none'
             }}>
               <div style={{ fontSize: '12px', color: '#ccc' }}>Total Messages</div>
               <div style={{ fontSize: '24px', fontWeight: 'bold' }}>{messages.length}</div>
@@ -353,7 +377,8 @@ export default function AdminPage() {
               padding: '15px',
               borderRadius: '10px',
               textAlign: 'center',
-              border: '1px solid rgba(255, 193, 7, 0.3)'
+              border: '1px solid rgba(255, 193, 7, 0.3)',
+              flex: isMobile ? '1' : 'none'
             }}>
               <div style={{ fontSize: '12px', color: '#ffc107' }}>Unread</div>
               <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#ffc107' }}>
@@ -371,7 +396,9 @@ export default function AdminPage() {
                 fontSize: '14px',
                 fontWeight: 'bold',
                 cursor: 'pointer',
-                transition: 'all 0.3s ease'
+                transition: 'all 0.3s ease',
+                width: isMobile ? '100%' : 'auto',
+                marginTop: isMobile ? '10px' : '0'
               }}
               onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
               onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
@@ -393,9 +420,26 @@ export default function AdminPage() {
           padding: '25px',
           marginBottom: '30px'
         }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-              <label style={{ fontWeight: 'bold', color: 'white' }}>Filter Messages:</label>
+          <div style={{
+            display: 'flex',
+            flexDirection: isMobile ? 'column' : 'row',
+            justifyContent: 'space-between',
+            alignItems: isMobile ? 'flex-start' : 'center',
+            gap: isMobile ? '15px' : '0'
+          }}>
+            <div style={{
+              display: 'flex',
+              flexDirection: isMobile ? 'column' : 'row',
+              alignItems: isMobile ? 'flex-start' : 'center',
+              gap: '15px'
+            }}>
+              <label style={{
+                fontWeight: 'bold',
+                color: 'white',
+                fontSize: isMobile ? '16px' : '14px'
+              }}>
+                Filter Messages:
+              </label>
               <select
                 value={filter}
                 onChange={(e) => setFilter(e.target.value as 'all' | 'unread' | 'read')}
@@ -405,7 +449,8 @@ export default function AdminPage() {
                   border: '1px solid #555',
                   borderRadius: '8px',
                   padding: '8px 12px',
-                  fontSize: '14px'
+                  fontSize: '14px',
+                  minWidth: isMobile ? '100%' : '200px'
                 }}
               >
                 <option value="all">All Messages ({messages.length})</option>
@@ -413,7 +458,11 @@ export default function AdminPage() {
                 <option value="read">Read Only ({messages.filter(m => m.read).length})</option>
               </select>
             </div>
-            <div style={{ fontSize: '14px', color: '#ccc' }}>
+            <div style={{
+              fontSize: isMobile ? '12px' : '14px',
+              color: '#ccc',
+              textAlign: isMobile ? 'left' : 'right'
+            }}>
               Last updated: {messages.length > 0 ? formatDate(messages[0].timestamp) : 'Never'}
             </div>
           </div>
@@ -456,7 +505,14 @@ export default function AdminPage() {
                   e.currentTarget.style.boxShadow = 'none';
                 }}
               >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '15px' }}>
+                <div style={{
+                  display: 'flex',
+                  flexDirection: isMobile ? 'column' : 'row',
+                  justifyContent: 'space-between',
+                  alignItems: isMobile ? 'flex-start' : 'flex-start',
+                  marginBottom: '15px',
+                  gap: isMobile ? '15px' : '0'
+                }}>
                   <div style={{ flex: 1 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '5px' }}>
                       <h3 style={{ fontSize: '20px', fontWeight: 'bold', margin: 0 }}>{msg.name}</h3>
@@ -472,13 +528,30 @@ export default function AdminPage() {
                         {msg.read ? 'Read' : 'Unread'}
                       </span>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '5px' }}>
+                    <div style={{
+                      display: 'flex',
+                      flexDirection: isMobile ? 'column' : 'row',
+                      alignItems: isMobile ? 'flex-start' : 'center',
+                      gap: '10px',
+                      marginBottom: '5px'
+                    }}>
                       <i className="fas fa-envelope" style={{ color: '#4a90e2', fontSize: '14px' }}></i>
-                      <a href={`mailto:${msg.email}`} style={{ color: '#4a90e2', textDecoration: 'none', fontSize: '14px' }}>
+                      <a href={`mailto:${msg.email}`} style={{
+                        color: '#4a90e2',
+                        textDecoration: 'none',
+                        fontSize: '14px',
+                        wordBreak: 'break-all'
+                      }}>
                         {msg.email}
                       </a>
                     </div>
-                    <p style={{ fontSize: '14px', color: '#ccc', margin: 0 }}>{formatDate(msg.timestamp)}</p>
+                    <p style={{
+                      fontSize: '14px',
+                      color: '#ccc',
+                      margin: 0
+                    }}>
+                      {formatDate(msg.timestamp)}
+                    </p>
                   </div>
                   {!msg.read && (
                     <button
@@ -495,7 +568,10 @@ export default function AdminPage() {
                         display: 'flex',
                         alignItems: 'center',
                         gap: '8px',
-                        transition: 'all 0.3s ease'
+                        transition: 'all 0.3s ease',
+                        alignSelf: isMobile ? 'flex-start' : 'center',
+                        width: isMobile ? '100%' : 'auto',
+                        justifyContent: 'center'
                       }}
                       onMouseEnter={(e) => {
                         e.currentTarget.style.transform = 'scale(1.05)';
