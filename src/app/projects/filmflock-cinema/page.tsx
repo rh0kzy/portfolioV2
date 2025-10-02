@@ -2,8 +2,47 @@
 
 import Script from "next/script";
 import Link from "next/link";
+import { useLanguage } from '../../../../lib/language-context';
 
 export default function FilmFlockCinema() {
+  const { language } = useLanguage();
+  const translations = language === 'fr' ? 
+    {
+      backToProjects: '← Retour aux Projets',
+      features: 'Fonctionnalités Clés',
+      filmflockCinema: {
+        title: 'FilmFlock Cinema',
+        subtitle: 'Système Complet de Gestion Cinématographique',
+        description: 'Une plateforme de gestion cinématographique complète qui gère la réservation de billets, la programmation de films et les opérations administratives pour les cinémas modernes.',
+        overview: 'Construit avec des technologies web modernes, ce système fournit une solution complète pour les opérations cinématographiques incluant la sélection de sièges en temps réel, la programmation automatisée et un tableau de bord d\'administration complet.',
+        keyFeatures: [
+          'Sélection et réservation de sièges en temps réel',
+          'Système de programmation de films automatisé',
+          'Tableau de bord d\'administration complet',
+          'Gestion des comptes utilisateurs',
+          'Intégration de traitement des paiements',
+          'Design responsive mobile'
+        ]
+      }
+    } : 
+    {
+      backToProjects: '← Back to Projects',
+      features: 'Key Features',
+      filmflockCinema: {
+        title: 'FilmFlock Cinema',
+        subtitle: 'Complete Cinema Management System',
+        description: 'A full-featured cinema management platform that handles ticket booking, movie scheduling, and administrative operations for modern cinemas.',
+        overview: 'Built with modern web technologies, this system provides a complete solution for cinema operations including real-time seat selection, automated scheduling, and comprehensive admin dashboard.',
+        keyFeatures: [
+          'Real-time seat selection and booking',
+          'Automated movie scheduling system',
+          'Comprehensive admin dashboard',
+          'User account management',
+          'Payment processing integration',
+          'Mobile-responsive design'
+        ]
+      }
+    };
   return (
     <div style={{
       background: '#0d1117',
@@ -38,7 +77,7 @@ export default function FilmFlockCinema() {
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text'
           }}>
-            FilmFlock Cinema
+            {translations.filmflockCinema.title}
           </h1>
           
           <p style={{
@@ -49,7 +88,7 @@ export default function FilmFlockCinema() {
             marginLeft: 'auto',
             marginRight: 'auto'
           }}>
-            A comprehensive cinema management system with advanced booking, scheduling, and customer management features
+            {translations.filmflockCinema.description}
           </p>
           
           <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '12px', marginTop: '30px'}}>
@@ -64,7 +103,7 @@ export default function FilmFlockCinema() {
 
       {/* Content Section */}
       <div style={{maxWidth: '1200px', margin: '0 auto', padding: '80px 20px'}}>
-        <Link href="/" style={{
+        <Link href="/projects" style={{
           display: 'inline-flex',
           alignItems: 'center',
           gap: '10px',
@@ -78,7 +117,7 @@ export default function FilmFlockCinema() {
           background: 'rgba(88, 166, 255, 0.1)'
         }}>
           <i className="fas fa-arrow-left"></i>
-          Back to Portfolio
+          {translations.backToProjects}
         </Link>
 
         {/* Project Overview */}
@@ -91,97 +130,34 @@ export default function FilmFlockCinema() {
         }}>
           <h2 style={{fontSize: '1.8rem', fontWeight: '700', marginBottom: '20px', color: '#e6edf3', display: 'flex', alignItems: 'center', gap: '15px'}}>
             <i className="fas fa-info-circle" style={{color: '#58a6ff'}}></i> 
-            Project Overview
+            {translations.filmflockCinema.subtitle}
           </h2>
           <p style={{color: '#8b949e', fontSize: '1.1rem', lineHeight: '1.7', marginBottom: '25px'}}>
-            FilmFlock Cinema is a comprehensive cinema management system designed to streamline theater operations. Built with Java Swing and MySQL, this application provides a complete solution for managing movie schedules, customer bookings, seat reservations, and administrative tasks. The system features an intuitive user interface, robust database integration, and advanced booking algorithms to handle complex cinema operations efficiently.
+            {translations.filmflockCinema.overview}
           </p>
 
           {/* Key Features */}
           <div style={{marginTop: '30px'}}>
-            <h3 style={{fontSize: '1.3rem', fontWeight: '600', marginBottom: '20px', color: '#e6edf3'}}>Key Features</h3>
+            <h3 style={{fontSize: '1.3rem', fontWeight: '600', marginBottom: '20px', color: '#e6edf3'}}>{translations.features}</h3>
             <div style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
               gap: '20px'
             }}>
-              <div style={{
-                background: '#21262d',
-                padding: '25px',
-                borderRadius: '12px',
-                border: '1px solid #30363d'
-              }}>
-                <i className="fas fa-ticket-alt" style={{fontSize: '1.5rem', color: '#58a6ff', marginBottom: '15px'}}></i>
-                <h4 style={{fontSize: '1.1rem', fontWeight: '600', marginBottom: '10px', color: '#e6edf3'}}>Booking System</h4>
-                <p style={{color: '#8b949e', fontSize: '0.95rem', lineHeight: '1.6'}}>
-                  Advanced seat reservation system with real-time availability tracking and conflict resolution.
-                </p>
-              </div>
-              
-              <div style={{
-                background: '#21262d',
-                padding: '25px',
-                borderRadius: '12px',
-                border: '1px solid #30363d'
-              }}>
-                <i className="fas fa-calendar-alt" style={{fontSize: '1.5rem', color: '#58a6ff', marginBottom: '15px'}}></i>
-                <h4 style={{fontSize: '1.1rem', fontWeight: '600', marginBottom: '10px', color: '#e6edf3'}}>Schedule Management</h4>
-                <p style={{color: '#8b949e', fontSize: '0.95rem', lineHeight: '1.6'}}>
-                  Comprehensive movie scheduling with showtime management and theater allocation algorithms.
-                </p>
-              </div>
-              
-              <div style={{
-                background: '#21262d',
-                padding: '25px',
-                borderRadius: '12px',
-                border: '1px solid #30363d'
-              }}>
-                <i className="fas fa-users" style={{fontSize: '1.5rem', color: '#58a6ff', marginBottom: '15px'}}></i>
-                <h4 style={{fontSize: '1.1rem', fontWeight: '600', marginBottom: '10px', color: '#e6edf3'}}>Customer Management</h4>
-                <p style={{color: '#8b949e', fontSize: '0.95rem', lineHeight: '1.6'}}>
-                  Complete customer database with booking history, preferences, and loyalty program integration.
-                </p>
-              </div>
-              
-              <div style={{
-                background: '#21262d',
-                padding: '25px',
-                borderRadius: '12px',
-                border: '1px solid #30363d'
-              }}>
-                <i className="fas fa-database" style={{fontSize: '1.5rem', color: '#58a6ff', marginBottom: '15px'}}></i>
-                <h4 style={{fontSize: '1.1rem', fontWeight: '600', marginBottom: '10px', color: '#e6edf3'}}>Database Integration</h4>
-                <p style={{color: '#8b949e', fontSize: '0.95rem', lineHeight: '1.6'}}>
-                  Robust MySQL database with optimized queries and data integrity constraints.
-                </p>
-              </div>
-              
-              <div style={{
-                background: '#21262d',
-                padding: '25px',
-                borderRadius: '12px',
-                border: '1px solid #30363d'
-              }}>
-                <i className="fas fa-chart-bar" style={{fontSize: '1.5rem', color: '#58a6ff', marginBottom: '15px'}}></i>
-                <h4 style={{fontSize: '1.1rem', fontWeight: '600', marginBottom: '10px', color: '#e6edf3'}}>Analytics & Reporting</h4>
-                <p style={{color: '#8b949e', fontSize: '0.95rem', lineHeight: '1.6'}}>
-                  Comprehensive reporting system with sales analytics and performance metrics.
-                </p>
-              </div>
-              
-              <div style={{
-                background: '#21262d',
-                padding: '25px',
-                borderRadius: '12px',
-                border: '1px solid #30363d'
-              }}>
-                <i className="fas fa-shield-alt" style={{fontSize: '1.5rem', color: '#58a6ff', marginBottom: '15px'}}></i>
-                <h4 style={{fontSize: '1.1rem', fontWeight: '600', marginBottom: '10px', color: '#e6edf3'}}>Security Features</h4>
-                <p style={{color: '#8b949e', fontSize: '0.95rem', lineHeight: '1.6'}}>
-                  User authentication, role-based access control, and secure data handling.
-                </p>
-              </div>
+              {translations.filmflockCinema.keyFeatures.map((feature: string, index: number) => (
+                <div key={index} style={{
+                  background: '#21262d',
+                  padding: '25px',
+                  borderRadius: '12px',
+                  border: '1px solid #30363d'
+                }}>
+                  <i className={`fas fa-${index === 0 ? 'ticket-alt' : index === 1 ? 'calendar-alt' : index === 2 ? 'users' : index === 3 ? 'database' : index === 4 ? 'chart-bar' : 'shield-alt'}`} style={{fontSize: '1.5rem', color: '#58a6ff', marginBottom: '15px'}}></i>
+                  <h4 style={{fontSize: '1.1rem', fontWeight: '600', marginBottom: '10px', color: '#e6edf3'}}>{feature.split(':')[0]}</h4>
+                  <p style={{color: '#8b949e', fontSize: '0.95rem', lineHeight: '1.6'}}>
+                    {feature}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
 

@@ -2,8 +2,13 @@
 
 import Script from "next/script";
 import Link from "next/link";
+import { useLanguage } from '../../../../lib/language-context';
 
 export default function RadiationAnalyzer() {
+  const { language } = useLanguage();
+  const translations = language === 'fr' ? 
+    { backToProjects: '← Retour aux Projets' } : 
+    { backToProjects: '← Back to Projects' };
   return (
     <div style={{
       background: '#0d1117',
@@ -68,7 +73,7 @@ export default function RadiationAnalyzer() {
 
       {/* Content Section */}
       <div style={{maxWidth: '1200px', margin: '0 auto', padding: '80px 20px'}}>
-        <Link href="/" style={{
+        <Link href="/projects" style={{
           display: 'inline-flex',
           alignItems: 'center',
           gap: '10px',
@@ -82,7 +87,7 @@ export default function RadiationAnalyzer() {
           background: 'rgba(88, 166, 255, 0.1)'
         }}>
           <i className="fas fa-arrow-left"></i>
-          Back to Portfolio
+          {translations.backToProjects}
         </Link>
 
         {/* Project Overview */}

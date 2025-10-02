@@ -2,8 +2,47 @@
 
 import Script from "next/script";
 import Link from "next/link";
+import { useLanguage } from '../../../../lib/language-context';
 
 export default function VertexPlatform() {
+  const { language } = useLanguage();
+  const translations = language === 'fr' ? 
+    {
+      backToProjects: '← Retour aux Projets',
+      features: 'Fonctionnalités Clés',
+      vertexPlatform: {
+        title: 'Vertex Platform',
+        subtitle: 'Plateforme de Gestion des Ressources Étudiantes',
+        description: 'Une plateforme complète conçue pour aider les étudiants à gérer les ressources, suivre les progrès et accéder aux matériaux éducatifs efficacement.',
+        overview: 'Cette plateforme combine l\'analyse de données, les outils de visualisation et les fonctionnalités de business intelligence pour fournir aux étudiants des outils puissants pour la réussite académique et le développement de carrière.',
+        keyFeatures: [
+          'Tableau de bord d\'analyse de données et de visualisation',
+          'Gestion et suivi des ressources',
+          'Outils de surveillance des progrès',
+          'Groupes d\'étude collaboratifs',
+          'Gestion des devoirs et des délais',
+          'Analyses de performance'
+        ]
+      }
+    } : 
+    {
+      backToProjects: '← Back to Projects',
+      features: 'Key Features',
+      vertexPlatform: {
+        title: 'Vertex Platform',
+        subtitle: 'Student Resource Management Platform',
+        description: 'A comprehensive platform designed to help students manage resources, track progress, and access educational materials efficiently.',
+        overview: 'This platform combines data analytics, visualization tools, and business intelligence features to provide students with powerful tools for academic success and career development.',
+        keyFeatures: [
+          'Data analytics and visualization dashboard',
+          'Resource management and tracking',
+          'Progress monitoring tools',
+          'Collaborative study groups',
+          'Assignment and deadline management',
+          'Performance analytics'
+        ]
+      }
+    };
   return (
     <div style={{
       background: '#0d1117',
@@ -42,7 +81,7 @@ export default function VertexPlatform() {
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text'
           }}>
-            Vertex Platform
+            {translations.vertexPlatform.title}
           </h1>
           
           <p style={{
@@ -53,7 +92,7 @@ export default function VertexPlatform() {
             marginLeft: 'auto',
             marginRight: 'auto'
           }}>
-            A next-generation business intelligence platform with advanced analytics and data visualization capabilities
+            {translations.vertexPlatform.description}
           </p>
           
           <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '12px', marginTop: '30px'}}>
@@ -68,7 +107,7 @@ export default function VertexPlatform() {
 
       {/* Content Section */}
       <div style={{maxWidth: '1200px', margin: '0 auto', padding: '80px 20px'}}>
-        <Link href="/" style={{
+        <Link href="/projects" style={{
           display: 'inline-flex',
           alignItems: 'center',
           gap: '10px',
@@ -82,7 +121,7 @@ export default function VertexPlatform() {
           background: 'rgba(88, 166, 255, 0.1)'
         }}>
           <i className="fas fa-arrow-left"></i>
-          Back to Portfolio
+          {translations.backToProjects}
         </Link>
 
         {/* Project Overview */}
@@ -95,97 +134,34 @@ export default function VertexPlatform() {
         }}>
           <h2 style={{fontSize: '1.8rem', fontWeight: '700', marginBottom: '20px', color: '#e6edf3', display: 'flex', alignItems: 'center', gap: '15px'}}>
             <i className="fas fa-info-circle" style={{color: '#58a6ff'}}></i> 
-            Project Overview
+            {translations.vertexPlatform.subtitle}
           </h2>
           <p style={{color: '#8b949e', fontSize: '1.1rem', lineHeight: '1.7', marginBottom: '25px'}}>
-            Vertex Platform is a cutting-edge business intelligence solution designed to transform raw data into actionable insights. Built with modern web technologies, this comprehensive platform provides advanced analytics, interactive dashboards, and powerful data visualization tools. The system empowers organizations to make data-driven decisions through intuitive interfaces, real-time reporting, and sophisticated analytical capabilities that scale with business needs.
+            {translations.vertexPlatform.overview}
           </p>
 
           {/* Key Features */}
           <div style={{marginTop: '30px'}}>
-            <h3 style={{fontSize: '1.3rem', fontWeight: '600', marginBottom: '20px', color: '#e6edf3'}}>Key Features</h3>
+            <h3 style={{fontSize: '1.3rem', fontWeight: '600', marginBottom: '20px', color: '#e6edf3'}}>{translations.features}</h3>
             <div style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
               gap: '20px'
             }}>
-              <div style={{
-                background: '#21262d',
-                padding: '25px',
-                borderRadius: '12px',
-                border: '1px solid #30363d'
-              }}>
-                <i className="fas fa-chart-bar" style={{fontSize: '1.5rem', color: '#58a6ff', marginBottom: '15px'}}></i>
-                <h4 style={{fontSize: '1.1rem', fontWeight: '600', marginBottom: '10px', color: '#e6edf3'}}>Interactive Dashboards</h4>
-                <p style={{color: '#8b949e', fontSize: '0.95rem', lineHeight: '1.6'}}>
-                  Dynamic and customizable dashboards with real-time data visualization and interactive elements.
-                </p>
-              </div>
-              
-              <div style={{
-                background: '#21262d',
-                padding: '25px',
-                borderRadius: '12px',
-                border: '1px solid #30363d'
-              }}>
-                <i className="fas fa-brain" style={{fontSize: '1.5rem', color: '#58a6ff', marginBottom: '15px'}}></i>
-                <h4 style={{fontSize: '1.1rem', fontWeight: '600', marginBottom: '10px', color: '#e6edf3'}}>Advanced Analytics</h4>
-                <p style={{color: '#8b949e', fontSize: '0.95rem', lineHeight: '1.6'}}>
-                  Sophisticated analytical algorithms with predictive modeling and machine learning integration.
-                </p>
-              </div>
-              
-              <div style={{
-                background: '#21262d',
-                padding: '25px',
-                borderRadius: '12px',
-                border: '1px solid #30363d'
-              }}>
-                <i className="fas fa-database" style={{fontSize: '1.5rem', color: '#58a6ff', marginBottom: '15px'}}></i>
-                <h4 style={{fontSize: '1.1rem', fontWeight: '600', marginBottom: '10px', color: '#e6edf3'}}>Data Integration</h4>
-                <p style={{color: '#8b949e', fontSize: '0.95rem', lineHeight: '1.6'}}>
-                  Seamless integration with multiple data sources and automated data pipeline management.
-                </p>
-              </div>
-              
-              <div style={{
-                background: '#21262d',
-                padding: '25px',
-                borderRadius: '12px',
-                border: '1px solid #30363d'
-              }}>
-                <i className="fas fa-eye" style={{fontSize: '1.5rem', color: '#58a6ff', marginBottom: '15px'}}></i>
-                <h4 style={{fontSize: '1.1rem', fontWeight: '600', marginBottom: '10px', color: '#e6edf3'}}>Data Visualization</h4>
-                <p style={{color: '#8b949e', fontSize: '0.95rem', lineHeight: '1.6'}}>
-                  Rich visualization library with charts, graphs, and interactive maps for comprehensive data presentation.
-                </p>
-              </div>
-              
-              <div style={{
-                background: '#21262d',
-                padding: '25px',
-                borderRadius: '12px',
-                border: '1px solid #30363d'
-              }}>
-                <i className="fas fa-clock" style={{fontSize: '1.5rem', color: '#58a6ff', marginBottom: '15px'}}></i>
-                <h4 style={{fontSize: '1.1rem', fontWeight: '600', marginBottom: '10px', color: '#e6edf3'}}>Real-time Processing</h4>
-                <p style={{color: '#8b949e', fontSize: '0.95rem', lineHeight: '1.6'}}>
-                  Live data streaming and real-time analytics with instant updates and alert notifications.
-                </p>
-              </div>
-              
-              <div style={{
-                background: '#21262d',
-                padding: '25px',
-                borderRadius: '12px',
-                border: '1px solid #30363d'
-              }}>
-                <i className="fas fa-cogs" style={{fontSize: '1.5rem', color: '#58a6ff', marginBottom: '15px'}}></i>
-                <h4 style={{fontSize: '1.1rem', fontWeight: '600', marginBottom: '10px', color: '#e6edf3'}}>Custom Workflows</h4>
-                <p style={{color: '#8b949e', fontSize: '0.95rem', lineHeight: '1.6'}}>
-                  Flexible workflow automation with custom business logic and rule-based processing.
-                </p>
-              </div>
+              {translations.vertexPlatform.keyFeatures.map((feature: string, index: number) => (
+                <div key={index} style={{
+                  background: '#21262d',
+                  padding: '25px',
+                  borderRadius: '12px',
+                  border: '1px solid #30363d'
+                }}>
+                  <i className={`fas fa-${index === 0 ? 'chart-bar' : index === 1 ? 'brain' : index === 2 ? 'database' : index === 3 ? 'eye' : index === 4 ? 'clock' : 'cogs'}`} style={{fontSize: '1.5rem', color: '#58a6ff', marginBottom: '15px'}}></i>
+                  <h4 style={{fontSize: '1.1rem', fontWeight: '600', marginBottom: '10px', color: '#e6edf3'}}>{feature.split(':')[0]}</h4>
+                  <p style={{color: '#8b949e', fontSize: '0.95rem', lineHeight: '1.6'}}>
+                    {feature}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
 

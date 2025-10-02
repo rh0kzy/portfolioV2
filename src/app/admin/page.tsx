@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { database, auth } from '../../../lib/firebase';
 import { ref, onValue, update } from 'firebase/database';
 import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
+import { useLanguage } from '../../../lib/language-context';
 
 interface FirebaseMessage {
   name: string;
@@ -30,6 +31,7 @@ export default function AdminPage() {
   const [loginError, setLoginError] = useState('');
   const [isLoginLoading, setIsLoginLoading] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const { t, isRTL } = useLanguage();
 
   // Check if user is already logged in
   useEffect(() => {
@@ -149,9 +151,9 @@ export default function AdminPage() {
               backgroundClip: 'text',
               marginBottom: '10px'
             }}>
-              Admin Login
+              {t('admin.login.title')}
             </h1>
-            <p style={{ color: '#ccc', fontSize: '14px' }}>Enter your credentials to access the admin panel</p>
+            <p style={{ color: '#ccc', fontSize: '14px' }}>{t('admin.login.subtitle')}</p>
           </div>
 
           <form onSubmit={handleLogin}>
@@ -163,7 +165,7 @@ export default function AdminPage() {
                 color: 'white',
                 marginBottom: '8px'
               }}>
-                Email
+                {t('admin.login.email')}
               </label>
               <input
                 type="email"
@@ -192,7 +194,7 @@ export default function AdminPage() {
                 color: 'white',
                 marginBottom: '8px'
               }}>
-                Password
+                {t('admin.login.password')}
               </label>
               <input
                 type="password"
@@ -223,7 +225,7 @@ export default function AdminPage() {
                 color: '#ff6b7d',
                 fontSize: '14px'
               }}>
-                {loginError}
+                {loginError === 'Invalid credentials' ? t('admin.login.error') : loginError}
               </div>
             )}
 
@@ -243,7 +245,7 @@ export default function AdminPage() {
                 transition: 'all 0.3s ease'
               }}
             >
-              {isLoginLoading ? 'Logging in...' : 'Login'}
+              {isLoginLoading ? t('admin.login.loading') : t('admin.login.login')}
             </button>
           </form>
 
@@ -302,7 +304,7 @@ export default function AdminPage() {
             animation: 'spin 1s linear infinite',
             margin: '0 auto 20px'
           }}></div>
-          <h1 style={{ fontSize: '24px', marginBottom: '10px' }}>Admin Dashboard</h1>
+          <h1 style={{ fontSize: '24px', marginBottom: '10px' }}>{t('admin.dashboard.title')}</h1>
           <p style={{ color: '#ccc' }}>Loading messages...</p>
         </div>
         <style>{`
@@ -352,7 +354,7 @@ export default function AdminPage() {
               Admin Dashboard
             </h1>
             <p style={{ color: '#ccc', margin: 0, fontSize: isMobile ? '14px' : '16px' }}>
-              Manage contact form messages
+              {t('admin.dashboard.subtitle')}
             </p>
           </div>
           <div style={{
@@ -369,7 +371,7 @@ export default function AdminPage() {
               textAlign: 'center',
               flex: isMobile ? '1' : 'none'
             }}>
-              <div style={{ fontSize: '12px', color: '#ccc' }}>Total Messages</div>
+              <div style={{ fontSize: '12px', color: '#ccc' }}>{t('admin.dashboard.stats.total')}</div>
               <div style={{ fontSize: '24px', fontWeight: 'bold' }}>{messages.length}</div>
             </div>
             <div style={{
@@ -380,7 +382,7 @@ export default function AdminPage() {
               border: '1px solid rgba(255, 193, 7, 0.3)',
               flex: isMobile ? '1' : 'none'
             }}>
-              <div style={{ fontSize: '12px', color: '#ffc107' }}>Unread</div>
+              <div style={{ fontSize: '12px', color: '#ffc107' }}>{t('admin.dashboard.stats.unread')}</div>
               <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#ffc107' }}>
                 {messages.filter(m => !m.read).length}
               </div>
@@ -403,7 +405,7 @@ export default function AdminPage() {
               onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
               onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
             >
-              Logout
+              {t('admin.dashboard.logout')}
             </button>
           </div>
         </div>
@@ -438,7 +440,7 @@ export default function AdminPage() {
                 color: 'white',
                 fontSize: isMobile ? '16px' : '14px'
               }}>
-                Filter Messages:
+                {t('admin.dashboard.filters.title')}
               </label>
               <select
                 value={filter}
@@ -453,9 +455,9 @@ export default function AdminPage() {
                   minWidth: isMobile ? '100%' : '200px'
                 }}
               >
-                <option value="all">All Messages ({messages.length})</option>
-                <option value="unread">Unread Only ({messages.filter(m => !m.read).length})</option>
-                <option value="read">Read Only ({messages.filter(m => m.read).length})</option>
+                <option value="all">{t('admin.dashboard.filters.all')} ({messages.length})</option>
+                <option value="unread">{t('admin.dashboard.filters.unread')} ({messages.filter(m => !m.read).length})</option>
+                <option value="read">{t('admin.dashboard.filters.read')} ({messages.filter(m => m.read).length})</option>
               </select>
             </div>
             <div style={{
@@ -479,8 +481,8 @@ export default function AdminPage() {
             textAlign: 'center'
           }}>
             <div style={{ fontSize: '48px', marginBottom: '20px' }}>📭</div>
-            <h3 style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '10px' }}>No messages found</h3>
-            <p style={{ color: '#ccc' }}>Messages will appear here when visitors contact you.</p>
+            <h3 style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '10px' }}>{t('admin.dashboard.messages.empty')}</h3>
+            <p style={{ color: '#ccc' }}>{t('admin.dashboard.messages.emptyDesc')}</p>
           </div>
         ) : (
           <div style={{ display: 'grid', gap: '20px' }}>
@@ -583,7 +585,7 @@ export default function AdminPage() {
                       }}
                     >
                       <span>✓</span>
-                      Mark Read
+                      {t('admin.dashboard.messages.markRead')}
                     </button>
                   )}
                 </div>
@@ -612,7 +614,7 @@ export default function AdminPage() {
             padding: '30px'
           }}>
             <h3 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-              📊 Message Statistics
+              📊 {t('admin.dashboard.statsFooter.title')}
             </h3>
             <div style={{
               display: 'grid',

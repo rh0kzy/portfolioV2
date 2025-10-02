@@ -31,16 +31,13 @@ A modern, responsive portfolio website built with Next.js 15, featuring a GitHub
 - **Admin Dashboard**: Secure admin panel for managing contact messages
 - **Project Showcase**: 8 detailed project pages with images and descriptions
 - **Interactive Components**: Hover effects, smooth scrolling, and dynamic content
+- **Multi-language Support**: Full French and Arabic translations with RTL support
 
-### 📱 Projects Featured
-- **Eden Parfum** - E-commerce perfume website
-- **File Management System** - Document organization tool
-- **FilmFlock Cinema** - Movie theater management system
-- **Medical Clinic** - Healthcare management platform
-- **Radiation Analyzer** - Scientific data analysis tool
-- **Teacher Management** - Educational administration system
-- **UNO Game** - Multiplayer card game
-- **Vertex Platform** - Student resource platform
+### 🌍 Multi-language Support
+- **French & Arabic**: Complete translations for both languages
+- **RTL Support**: Proper right-to-left layout for Arabic text
+- **Language Persistence**: Selected language saved in localStorage
+- **Auto-detection**: Automatically detects browser language preference
 
 ## 🛠️ Tech Stack
 

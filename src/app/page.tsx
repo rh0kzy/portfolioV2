@@ -4,11 +4,14 @@ import Script from "next/script";
 import { useState } from 'react';
 import { database } from '../../lib/firebase';
 import { ref, set, push } from 'firebase/database';
+import { useLanguage } from '../../lib/language-context';
+import LanguageSwitcher from '../../components/LanguageSwitcher';
 
 export default function Home() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState('');
+  const { t, isRTL } = useLanguage();
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -54,12 +57,13 @@ export default function Home() {
               <span className="portfolio-title"></span>
             </div>
             <ul className="nav-menu">
-              <li><a href="#home" className="nav-link">Overview</a></li>
-              <li><a href="#projects" className="nav-link">Projects</a></li>
-              <li><a href="#about" className="nav-link">About</a></li>
-              <li><a href="#skills" className="nav-link">Skills</a></li>
-              <li><a href="#contact" className="nav-link">Contact</a></li>
+              <li><a href="#home" className="nav-link">{t('nav.home')}</a></li>
+              <li><a href="#projects" className="nav-link">{t('nav.projects')}</a></li>
+              <li><a href="#about" className="nav-link">{t('nav.about')}</a></li>
+              <li><a href="#skills" className="nav-link">{t('nav.skills')}</a></li>
+              <li><a href="#contact" className="nav-link">{t('nav.contact')}</a></li>
             </ul>
+            <LanguageSwitcher />
           </nav>
         </div>
       </header>
@@ -83,12 +87,12 @@ export default function Home() {
                 <div className="profile-username">
                   <h1>@rh0kzy</h1>
                 </div>
-                <p className="profile-bio">Étudiant en 3ème année d&apos;ingéniorat informatique | Développeur d&apos;applications et web passionné</p>
+                <p className="profile-bio">{t('hero.description')}</p>
 
                 <div className="profile-details">
                   <div className="detail-item">
                     <i className="fas fa-graduation-cap"></i>
-                    <span>3ème année Ingéniorat Informatique</span>
+                    <span>{t('about.achievements.student')}</span>
                   </div>
                   <div className="detail-item">
                     <i className="fas fa-brain"></i>
@@ -117,18 +121,18 @@ export default function Home() {
       {/* Projects Section */}
       <section id="projects" className="projects">
         <div className="container">
-          <h2 className="section-title">Featured Projects</h2>
+          <h2 className="section-title">{t('projects.title')}</h2>
           <div className="projects-grid">
             <div className="project-card">
               <div className="project-image">
                 <img src="/projects/uno-game/UNO_Logo.svg.png" alt="UNO Game" />
                 <div className="project-overlay">
-                  <a href="/projects/uno-game" className="btn btn-primary">View Details</a>
+                  <a href="/projects/uno-game" className="btn btn-primary">{t('projects.viewDetails')}</a>
                 </div>
               </div>
               <div className="project-content">
-                <h3>UNO Game</h3>
-                <p>A fully functional digital implementation of the classic UNO card game built in Java with custom GUI framework and intelligent AI players.</p>
+                <h3>{t('projects.unoGame.title')}</h3>
+                <p>{t('projects.unoGame.description')}</p>
                 <div className="project-tags">
                   <span className="tag">Java</span>
                   <span className="tag">Swing</span>
@@ -142,12 +146,12 @@ export default function Home() {
               <div className="project-image">
                 <img src="/projects/filmflock-cinema/cinemaLogo.jpg" alt="FilmFlock Cinema" />
                 <div className="project-overlay">
-                  <a href="/projects/filmflock-cinema" className="btn btn-primary">View Details</a>
+                  <a href="/projects/filmflock-cinema" className="btn btn-primary">{t('projects.viewDetails')}</a>
                 </div>
               </div>
               <div className="project-content">
-                <h3>FilmFlock - Cinema Booking System</h3>
-                <p>Comprehensive movie ticket booking system with seat selection, payment processing, and admin panel for cinema management.</p>
+                <h3>{t('projects.filmflockCinema.title')}</h3>
+                <p>{t('projects.filmflockCinema.description')}</p>
                 <div className="project-tags">
                   <span className="tag">Java</span>
                   <span className="tag">MySQL</span>
@@ -161,7 +165,7 @@ export default function Home() {
               <div className="project-image">
                 <img src="/projects/eden-parfum/eden-parfum-logo.png" alt="Eden Parfum" />
                 <div className="project-overlay">
-                  <a href="/projects/eden-parfum" className="btn btn-primary">View Details</a>
+                  <a href="/projects/eden-parfum" className="btn btn-primary">{t('projects.viewDetails')}</a>
                   <a href="https://edenparfum.netlify.app/" target="_blank" className="btn btn-secondary">
                     <i className="fas fa-external-link-alt"></i>
                     Live Site
@@ -169,8 +173,8 @@ export default function Home() {
                 </div>
               </div>
               <div className="project-content">
-                <h3>Eden Parfum - E-Commerce Website</h3>
-                <p>Luxury perfume e-commerce platform with 507+ fragrances, advanced filtering, and responsive design for premium brand showcase.</p>
+                <h3>{t('projects.edenParfum.title')}</h3>
+                <p>{t('projects.edenParfum.description')}</p>
                 <div className="project-tags">
                   <span className="tag">HTML5</span>
                   <span className="tag">CSS3</span>
@@ -184,21 +188,21 @@ export default function Home() {
               <div className="project-image">
                 <img src="/projects/vertex-platform/Screenshot 2025-08-24 162542.png" alt="Vertex Platform" />
                 <div className="project-overlay">
-                  <a href="/projects/vertex-platform" className="btn btn-primary">View Details</a>
+                  <a href="/projects/vertex-platform" className="btn btn-primary">{t('projects.viewDetails')}</a>
                   <a href="https://vertexstudents.netlify.app/" target="_blank" className="btn btn-secondary">
                     <i className="fas fa-external-link-alt"></i>
                     Live Site
                   </a>
                 </div>
               </div>
-              <div className="project-content">
-                <h3>Vertex - Academic Platform</h3>
-                <p>Comprehensive student portal with Q&A system, academic calculators, and collaborative learning tools built with React.</p>
+                            <div className="project-content">
+                <h3>{t('projects.vertexPlatform.title')}</h3>
+                <p>{t('projects.vertexPlatform.description')}</p>
                 <div className="project-tags">
                   <span className="tag">React</span>
-                  <span className="tag">JavaScript</span>
-                  <span className="tag">CSS3</span>
-                  <span className="tag">Authentication</span>
+                  <span className="tag">Node.js</span>
+                  <span className="tag">MongoDB</span>
+                  <span className="tag">Express</span>
                 </div>
               </div>
             </div>
@@ -287,67 +291,67 @@ export default function Home() {
         <div className="container">
           <div className="about-content">
             <div className="about-text">
-              <h2>About Me</h2>
-              <p>I am Aymen Belkadi, a 3rd year Computer Engineering student specializing in Artificial Intelligence. Passionate about application and web development, I combine my academic knowledge with a practical approach to create innovative solutions.</p>
+              <h2>{t('about.title')}</h2>
+              <p>{t('about.description1')}</p>
 
-              <p>My engineering journey has enabled me to acquire solid skills in programming, system design, and web development. With <strong><span data-github-contributions>417</span> contributions</strong> on GitHub in the last year, I maintain a consistent coding practice and am constantly seeking new challenges and opportunities to apply my knowledge and develop new skills.</p>
+              <p>{t('about.description2')}</p>
 
               <div className="achievements">
-                <h3>Key Achievements</h3>
+                <h3>{t('about.achievements.title')}</h3>
                 <div className="achievement-grid">
                   <div className="achievement-item">
                     <i className="fas fa-code"></i>
-                    <span><span data-github-contributions>417</span> GitHub Contributions</span>
+                    <span><span data-github-contributions>417</span> {t('about.achievements.contributions')}</span>
                   </div>
                   <div className="achievement-item">
                     <i className="fas fa-project-diagram"></i>
-                    <span><span data-github-repos>9</span>+ Portfolio Projects</span>
+                    <span><span data-github-repos>9</span>+ {t('about.achievements.projects')}</span>
                   </div>
                   <div className="achievement-item">
                     <i className="fas fa-graduation-cap"></i>
-                    <span>AI Engineering Student</span>
+                    <span>{t('about.achievements.student')}</span>
                   </div>
                   <div className="achievement-item">
                     <i className="fas fa-rocket"></i>
-                    <span>Full-Stack Developer</span>
+                    <span>{t('about.achievements.developer')}</span>
                   </div>
                 </div>
               </div>
             </div>
 
             <div className="github-activity">
-              <h3>GitHub Activity</h3>
+              <h3>{t('about.githubActivity.title')}</h3>
               <div className="github-controls">
                 <button id="refreshGitHubData" className="btn btn-secondary btn-sm">
                   <i className="fas fa-sync-alt"></i>
-                  Refresh GitHub Data
+                  {t('about.githubActivity.refresh')}
                 </button>
               </div>
               <div className="activity-stats">
                 <div className="stat-item">
                   <span className="stat-number" data-stat="contributions">417</span>
-                  <span className="stat-label">Contributions in the last year</span>
+                  <span className="stat-label">{t('about.githubActivity.contributions')}</span>
                 </div>
                 <div className="stat-item">
                   <span className="stat-number" data-stat="repos">9</span>
-                  <span className="stat-label">Public Repositories</span>
+                  <span className="stat-label">{t('about.githubActivity.repos')}</span>
                 </div>
                 <div className="stat-item">
                   <span className="stat-number" data-stat="commits">500+</span>
-                  <span className="stat-label">Commits this year</span>
+                  <span className="stat-label">{t('about.githubActivity.commits')}</span>
                 </div>
               </div>
               <div className="activity-graph">
                 <div className="contribution-graph">
                   <div className="graph-header">
-                    <span><span data-github-contributions>417</span> contributions in the last year</span>
+                    <span><span data-github-contributions>417</span> {t('about.githubActivity.contributions')}</span>
                     <span className="year" data-github-year>2024-2025</span>
                   </div>
                   <div className="graph-grid">
                     {/* Contribution squares will be generated here by JavaScript */}
                   </div>
                   <div className="contribution-summary">
-                    <p>Consistent coding activity with regular contributions across multiple projects. Strong commitment to continuous learning and development.</p>
+                    <p>{t('about.githubActivity.summary')}</p>
                   </div>
                   <div className="activity-highlights">
                     <div className="highlight-item">
@@ -384,117 +388,113 @@ export default function Home() {
       {/* Skills Section */}
       <section id="skills" className="skills">
         <div className="container">
-          <h2 className="section-title">Technical Skills</h2>
+          <h2 className="section-title">{t('skills.title')}</h2>
 
           <div className="skills-categories">
-            {/* Programming Languages */}
             <div className="skill-category">
               <h3 className="category-title">
                 <i className="fas fa-code"></i>
-                Langages de Programmation
+                {t('skills.programming.title')}
               </h3>
               <div className="skill-cards">
                 <div className="skill-card">
                   <div className="skill-icon">
                     <i className="fab fa-html5"></i>
                   </div>
-                  <span className="skill-name">HTML</span>
+                  <span className="skill-name">{t('skills.programming.html')}</span>
                 </div>
                 <div className="skill-card">
                   <div className="skill-icon">
                     <i className="fab fa-css3-alt"></i>
                   </div>
-                  <span className="skill-name">CSS</span>
+                  <span className="skill-name">{t('skills.programming.css')}</span>
                 </div>
                 <div className="skill-card">
                   <div className="skill-icon">
                     <i className="fab fa-js-square"></i>
                   </div>
-                  <span className="skill-name">JavaScript</span>
+                  <span className="skill-name">{t('skills.programming.javascript')}</span>
                 </div>
                 <div className="skill-card">
                   <div className="skill-icon">
                     <i className="fab fa-react"></i>
                   </div>
-                  <span className="skill-name">React</span>
+                  <span className="skill-name">{t('skills.programming.react')}</span>
                 </div>
                 <div className="skill-card">
                   <div className="skill-icon">
                     <i className="fab fa-java"></i>
                   </div>
-                  <span className="skill-name">Java</span>
+                  <span className="skill-name">{t('skills.programming.java')}</span>
                 </div>
                 <div className="skill-card">
                   <div className="skill-icon">
                     <i className="fas fa-code"></i>
                   </div>
-                  <span className="skill-name">C</span>
+                  <span className="skill-name">{t('skills.programming.c')}</span>
                 </div>
                 <div className="skill-card">
                   <div className="skill-icon">
                     <i className="fab fa-python"></i>
                   </div>
-                  <span className="skill-name">Python</span>
+                  <span className="skill-name">{t('skills.programming.python')}</span>
                 </div>
               </div>
             </div>
 
-            {/* Mobile Development */}
             <div className="skill-category">
               <h3 className="category-title">
                 <i className="fas fa-mobile-alt"></i>
-                Développement Mobile
+                {t('skills.mobile.title')}
               </h3>
               <div className="skill-cards">
                 <div className="skill-card">
                   <div className="skill-icon">
                     <i className="fas fa-mobile"></i>
                   </div>
-                  <span className="skill-name">Flutter</span>
+                  <span className="skill-name">{t('skills.mobile.flutter')}</span>
                 </div>
                 <div className="skill-card">
                   <div className="skill-icon">
                     <i className="fab fa-react"></i>
                   </div>
-                  <span className="skill-name">React Native</span>
+                  <span className="skill-name">{t('skills.mobile.reactNative')}</span>
                 </div>
               </div>
             </div>
 
-            {/* Databases & Tools */}
             <div className="skill-category">
               <h3 className="category-title">
                 <i className="fas fa-database"></i>
-                Bases de Données & Outils
+                {t('skills.databases.title')}
               </h3>
               <div className="skill-cards">
                 <div className="skill-card">
                   <div className="skill-icon">
                     <i className="fas fa-database"></i>
                   </div>
-                  <span className="skill-name">MySQL</span>
+                  <span className="skill-name">{t('skills.databases.mysql')}</span>
                 </div>
                 <div className="skill-card">
                   <div className="skill-icon">
                     <i className="fab fa-git-alt"></i>
                   </div>
-                  <span className="skill-name">Git</span>
+                  <span className="skill-name">{t('skills.databases.git')}</span>
                 </div>
               </div>
             </div>
 
-            {/* Artificial Intelligence */}
             <div className="skill-category">
               <h3 className="category-title">
                 <i className="fas fa-brain"></i>
-                Intelligence Artificielle
+                {t('skills.ai.title')}
               </h3>
               <div className="skill-cards">
                 <div className="skill-card">
                   <div className="skill-icon">
                     <i className="fab fa-python"></i>
                   </div>
-                  <span className="skill-name">Python</span>
+                  <span className="skill-name">{t('skills.ai.python')}</span>
                 </div>
               </div>
             </div>
@@ -505,11 +505,11 @@ export default function Home() {
       {/* Contact Section */}
       <section id="contact" className="contact">
         <div className="container">
-          <h2 className="section-title">Get In Touch</h2>
+          <h2 className="section-title">{t('contact.title')}</h2>
           <div className="contact-content">
             <div className="contact-info">
-              <h3>Let&apos;s collaborate</h3>
-              <p>I&apos;m always interested in new opportunities and exciting projects. Whether you have a project in mind or just want to chat about technology, feel free to reach out!</p>
+              <h3>{t('contact.subtitle')}</h3>
+              <p>{t('contact.description')}</p>
 
               <div className="contact-methods">
                 <a href="mailto:aymenbelkadi1012005@gmail.com" className="contact-method">
@@ -533,7 +533,7 @@ export default function Home() {
 
             <form className="contact-form" onSubmit={handleFormSubmit}>
               <div className="form-group">
-                <label htmlFor="name">Name</label>
+                <label htmlFor="name">{t('contact.form.name')}</label>
                 <input 
                   type="text" 
                   id="name" 
@@ -544,7 +544,7 @@ export default function Home() {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email">{t('contact.form.email')}</label>
                 <input 
                   type="email" 
                   id="email" 
@@ -555,7 +555,7 @@ export default function Home() {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="message">Message</label>
+                <label htmlFor="message">{t('contact.form.message')}</label>
                 <textarea 
                   id="message" 
                   name="message" 
@@ -566,11 +566,11 @@ export default function Home() {
                 ></textarea>
               </div>
               <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
-                {isSubmitting ? 'Sending...' : 'Send Message'}
+                {isSubmitting ? t('contact.form.sending') : t('contact.form.send')}
               </button>
               {submitStatus && (
                 <p style={{ marginTop: '10px', color: submitStatus.includes('successfully') ? 'green' : 'red' }}>
-                  {submitStatus}
+                  {submitStatus === 'Message sent successfully!' ? t('contact.form.success') : t('contact.form.error')}
                 </p>
               )}
             </form>

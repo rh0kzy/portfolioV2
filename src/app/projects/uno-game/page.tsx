@@ -2,8 +2,47 @@
 
 import Script from "next/script";
 import Link from "next/link";
+import { useLanguage } from '../../../../lib/language-context';
 
 export default function UnoGame() {
+  const { language } = useLanguage();
+  const translations = language === 'fr' ? 
+    {
+      backToProjects: '← Retour aux Projets',
+      features: 'Fonctionnalités Clés',
+      unoGame: {
+        title: 'Jeu UNO',
+        subtitle: 'Implémentation de Jeu de Cartes Multijoueur',
+        description: 'Une implémentation numérique du jeu de cartes classique UNO avec gameplay multijoueur en temps réel et interface utilisateur interactive.',
+        overview: 'Construit avec des technologies web modernes, ce jeu UNO fournit une expérience multijoueur engageante avec gameplay en temps réel, fonctionnalité de chat et design responsive.',
+        keyFeatures: [
+          'Gameplay multijoueur en temps réel',
+          'Système de chat interactif',
+          'Design responsive pour tous les appareils',
+          'Synchronisation de l\'état du jeu',
+          'Suivi des statistiques des joueurs',
+          'Règles de jeu personnalisables'
+        ]
+      }
+    } : 
+    {
+      backToProjects: '← Back to Projects',
+      features: 'Key Features',
+      unoGame: {
+        title: 'UNO Game',
+        subtitle: 'Multiplayer Card Game Implementation',
+        description: 'A digital implementation of the classic UNO card game featuring real-time multiplayer gameplay and interactive user interface.',
+        overview: 'Built with modern web technologies, this UNO game provides an engaging multiplayer experience with real-time gameplay, chat functionality, and responsive design.',
+        keyFeatures: [
+          'Real-time multiplayer gameplay',
+          'Interactive chat system',
+          'Responsive design for all devices',
+          'Game state synchronization',
+          'Player statistics tracking',
+          'Customizable game rules'
+        ]
+      }
+    };
   return (
     <div style={{
       background: '#0d1117',
@@ -38,7 +77,7 @@ export default function UnoGame() {
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text'
           }}>
-            UNO Game
+            {translations.unoGame.title}
           </h1>
           
           <p style={{
@@ -49,7 +88,7 @@ export default function UnoGame() {
             marginLeft: 'auto',
             marginRight: 'auto'
           }}>
-            A fully functional digital implementation of the classic UNO card game with advanced AI and stunning graphics
+            {translations.unoGame.description}
           </p>
           
           <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '12px', marginTop: '30px'}}>
@@ -64,7 +103,7 @@ export default function UnoGame() {
 
       {/* Content Section */}
       <div style={{maxWidth: '1200px', margin: '0 auto', padding: '80px 20px'}}>
-        <Link href="/" style={{
+        <Link href="/projects" style={{
           display: 'inline-flex',
           alignItems: 'center',
           gap: '10px',
@@ -78,7 +117,7 @@ export default function UnoGame() {
           background: 'rgba(88, 166, 255, 0.1)'
         }}>
           <i className="fas fa-arrow-left"></i>
-          Back to Portfolio
+          {translations.backToProjects}
         </Link>
 
         {/* Project Overview */}
@@ -91,10 +130,10 @@ export default function UnoGame() {
         }}>
           <h2 style={{fontSize: '1.8rem', fontWeight: '700', marginBottom: '20px', color: '#e6edf3', display: 'flex', alignItems: 'center', gap: '15px'}}>
             <i className="fas fa-info-circle" style={{color: '#58a6ff'}}></i> 
-            Project Overview
+            {translations.unoGame.subtitle}
           </h2>
           <p style={{color: '#8b949e', fontSize: '1.1rem', lineHeight: '1.7', marginBottom: '25px'}}>
-            A sophisticated digital recreation of the beloved UNO card game, engineered in Java using advanced object-oriented programming principles and custom Swing components. This comprehensive desktop application demonstrates mastery of game development fundamentals, including complex rule engines, intelligent AI opponents, dynamic card management systems, and intuitive user interface design.
+            {translations.unoGame.overview}
           </p>
 
           {/* Stats Grid */}

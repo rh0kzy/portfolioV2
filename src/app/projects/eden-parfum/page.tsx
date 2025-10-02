@@ -2,8 +2,47 @@
 
 import Script from "next/script";
 import Link from "next/link";
+import { useLanguage } from '../../../../lib/language-context';
 
 export default function EdenParfum() {
+  const { language } = useLanguage();
+  const translations = language === 'fr' ? 
+    {
+      backToProjects: '← Retour aux Projets',
+      features: 'Fonctionnalités Clés',
+      edenParfum: {
+        title: 'Eden Parfum',
+        subtitle: 'Plateforme E-commerce de Parfums de Luxe',
+        description: 'Une solution e-commerce complète pour les parfums de luxe présentant un catalogue étendu de plus de 507 fragrances de marques premium du monde entier.',
+        overview: 'Ce projet présente des techniques avancées de développement web avec un focus sur l\'expérience utilisateur, les performances et les principes de design moderne. La plateforme offre une expérience d\'achat fluide avec des options de filtrage sophistiquées et un design responsive.',
+        keyFeatures: [
+          '507+ fragrances premium de marques de luxe',
+          'Filtrage avancé par marque, prix, genre et famille olfactive',
+          'Design responsive optimisé pour tous les appareils',
+          'Temps de chargement rapides avec images optimisées',
+          'Interface utilisateur intuitive avec animations fluides',
+          'Intégration de paiement sécurisé prête'
+        ]
+      }
+    } : 
+    {
+      backToProjects: '← Back to Projects',
+      features: 'Key Features',
+      edenParfum: {
+        title: 'Eden Parfum',
+        subtitle: 'Luxury Perfume E-commerce Platform',
+        description: 'A comprehensive e-commerce solution for luxury perfumes featuring an extensive catalog of over 507 fragrances from premium brands worldwide.',
+        overview: 'This project showcases advanced web development techniques with a focus on user experience, performance, and modern design principles. The platform offers a seamless shopping experience with sophisticated filtering options and responsive design.',
+        keyFeatures: [
+          '507+ premium fragrances from luxury brands',
+          'Advanced filtering by brand, price, gender, and scent family',
+          'Responsive design optimized for all devices',
+          'Fast loading times with optimized images',
+          'Intuitive user interface with smooth animations',
+          'Secure payment integration ready'
+        ]
+      }
+    };
   return (
     <div style={{
       background: '#0d1117',
@@ -38,7 +77,7 @@ export default function EdenParfum() {
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text'
           }}>
-            Eden Parfum
+            {translations.edenParfum.title}
           </h1>
           
           <p style={{
@@ -49,7 +88,7 @@ export default function EdenParfum() {
             marginLeft: 'auto',
             marginRight: 'auto'
           }}>
-            A sophisticated e-commerce platform for luxury perfumes with immersive shopping experience and premium design
+            {translations.edenParfum.description}
           </p>
           
           <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '12px', marginTop: '30px'}}>
@@ -64,7 +103,7 @@ export default function EdenParfum() {
 
       {/* Content Section */}
       <div style={{maxWidth: '1200px', margin: '0 auto', padding: '80px 20px'}}>
-        <Link href="/" style={{
+        <Link href="/projects" style={{
           display: 'inline-flex',
           alignItems: 'center',
           gap: '10px',
@@ -78,7 +117,7 @@ export default function EdenParfum() {
           background: 'rgba(88, 166, 255, 0.1)'
         }}>
           <i className="fas fa-arrow-left"></i>
-          Back to Portfolio
+          {translations.backToProjects}
         </Link>
 
         {/* Project Overview */}
@@ -91,58 +130,34 @@ export default function EdenParfum() {
         }}>
           <h2 style={{fontSize: '1.8rem', fontWeight: '700', marginBottom: '20px', color: '#e6edf3', display: 'flex', alignItems: 'center', gap: '15px'}}>
             <i className="fas fa-info-circle" style={{color: '#58a6ff'}}></i> 
-            Project Overview
+            {translations.edenParfum.subtitle}
           </h2>
           <p style={{color: '#8b949e', fontSize: '1.1rem', lineHeight: '1.7', marginBottom: '25px'}}>
-            Eden Parfum is a sophisticated e-commerce platform designed specifically for luxury perfume retail. Built with modern web technologies, this platform combines elegant design principles with powerful functionality to create an immersive shopping experience. The website features responsive design, interactive product galleries, secure shopping cart functionality, and a premium user interface that reflects the luxury nature of the products.
+            {translations.edenParfum.overview}
           </p>
 
           {/* Key Features */}
           <div style={{marginTop: '30px'}}>
-            <h3 style={{fontSize: '1.3rem', fontWeight: '600', marginBottom: '20px', color: '#e6edf3'}}>Key Features</h3>
+            <h3 style={{fontSize: '1.3rem', fontWeight: '600', marginBottom: '20px', color: '#e6edf3'}}>{translations.features}</h3>
             <div style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
               gap: '20px'
             }}>
-              <div style={{
-                background: '#21262d',
-                padding: '25px',
-                borderRadius: '12px',
-                border: '1px solid #30363d'
-              }}>
-                <i className="fas fa-shopping-cart" style={{fontSize: '1.5rem', color: '#58a6ff', marginBottom: '15px'}}></i>
-                <h4 style={{fontSize: '1.1rem', fontWeight: '600', marginBottom: '10px', color: '#e6edf3'}}>E-commerce Functionality</h4>
-                <p style={{color: '#8b949e', fontSize: '0.95rem', lineHeight: '1.6'}}>
-                  Complete shopping cart system with product selection, quantity management, and secure checkout process.
-                </p>
-              </div>
-              
-              <div style={{
-                background: '#21262d',
-                padding: '25px',
-                borderRadius: '12px',
-                border: '1px solid #30363d'
-              }}>
-                <i className="fas fa-palette" style={{fontSize: '1.5rem', color: '#58a6ff', marginBottom: '15px'}}></i>
-                <h4 style={{fontSize: '1.1rem', fontWeight: '600', marginBottom: '10px', color: '#e6edf3'}}>Premium Design</h4>
-                <p style={{color: '#8b949e', fontSize: '0.95rem', lineHeight: '1.6'}}>
-                  Elegant and sophisticated user interface with luxury aesthetics and smooth animations.
-                </p>
-              </div>
-              
-              <div style={{
-                background: '#21262d',
-                padding: '25px',
-                borderRadius: '12px',
-                border: '1px solid #30363d'
-              }}>
-                <i className="fas fa-mobile-alt" style={{fontSize: '1.5rem', color: '#58a6ff', marginBottom: '15px'}}></i>
-                <h4 style={{fontSize: '1.1rem', fontWeight: '600', marginBottom: '10px', color: '#e6edf3'}}>Responsive Design</h4>
-                <p style={{color: '#8b949e', fontSize: '0.95rem', lineHeight: '1.6'}}>
-                  Fully responsive layout that provides optimal viewing experience across all devices and screen sizes.
-                </p>
-              </div>
+              {translations.edenParfum.keyFeatures.map((feature: string, index: number) => (
+                <div key={index} style={{
+                  background: '#21262d',
+                  padding: '25px',
+                  borderRadius: '12px',
+                  border: '1px solid #30363d'
+                }}>
+                  <i className={`fas fa-${index === 0 ? 'shopping-cart' : index === 1 ? 'filter' : index === 2 ? 'mobile-alt' : index === 3 ? 'bolt' : index === 4 ? 'magic' : 'credit-card'}`} style={{fontSize: '1.5rem', color: '#58a6ff', marginBottom: '15px'}}></i>
+                  <h4 style={{fontSize: '1.1rem', fontWeight: '600', marginBottom: '10px', color: '#e6edf3'}}>{feature.split(':')[0]}</h4>
+                  <p style={{color: '#8b949e', fontSize: '0.95rem', lineHeight: '1.6'}}>
+                    {feature}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
 
