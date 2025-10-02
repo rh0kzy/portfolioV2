@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { database, auth } from '../../../lib/firebase';
-import { ref, onValue, update } from 'firebase/database';
+import { ref, onValue, update, remove } from 'firebase/database';
 import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
 import { useLanguage } from '../../../lib/language-context';
 
@@ -271,6 +271,18 @@ export default function AdminPage() {
       await update(messageRef, { read: true });
     } catch (error) {
       console.error('Error marking message as read:', error);
+    }
+  };
+
+  const deleteMessage = async (messageId: string) => {
+    if (window.confirm('Are you sure you want to delete this message? This action cannot be undone.')) {
+      try {
+        const messageRef = ref(database, `messages/${messageId}`);
+        await remove(messageRef);
+      } catch (error) {
+        console.error('Error deleting message:', error);
+        alert('Failed to delete message. Please try again.');
+      }
     }
   };
 
@@ -555,11 +567,50 @@ export default function AdminPage() {
                       {formatDate(msg.timestamp)}
                     </p>
                   </div>
-                  {!msg.read && (
+                  <div style={{
+                    display: 'flex',
+                    flexDirection: isMobile ? 'column' : 'row',
+                    gap: '10px',
+                    alignSelf: isMobile ? 'stretch' : 'center',
+                    width: isMobile ? '100%' : 'auto'
+                  }}>
+                    {!msg.read && (
+                      <button
+                        onClick={() => markAsRead(msg.id)}
+                        style={{
+                          background: 'linear-gradient(45deg, #4a90e2, #357abd)',
+                          color: 'white',
+                          border: 'none',
+                          padding: '10px 20px',
+                          borderRadius: '8px',
+                          cursor: 'pointer',
+                          fontSize: '14px',
+                          fontWeight: 'bold',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '8px',
+                          transition: 'all 0.3s ease',
+                          width: isMobile ? '100%' : 'auto',
+                          justifyContent: 'center',
+                          minWidth: '140px'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.transform = 'scale(1.05)';
+                          e.currentTarget.style.boxShadow = '0 5px 15px rgba(74, 144, 226, 0.4)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.transform = 'scale(1)';
+                          e.currentTarget.style.boxShadow = 'none';
+                        }}
+                      >
+                        <span>✓</span>
+                        Mark as Read
+                      </button>
+                    )}
                     <button
-                      onClick={() => markAsRead(msg.id)}
+                      onClick={() => deleteMessage(msg.id)}
                       style={{
-                        background: 'linear-gradient(45deg, #4a90e2, #357abd)',
+                        background: 'linear-gradient(45deg, #e74c3c, #c0392b)',
                         color: 'white',
                         border: 'none',
                         padding: '10px 20px',
@@ -571,23 +622,23 @@ export default function AdminPage() {
                         alignItems: 'center',
                         gap: '8px',
                         transition: 'all 0.3s ease',
-                        alignSelf: isMobile ? 'flex-start' : 'center',
                         width: isMobile ? '100%' : 'auto',
-                        justifyContent: 'center'
+                        justifyContent: 'center',
+                        minWidth: '120px'
                       }}
                       onMouseEnter={(e) => {
                         e.currentTarget.style.transform = 'scale(1.05)';
-                        e.currentTarget.style.boxShadow = '0 5px 15px rgba(74, 144, 226, 0.4)';
+                        e.currentTarget.style.boxShadow = '0 5px 15px rgba(231, 76, 60, 0.4)';
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.transform = 'scale(1)';
                         e.currentTarget.style.boxShadow = 'none';
                       }}
                     >
-                      <span>✓</span>
-                      {t('admin.dashboard.messages.markRead')}
+                      <span>🗑️</span>
+                      Delete
                     </button>
-                  )}
+                  </div>
                 </div>
                 <div style={{
                   background: 'rgba(255, 255, 255, 0.05)',
