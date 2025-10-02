@@ -1,8 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { database } from '../../../lib/firebase';
+import { database, auth } from '../../../lib/firebase';
 import { ref, onValue, update } from 'firebase/database';
+import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
 
 interface FirebaseMessage {
   name: string;
@@ -23,8 +24,28 @@ export default function AdminPage() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<'all' | 'unread' | 'read'>('all');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loginData, setLoginData] = useState({ email: '', password: '' });
+  const [loginError, setLoginError] = useState('');
+  const [isLoginLoading, setIsLoginLoading] = useState(false);
 
+  // Check if user is already logged in
   useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  // Load messages when logged in
+  useEffect(() => {
+    if (!isLoggedIn) return;
+
     const messagesRef = ref(database, 'messages');
     const unsubscribe = onValue(messagesRef, (snapshot) => {
       const data = snapshot.val();
@@ -41,7 +62,191 @@ export default function AdminPage() {
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [isLoggedIn]);
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoginLoading(true);
+    setLoginError('');
+
+    try {
+      await signInWithEmailAndPassword(auth, loginData.email, loginData.password);
+      // Firebase Auth will automatically trigger the onAuthStateChanged listener
+      // which will set isLoggedIn to true
+    } catch (error) {
+      console.error('Login error:', error);
+      const authError = error as { code?: string; message?: string };
+      if (authError.code === 'auth/user-not-found') {
+        setLoginError('No account found with this email address.');
+      } else if (authError.code === 'auth/wrong-password') {
+        setLoginError('Incorrect password.');
+      } else if (authError.code === 'auth/invalid-email') {
+        setLoginError('Invalid email address.');
+      } else if (authError.code === 'auth/too-many-requests') {
+        setLoginError('Too many failed login attempts. Please try again later.');
+      } else {
+        setLoginError('Login failed. Please try again.');
+      }
+    } finally {
+      setIsLoginLoading(false);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      // Firebase Auth will automatically trigger the onAuthStateChanged listener
+      // which will set isLoggedIn to false
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+  };
+
+  // Login Page
+  if (!isLoggedIn) {
+    return (
+      <div style={{
+        minHeight: '100vh',
+        background: 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontFamily: 'Arial, sans-serif',
+        color: 'white'
+      }}>
+        <div style={{
+          background: 'rgba(255, 255, 255, 0.05)',
+          backdropFilter: 'blur(10px)',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
+          borderRadius: '20px',
+          padding: '40px',
+          width: '100%',
+          maxWidth: '400px',
+          boxShadow: '0 20px 60px rgba(0,0,0,0.3)'
+        }}>
+          <div style={{ textAlign: 'center', marginBottom: '30px' }}>
+            <h1 style={{
+              fontSize: '28px',
+              fontWeight: 'bold',
+              background: 'linear-gradient(45deg, #4a90e2, #9b59b6)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              marginBottom: '10px'
+            }}>
+              Admin Login
+            </h1>
+            <p style={{ color: '#ccc' }}>Enter your credentials to access the admin panel</p>
+          </div>
+
+          <form onSubmit={handleLogin}>
+            <div style={{ marginBottom: '20px' }}>
+              <label style={{
+                display: 'block',
+                fontSize: '14px',
+                fontWeight: 'bold',
+                color: 'white',
+                marginBottom: '8px'
+              }}>
+                Email
+              </label>
+              <input
+                type="email"
+                value={loginData.email}
+                onChange={(e) => setLoginData(prev => ({ ...prev, email: e.target.value }))}
+                style={{
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  borderRadius: '8px',
+                  color: 'white',
+                  fontSize: '16px',
+                  outline: 'none'
+                }}
+                placeholder="admin@example.com"
+                required
+              />
+            </div>
+
+            <div style={{ marginBottom: '30px' }}>
+              <label style={{
+                display: 'block',
+                fontSize: '14px',
+                fontWeight: 'bold',
+                color: 'white',
+                marginBottom: '8px'
+              }}>
+                Password
+              </label>
+              <input
+                type="password"
+                value={loginData.password}
+                onChange={(e) => setLoginData(prev => ({ ...prev, password: e.target.value }))}
+                style={{
+                  width: '100%',
+                  padding: '12px 16px',
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  borderRadius: '8px',
+                  color: 'white',
+                  fontSize: '16px',
+                  outline: 'none'
+                }}
+                placeholder="Enter your password"
+                required
+              />
+            </div>
+
+            {loginError && (
+              <div style={{
+                background: 'rgba(220, 53, 69, 0.1)',
+                border: '1px solid rgba(220, 53, 69, 0.3)',
+                borderRadius: '8px',
+                padding: '12px',
+                marginBottom: '20px',
+                color: '#ff6b7d',
+                fontSize: '14px'
+              }}>
+                {loginError}
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={isLoginLoading}
+              style={{
+                width: '100%',
+                padding: '14px',
+                background: isLoginLoading ? '#666' : 'linear-gradient(45deg, #4a90e2, #357abd)',
+                color: 'white',
+                border: 'none',
+                borderRadius: '8px',
+                fontSize: '16px',
+                fontWeight: 'bold',
+                cursor: isLoginLoading ? 'not-allowed' : 'pointer',
+                transition: 'all 0.3s ease'
+              }}
+            >
+              {isLoginLoading ? 'Logging in...' : 'Login'}
+            </button>
+          </form>
+
+          <div style={{
+            marginTop: '20px',
+            padding: '15px',
+            background: 'rgba(255, 193, 7, 0.1)',
+            border: '1px solid rgba(255, 193, 7, 0.3)',
+            borderRadius: '8px'
+          }}>
+            <p style={{ fontSize: '12px', color: '#ccc', margin: 0, textAlign: 'center' }}>
+              <strong>Note:</strong> Use the email and password you set up in Firebase Authentication.
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const markAsRead = async (messageId: string) => {
     try {
@@ -153,6 +358,24 @@ export default function AdminPage() {
                 {messages.filter(m => !m.read).length}
               </div>
             </div>
+            <button
+              onClick={handleLogout}
+              style={{
+                background: 'linear-gradient(45deg, #e74c3c, #c0392b)',
+                color: 'white',
+                border: 'none',
+                borderRadius: '8px',
+                padding: '12px 20px',
+                fontSize: '14px',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease'
+              }}
+              onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
+              onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+            >
+              Logout
+            </button>
           </div>
         </div>
       </div>

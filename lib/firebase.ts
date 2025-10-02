@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getDatabase } from "firebase/database"; // Added for Realtime Database access
+import { getAuth } from "firebase/auth"; // Added for Authentication
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -31,4 +32,7 @@ if (typeof window !== 'undefined') {
 // Initialize Realtime Database
 const database = getDatabase(app);
 
-export { app, analytics, database };
+// Initialize Firebase Authentication
+const auth = getAuth(app);
+
+export { app, analytics, database, auth };
