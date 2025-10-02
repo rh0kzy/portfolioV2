@@ -32,7 +32,7 @@ export default function Home() {
         read: false
       });
 
-      setSubmitStatus('Message sent successfully!');
+      setSubmitStatus('Message sent successfully! You will receive a confirmation email shortly.');
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
       setSubmitStatus('Failed to send message. Please try again.');
@@ -40,9 +40,7 @@ export default function Home() {
     } finally {
       setIsSubmitting(false);
     }
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  };  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
