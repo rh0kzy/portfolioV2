@@ -27,7 +27,7 @@ A modern, responsive portfolio website built with Next.js 15, featuring a GitHub
 
 ### 🔧 Functionality
 - **Real-time GitHub Integration**: Live GitHub statistics and repository data
-- **Contact Form**: Firebase-powered contact form with automated email confirmations and admin notifications
+- **Contact Form**: Firebase-powered contact form for collecting messages
 - **Admin Dashboard**: Secure admin panel for managing contact messages
 - **Project Showcase**: 8 detailed project pages with images and descriptions
 - **Interactive Components**: Hover effects, smooth scrolling, and dynamic content
@@ -139,43 +139,6 @@ For contact form functionality:
    NEXT_PUBLIC_FIREBASE_DATABASE_URL=https://your_project.firebaseio.com
       NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
    ```
-
-### Firebase Functions Setup (Optional)
-
-For automated email confirmations and admin notifications using Gmail:
-
-1. **Install Firebase CLI**
-   ```bash
-   npm install -g firebase-tools
-   ```
-
-2. **Login to Firebase**
-   ```bash
-   firebase login
-   ```
-
-3. **Set Up Gmail App Password**
-   - Enable 2FA on your Gmail account
-   - Generate App Password: [Google Account Settings](https://myaccount.google.com/apppasswords)
-   - Note the 16-character password
-
-4. **Configure Email Settings**
-   ```bash
-   firebase functions:config:set email.user="your-gmail@gmail.com"
-   firebase functions:config:set email.password="your-16-char-app-password"
-   firebase functions:config:set email.admin="your-admin-email@example.com"
-   ```
-
-5. **Deploy Functions**
-   ```bash
-   cd functions
-   npm install
-   cd ..
-   firebase deploy --only functions
-   ```
-
-6. **Setup Guide**
-   - See [`FIREBASE_FUNCTIONS_SETUP.md`](./FIREBASE_FUNCTIONS_SETUP.md) for detailed instructions
 
 ### Deployment
    ```

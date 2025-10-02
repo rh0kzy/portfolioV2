@@ -1,6 +1,5 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 import { getDatabase } from "firebase/database"; // Added for Realtime Database access
 import { getAuth } from "firebase/auth"; // Added for Authentication
 
@@ -23,16 +22,10 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Initialize Analytics only on the client side (to avoid SSR issues)
-let analytics;
-if (typeof window !== 'undefined') {
-  analytics = getAnalytics(app);
-}
-
 // Initialize Realtime Database
 const database = getDatabase(app);
 
 // Initialize Firebase Authentication
 const auth = getAuth(app);
 
-export { app, analytics, database, auth };
+export { app, database, auth };

@@ -1,0 +1,11 @@
+{
+  "rules": {
+    ".read": "false",
+    ".write": "false",
+    "messages": {
+      ".read": "false",
+      ".write": "true",
+      ".indexOn": ["timestamp"]
+    }
+  }
+}
