@@ -32,7 +32,31 @@ export default function Home() {
         read: false
       };
 
+      // Save to Firebase
       await set(newMessageRef, messageData);
+
+      // Send email notification
+      try {
+        const emailResponse = await fetch('/api/send-email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: messageData.name,
+            email: messageData.email,
+            message: messageData.message,
+          }),
+        });
+
+        if (!emailResponse.ok) {
+          console.warn('Email sending failed, but message was saved to database');
+        } else {
+          console.log('Email notification sent successfully');
+        }
+      } catch (emailError) {
+        console.warn('Email sending failed:', emailError, 'but message was saved to database');
+      }
 
       console.log('Message saved successfully:', messageData);
       setSubmitStatus('Message sent successfully!');
