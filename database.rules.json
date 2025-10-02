@@ -3,7 +3,7 @@
     ".read": "false",
     ".write": "false",
     "messages": {
-      ".read": "false",
+      ".read": "auth != null",
       ".write": "true",
       ".indexOn": ["timestamp"]
     }
