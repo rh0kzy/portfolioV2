@@ -1,8 +1,76 @@
+'use client';
+
 import Script from "next/script";
+import { useEffect, useState } from 'react';
+import { database } from '../../lib/firebase';
+import { ref, set, get, push } from 'firebase/database';
 
 export default function Home() {
+  const [firebaseStatus, setFirebaseStatus] = useState('Checking Firebase connection...');
+  const [formData, setFormData] = useState({ name: '', message: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState('');
+
+  useEffect(() => {
+    const testConnection = async () => {
+      try {
+        // Test write
+        await set(ref(database, 'test/connection'), { message: 'Linked successfully!', timestamp: Date.now() });
+
+        // Test read
+        const snapshot = await get(ref(database, 'test/connection'));
+        if (snapshot.exists()) {
+          setFirebaseStatus('Firebase linked and working!');
+        } else {
+          setFirebaseStatus('Connection failed: No data found.');
+        }
+      } catch (error) {
+        setFirebaseStatus('Connection failed: ' + (error instanceof Error ? error.message : String(error)));
+      }
+    };
+
+    testConnection();
+  }, []);
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.name.trim() || !formData.message.trim()) return;
+
+    setIsSubmitting(true);
+    setSubmitStatus('');
+
+    try {
+      const messagesRef = ref(database, 'messages');
+      const newMessageRef = push(messagesRef);
+      
+      await set(newMessageRef, {
+        name: formData.name.trim(),
+        message: formData.message.trim(),
+        timestamp: Date.now(),
+        read: false
+      });
+
+      setSubmitStatus('Message sent successfully!');
+      setFormData({ name: '', message: '' });
+    } catch (error) {
+      setSubmitStatus('Failed to send message. Please try again.');
+      console.error('Error sending message:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
   return (
     <>
+      {/* Firebase Status */}
+      <div style={{ position: 'fixed', top: '10px', right: '10px', background: 'rgba(0,0,0,0.8)', color: 'white', padding: '5px 10px', borderRadius: '5px', zIndex: 1000 }}>
+        {firebaseStatus}
+      </div>
       {/* Header Navigation */}
       <header className="header">
         <div className="container">
@@ -488,16 +556,37 @@ export default function Home() {
               </div>
             </div>
 
-            <form className="contact-form">
+            <form className="contact-form" onSubmit={handleFormSubmit}>
               <div className="form-group">
                 <label htmlFor="name">Name</label>
-                <input type="text" id="name" name="name" required />
+                <input 
+                  type="text" 
+                  id="name" 
+                  name="name" 
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  required 
+                />
               </div>
               <div className="form-group">
                 <label htmlFor="message">Message</label>
-                <textarea id="message" name="message" rows={5} required></textarea>
+                <textarea 
+                  id="message" 
+                  name="message" 
+                  rows={5} 
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  required
+                ></textarea>
               </div>
-              <button type="submit" className="btn btn-primary">Send Message</button>
+              <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
+                {isSubmitting ? 'Sending...' : 'Send Message'}
+              </button>
+              {submitStatus && (
+                <p style={{ marginTop: '10px', color: submitStatus.includes('successfully') ? 'green' : 'red' }}>
+                  {submitStatus}
+                </p>
+              )}
             </form>
           </div>
         </div>
