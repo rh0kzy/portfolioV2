@@ -47,6 +47,33 @@ pnpm dev
 4. **Open your browser**
 Navigate to [http://localhost:3000](http://localhost:3000) to see the portfolio.
 
+### GitHub API Setup (Optional)
+
+To display real-time GitHub statistics and activity data:
+
+1. **Create a GitHub Personal Access Token**
+   - Go to [GitHub Settings > Developer settings > Personal access tokens](https://github.com/settings/tokens)
+   - Click "Generate new token (classic)"
+   - Give it a descriptive name (e.g., "Portfolio Website")
+   - Select these scopes:
+     - `public_repo` (for public repository data)
+     - `read:user` (for user profile data)
+   - Click "Generate token" and copy it immediately
+
+2. **Set up environment variables**
+   - Copy `.env.local.example` to `.env.local` (if it exists) or create `.env.local`
+   - Add your GitHub token:
+   ```env
+   GITHUB_TOKEN=your_github_personal_access_token_here
+   ```
+
+3. **Restart the development server**
+   ```bash
+   npm run dev
+   ```
+
+**Security Note**: Never commit your `.env.local` file to version control. It's already in `.gitignore`.
+
 ## 📁 Project Structure
 
 ```

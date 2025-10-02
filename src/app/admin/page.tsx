@@ -7,6 +7,7 @@ import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebas
 
 interface FirebaseMessage {
   name: string;
+  email: string;
   message: string;
   timestamp: number;
   read: boolean;
@@ -15,6 +16,7 @@ interface FirebaseMessage {
 interface Message {
   id: string;
   name: string;
+  email: string;
   message: string;
   timestamp: number;
   read: boolean;
@@ -469,6 +471,12 @@ export default function AdminPage() {
                       }}>
                         {msg.read ? 'Read' : 'Unread'}
                       </span>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '5px' }}>
+                      <i className="fas fa-envelope" style={{ color: '#4a90e2', fontSize: '14px' }}></i>
+                      <a href={`mailto:${msg.email}`} style={{ color: '#4a90e2', textDecoration: 'none', fontSize: '14px' }}>
+                        {msg.email}
+                      </a>
                     </div>
                     <p style={{ fontSize: '14px', color: '#ccc', margin: 0 }}>{formatDate(msg.timestamp)}</p>
                   </div>

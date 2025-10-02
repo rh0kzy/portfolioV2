@@ -1,40 +1,18 @@
 'use client';
 
 import Script from "next/script";
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { database } from '../../lib/firebase';
-import { ref, set, get, push } from 'firebase/database';
+import { ref, set, push } from 'firebase/database';
 
 export default function Home() {
-  const [firebaseStatus, setFirebaseStatus] = useState('Checking Firebase connection...');
-  const [formData, setFormData] = useState({ name: '', message: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState('');
 
-  useEffect(() => {
-    const testConnection = async () => {
-      try {
-        // Test write
-        await set(ref(database, 'test/connection'), { message: 'Linked successfully!', timestamp: Date.now() });
-
-        // Test read
-        const snapshot = await get(ref(database, 'test/connection'));
-        if (snapshot.exists()) {
-          setFirebaseStatus('Firebase linked and working!');
-        } else {
-          setFirebaseStatus('Connection failed: No data found.');
-        }
-      } catch (error) {
-        setFirebaseStatus('Connection failed: ' + (error instanceof Error ? error.message : String(error)));
-      }
-    };
-
-    testConnection();
-  }, []);
-
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name.trim() || !formData.message.trim()) return;
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) return;
 
     setIsSubmitting(true);
     setSubmitStatus('');
@@ -45,13 +23,14 @@ export default function Home() {
       
       await set(newMessageRef, {
         name: formData.name.trim(),
+        email: formData.email.trim(),
         message: formData.message.trim(),
         timestamp: Date.now(),
         read: false
       });
 
       setSubmitStatus('Message sent successfully!');
-      setFormData({ name: '', message: '' });
+      setFormData({ name: '', email: '', message: '' });
     } catch (error) {
       setSubmitStatus('Failed to send message. Please try again.');
       console.error('Error sending message:', error);
@@ -67,10 +46,6 @@ export default function Home() {
 
   return (
     <>
-      {/* Firebase Status */}
-      <div style={{ position: 'fixed', top: '10px', right: '10px', background: 'rgba(0,0,0,0.8)', color: 'white', padding: '5px 10px', borderRadius: '5px', zIndex: 1000 }}>
-        {firebaseStatus}
-      </div>
       {/* Header Navigation */}
       <header className="header">
         <div className="container">
@@ -358,7 +333,7 @@ export default function Home() {
                   <span className="stat-label">Public Repositories</span>
                 </div>
                 <div className="stat-item">
-                  <span className="stat-number">100+</span>
+                  <span className="stat-number" data-stat="commits">500+</span>
                   <span className="stat-label">Commits this year</span>
                 </div>
               </div>
@@ -564,6 +539,17 @@ export default function Home() {
                   id="name" 
                   name="name" 
                   value={formData.name}
+                  onChange={handleInputChange}
+                  required 
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input 
+                  type="email" 
+                  id="email" 
+                  name="email" 
+                  value={formData.email}
                   onChange={handleInputChange}
                   required 
                 />

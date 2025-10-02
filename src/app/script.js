@@ -3,6 +3,8 @@
 // GitHub API Configuration
 const GITHUB_USERNAME = 'rh0kzy';
 const GITHUB_API_BASE = 'https://api.github.com';
+// GitHub Personal Access Token (set this in your environment or replace with your token)
+const GITHUB_TOKEN = process.env.NEXT_PUBLIC_GITHUB_TOKEN || 'your_github_token_here';
 
 // Fallback data when APIs fail
 const FALLBACK_GITHUB_DATA = {
@@ -42,8 +44,9 @@ async function robustFetch(endpoint) {
             method: 'GET',
             headers: {
                 'Accept': 'application/vnd.github+json',
-                'User-Agent': 'Portfolio-Website'
-            }
+                'User-Agent': 'Portfolio-Website',
+                'Authorization': GITHUB_TOKEN && GITHUB_TOKEN !== 'your_github_token_here' ? `token ${GITHUB_TOKEN}` : undefined
+            }.filter(Boolean)
         });
         
         if (response.ok) {
@@ -67,7 +70,11 @@ async function robustFetch(endpoint) {
     try {
         const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(endpoint)}`;
         console.log(`Trying CORS proxy: ${proxyUrl}`);
-        const response = await fetch(proxyUrl);
+        const response = await fetch(proxyUrl, {
+            headers: {
+                'Authorization': GITHUB_TOKEN && GITHUB_TOKEN !== 'your_github_token_here' ? `token ${GITHUB_TOKEN}` : undefined
+            }.filter(Boolean)
+        });
         
         if (response.ok) {
             console.log('CORS proxy request successful');
@@ -199,10 +206,10 @@ async function fetchContributionData() {
         const currentYear = new Date().getFullYear();
         const contributions = calculateContributions(githubData.events || []);
         
-        // If we got no contributions from events, use known values
-        const totalContributions = contributions.total > 0 ? contributions.total : 417;
-        const repoCount = githubData.repos?.length || 10;
-        const publicRepos = githubData.user?.public_repos || 10;
+        // If we got no contributions from events, don't show fake data
+        const totalContributions = contributions.total > 0 ? contributions.total : null;
+        const repoCount = githubData.repos?.length || 0;
+        const publicRepos = githubData.user?.public_repos || githubData.repos?.length || 0;
         
         const result = {
             totalContributions: totalContributions,
@@ -222,11 +229,11 @@ async function fetchContributionData() {
         console.error('Error fetching contribution data:', error);
         // Return fallback data instead of null
         return {
-            totalContributions: 417, // Your known contribution count
-            currentStreak: 5,
-            longestStreak: 15,
-            repoCount: 10,
-            publicRepos: 10,
+            totalContributions: null, // Will show as "N/A" or be hidden
+            currentStreak: null,
+            longestStreak: null,
+            repoCount: 0,
+            publicRepos: 0,
             followers: 0,
             following: 0
         };
@@ -449,8 +456,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 generateMockContributionGraph();
                 // Use fallback static data
                 const fallbackData = {
-                    totalContributions: 377,
-                    publicRepos: 8,
+                    totalContributions: null, // No fake data
+                    publicRepos: 0,
                     currentStreak: 0,
                     longestStreak: 0
                 };
@@ -493,7 +500,28 @@ document.addEventListener('DOMContentLoaded', function() {
         // Update main contribution count
         const contributionElements = document.querySelectorAll('[data-github-contributions]');
         contributionElements.forEach(element => {
-            element.textContent = data.totalContributions;
+            if (data.totalContributions !== null && data.totalContributions !== undefined) {
+                element.textContent = data.totalContributions;
+                element.style.display = ''; // Show element
+                // Update the graph header text
+                const graphHeader = element.closest('.graph-header');
+                if (graphHeader) {
+                    const span = graphHeader.querySelector('span');
+                    if (span) {
+                        span.innerHTML = `<span data-github-contributions>${data.totalContributions}</span> contributions in the last year`;
+                    }
+                }
+            } else {
+                element.textContent = 'N/A';
+                // Update the graph header for N/A case
+                const graphHeader = element.closest('.graph-header');
+                if (graphHeader) {
+                    const span = graphHeader.querySelector('span');
+                    if (span) {
+                        span.innerHTML = `Contribution data unavailable`;
+                    }
+                }
+            }
         });
 
         // Update repository count
@@ -514,10 +542,15 @@ document.addEventListener('DOMContentLoaded', function() {
         statNumbers.forEach(stat => {
             const dataAttr = stat.getAttribute('data-stat');
             if (dataAttr === 'contributions') {
-                animateNumber(stat, data.totalContributions);
+                if (data.totalContributions !== null && data.totalContributions !== undefined) {
+                    animateNumber(stat, data.totalContributions);
+                } else {
+                    stat.textContent = 'N/A';
+                }
             } else if (dataAttr === 'repos') {
                 animateNumber(stat, data.publicRepos);
             }
+            // Keep commits as manually set "+500"
         });
 
         // Update activity highlights
@@ -547,11 +580,15 @@ document.addEventListener('DOMContentLoaded', function() {
         const streakElement = document.querySelector('[data-github-streak]');
         if (streakElement && data.currentStreak > 0) {
             streakElement.textContent = `${data.currentStreak} day coding streak`;
+        } else if (streakElement) {
+            streakElement.textContent = 'Streak data unavailable';
         }
         
         const activityElement = document.querySelector('[data-github-activity]');
         if (activityElement) {
-            if (data.totalContributions > 200) {
+            if (data.totalContributions === null || data.totalContributions === undefined) {
+                activityElement.textContent = 'Activity data unavailable';
+            } else if (data.totalContributions > 200) {
                 activityElement.textContent = 'Very active contributor';
             } else if (data.totalContributions > 100) {
                 activityElement.textContent = 'Active contributor';
@@ -621,11 +658,11 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Based on actual GitHub profile data for @rh0kzy
         return {
-            totalContributions: 417, // Actual contribution count
-            publicRepos: 9,          // Actual count from API
+            totalContributions: null, // GitHub API doesn't provide contribution counts
+            publicRepos: 13,          // Actual count from GitHub profile
             followers: 3,           // Actual count from API
-            currentStreak: 5,
-            longestStreak: 20,
+            currentStreak: null,
+            longestStreak: null,
             year: currentYear,
             lastUpdated: currentDate.toISOString(),
             username: 'rh0kzy',
