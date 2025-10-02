@@ -1,8 +1,14 @@
 const nodemailer = require('nodemailer');
 
 exports.handler = async (event, context) => {
+  console.log('Function started. HTTP method:', event.httpMethod);
+  console.log('Environment check - EMAIL_USER exists:', !!process.env.EMAIL_USER);
+  console.log('Environment check - EMAIL_PASS exists:', !!process.env.EMAIL_PASS);
+  console.log('Environment check - ADMIN_EMAIL exists:', !!process.env.ADMIN_EMAIL);
+
   // Only allow POST requests
   if (event.httpMethod !== 'POST') {
+    console.log('Method not allowed:', event.httpMethod);
     return {
       statusCode: 405,
       headers: {
@@ -16,6 +22,7 @@ exports.handler = async (event, context) => {
 
   // Handle CORS preflight requests
   if (event.httpMethod === 'OPTIONS') {
+    console.log('CORS preflight request');
     return {
       statusCode: 200,
       headers: {
@@ -28,10 +35,14 @@ exports.handler = async (event, context) => {
   }
 
   try {
-    const { name, email, message } = JSON.parse(event.body);
+    console.log('Parsing request body...');
+    const { name, email, message } = JSON.parse(event.body || '{}');
+
+    console.log('Received data:', { name: !!name, email: !!email, message: !!message });
 
     // Validate input
     if (!name || !email || !message) {
+      console.log('Missing required fields');
       return {
         statusCode: 400,
         headers: {
@@ -42,6 +53,7 @@ exports.handler = async (event, context) => {
       };
     }
 
+    console.log('Creating transporter...');
     // Create transporter
     const transporter = nodemailer.createTransport({
       host: process.env.EMAIL_HOST,
@@ -51,11 +63,22 @@ exports.handler = async (event, context) => {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
       },
+      // Add these options for better compatibility
+      tls: {
+        rejectUnauthorized: false
+      }
     });
 
-    // Get site URL from environment or use default
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.URL || 'https://your-netlify-site.netlify.app';
+    console.log('Verifying transporter...');
+    // Verify connection configuration
+    await transporter.verify();
+    console.log('Transporter verified successfully');
 
+    // Get site URL from environment or use default
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.URL || 'https://aymenbelkadiptfl.netlify.app';
+    console.log('Using site URL:', siteUrl);
+
+    console.log('Preparing admin email...');
     // Email to admin (you) about new message
     const adminMailOptions = {
       from: `"Portfolio Contact Form" <${process.env.EMAIL_USER}>`,
@@ -113,6 +136,7 @@ exports.handler = async (event, context) => {
       `,
     };
 
+    console.log('Preparing confirmation email...');
     // Email confirmation to the person who sent the message
     const confirmationMailOptions = {
       from: `"Aymen Belkadi - Portfolio" <${process.env.EMAIL_USER}>`,
@@ -167,9 +191,14 @@ exports.handler = async (event, context) => {
       `,
     };
 
+    console.log('Sending admin email...');
     // Send both emails
     await transporter.sendMail(adminMailOptions);
+    console.log('Admin email sent successfully');
+
+    console.log('Sending confirmation email...');
     await transporter.sendMail(confirmationMailOptions);
+    console.log('Confirmation email sent successfully');
 
     return {
       statusCode: 200,
@@ -181,14 +210,19 @@ exports.handler = async (event, context) => {
     };
 
   } catch (error) {
-    console.error('Error sending email:', error);
+    console.error('Error in email function:', error);
+    console.error('Error stack:', error.stack);
     return {
       statusCode: 500,
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Headers': 'Content-Type',
       },
-      body: JSON.stringify({ error: 'Failed to send email', details: error.message }),
+      body: JSON.stringify({ 
+        error: 'Failed to send email', 
+        details: error.message,
+        stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+      }),
     };
   }
 };
