@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aymen Belkadi - Full Stack Developer CV</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .no-print {
+                display: none;
+            }
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.4;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        .cv-container {
+            width: 210mm;
+            height: 297mm;
+            margin: 20px auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            display: flex;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Left Sidebar */
+        .sidebar {
+            width: 35%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 25px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .profile-section {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid white;
+            object-fit: cover;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .profile-section h1 {
+            font-size: 20px;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .profile-section .title {
+            font-size: 13px;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .sidebar-section {
+            margin-bottom: 22px;
+        }
+
+        .sidebar-section h2 {
+            font-size: 14px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+            padding-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 10px;
+        }
+
+        .contact-item i {
+            margin-right: 8px;
+            width: 14px;
+        }
+
+        .skill-item {
+            margin-bottom: 6px;
+            font-size: 10px;
+        }
+
+        .skill-name {
+            margin-bottom: 3px;
+            font-weight: 500;
+        }
+
+        .skill-bar {
+            height: 6px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .skill-level {
+            height: 100%;
+            background: white;
+            border-radius: 3px;
+        }
+
+        .language-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            font-size: 10px;
+        }
+
+        /* Main Content */
+        .main-content {
+            width: 65%;
+            padding: 30px 35px;
+            background: white;
+        }
+
+        .main-section {
+            margin-bottom: 18px;
+        }
+
+        .main-section h2 {
+            font-size: 16px;
+            color: #667eea;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 4px;
+            font-weight: 700;
+        }
+
+        .summary {
+            font-size: 9.5px;
+            line-height: 1.5;
+            text-align: justify;
+            color: #555;
+        }
+
+        .experience-item {
+            margin-bottom: 12px;
+            page-break-inside: avoid;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 4px;
+        }
+
+        .experience-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .experience-tech {
+            font-size: 8px;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .experience-description {
+            font-size: 9px;
+            color: #666;
+            margin-bottom: 3px;
+            line-height: 1.4;
+        }
+
+        .experience-features {
+            font-size: 8.5px;
+            color: #555;
+            padding-left: 12px;
+        }
+
+        .experience-features li {
+            margin-bottom: 2px;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            font-size: 9px;
+        }
+
+        .tech-category {
+            background: #f8f9fa;
+            padding: 8px;
+            border-radius: 5px;
+            border-left: 3px solid #667eea;
+        }
+
+        .tech-category-title {
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 4px;
+            font-size: 9px;
+        }
+
+        .tech-list {
+            color: #666;
+            line-height: 1.5;
+            font-size: 8.5px;
+        }
+
+        .education-item {
+            font-size: 10px;
+            margin-bottom: 6px;
+        }
+
+        .education-degree {
+            font-weight: 700;
+            color: #333;
+        }
+
+        .education-details {
+            color: #666;
+            font-size: 9px;
+        }
+
+        /* Print Button */
+        .print-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s;
+        }
+
+        .print-button:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Decorative elements */
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .sidebar::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: -30px;
+            width: 100px;
+            height: 100px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <button class="print-button no-print" onclick="window.print()">🖨️ Print CV</button>
+
+    <div class="cv-container">
+        <!-- Left Sidebar -->
+        <div class="sidebar">
+            <div class="profile-section">
+                <img src="/photos/20250524_001245730_iOS.jpg" alt="Aymen Belkadi" class="profile-img">
+                <h1>Aymen Belkadi</h1>
+                <div class="title">Full Stack Developer</div>
+            </div>
+
+            <div class="sidebar-section">
+                <h2>Contact</h2>
+                <div class="contact-item">
+                    <i>📧</i>
+                    <span>aymenbelkadi1012005@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <i>🌐</i>
+                    <span>aymenbelkadiptfl.netlify.app</span>
+                </div>
+                <div class="contact-item">
+                    <i>💻</i>
+                    <span>github.com/rh0kzy</span>
+                </div>
+                <div class="contact-item">
+                    <i>📍</i>
+                    <span>Algeria</span>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h2>Core Skills</h2>
+                <div class="skill-item">
+                    <div class="skill-name">React & Next.js</div>
+                    <div class="skill-bar"><div class="skill-level" style="width: 90%"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">JavaScript/TypeScript</div>
+                    <div class="skill-bar"><div class="skill-level" style="width: 85%"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Java Development</div>
+                    <div class="skill-bar"><div class="skill-level" style="width: 80%"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Firebase & Cloud</div>
+                    <div class="skill-bar"><div class="skill-level" style="width: 75%"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Python</div>
+                    <div class="skill-bar"><div class="skill-level" style="width: 70%"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">UI/UX Design</div>
+                    <div class="skill-bar"><div class="skill-level" style="width: 85%"></div></div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h2>Languages</h2>
+                <div class="language-item">
+                    <span>Arabic</span>
+                    <span>Native</span>
+                </div>
+                <div class="language-item">
+                    <span>French</span>
+                    <span>Professional</span>
+                </div>
+                <div class="language-item">
+                    <span>English</span>
+                    <span>Professional</span>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h2>Soft Skills</h2>
+                <div style="font-size: 9px; line-height: 1.6;">
+                    • Problem Solving<br>
+                    • Self-Motivated<br>
+                    • Team Collaboration<br>
+                    • Project Management<br>
+                    • Adaptability<br>
+                    • Attention to Detail
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="main-section">
+                <h2>Professional Summary</h2>
+                <p class="summary">
+                    Full Stack Developer with proven experience in building scalable web applications and desktop software. 
+                    Successfully delivered 8+ complete projects across healthcare, e-commerce, entertainment, and education domains. 
+                    Specialized in React ecosystem, Next.js, and modern JavaScript with strong foundation in both frontend and backend 
+                    development. Experienced in cloud deployment, serverless architecture, and implementing secure authentication systems.
+                </p>
+            </div>
+
+            <div class="main-section">
+                <h2>Technical Stack</h2>
+                <div class="tech-grid">
+                    <div class="tech-category">
+                        <div class="tech-category-title">Frontend</div>
+                        <div class="tech-list">Next.js 15 • React 19 • TypeScript<br>Tailwind CSS • HTML5/CSS3</div>
+                    </div>
+                    <div class="tech-category">
+                        <div class="tech-category-title">Backend</div>
+                        <div class="tech-list">Node.js • Express.js • Nodemailer<br>Netlify Functions • RESTful APIs</div>
+                    </div>
+                    <div class="tech-category">
+                        <div class="tech-category-title">Database & Cloud</div>
+                        <div class="tech-list">Firebase • MySQL • Realtime DB<br>Firebase Auth • Netlify</div>
+                    </div>
+                    <div class="tech-category">
+                        <div class="tech-category-title">Desktop & Other</div>
+                        <div class="tech-list">Java Swing • Python PyQt6<br>Git • CI/CD • OOP Patterns</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-section">
+                <h2>Key Projects</h2>
+                
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div class="experience-title">Personal Portfolio Website</div>
+                        <div class="experience-tech">Next.js • React • Firebase</div>
+                    </div>
+                    <div class="experience-description">
+                        Modern responsive portfolio with automated contact system and secure admin dashboard
+                    </div>
+                    <ul class="experience-features">
+                        <li>Implemented serverless email notifications with Nodemailer & Netlify Functions</li>
+                        <li>Built secure admin panel with Firebase Authentication and CRUD operations</li>
+                        <li>Deployed with CI/CD pipeline on Netlify • Multi-language support (EN/FR/AR)</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div class="experience-title">Teacher Management System</div>
+                        <div class="experience-tech">React • Node.js • MySQL</div>
+                    </div>
+                    <div class="experience-description">
+                        Web application for academic administration with real-time analytics
+                    </div>
+                    <ul class="experience-features">
+                        <li>Role-based access control with admin/chief admin roles</li>
+                        <li>Real-time workload analytics and data visualization</li>
+                        <li>Automated teacher-module assignment workflow</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div class="experience-title">FilmFlock - Cinema Booking System</div>
+                        <div class="experience-tech">Java • MVC • Swing GUI</div>
+                    </div>
+                    <div class="experience-description">
+                        Desktop cinema management with customer booking and admin controls
+                    </div>
+                    <ul class="experience-features">
+                        <li>Full MVC architecture with interactive seat selection system</li>
+                        <li>Payment processing with validation • Admin panel for cinema management</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div class="experience-title">Medical Clinic Management</div>
+                        <div class="experience-tech">Java • Swing • OOP</div>
+                    </div>
+                    <div class="experience-description">
+                        Healthcare management system for patient records and appointments
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div class="experience-title">EDEN Parfum E-Commerce</div>
+                        <div class="experience-tech">HTML5 • CSS3 • JavaScript</div>
+                    </div>
+                    <div class="experience-description">
+                        Luxury e-commerce platform with 507+ premium fragrances • Mobile-first responsive design
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div class="experience-title">Radiation Pattern Visualizer</div>
+                        <div class="experience-tech">Python • PyQt6</div>
+                    </div>
+                    <div class="experience-description">
+                        Scientific tool for electromagnetic field analysis • Team project (4 developers)
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-section">
+                <h2>Education</h2>
+                <div class="education-item">
+                    <div class="education-degree">Ingénieur d'État in Artificial Intelligence (3rd Year)</div>
+                    <div class="education-details">USTHB (University of Science and Technology Houari Boumediene) • 2023 - 2028</div>
+                </div>
+            </div>
+
+            <div class="main-section">
+                <h2>Achievements</h2>
+                <div class="experience-description">
+                    ✓ 8+ Complete projects across multiple domains and technologies<br>
+                    ✓ Successfully implemented CI/CD pipeline and serverless architecture<br>
+                    ✓ Real-world application deployed for business client (EDEN PARFUM)<br>
+                    ✓ Experience with team collaboration in scientific computing project
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

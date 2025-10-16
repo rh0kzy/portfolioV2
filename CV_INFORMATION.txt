@@ -1,0 +1,352 @@
+═══════════════════════════════════════════════════════════════════════════════
+                        CV INFORMATION - AYMEN BELKADI
+                         Full Stack Developer Portfolio
+═══════════════════════════════════════════════════════════════════════════════
+
+PERSONAL INFORMATION
+═══════════════════════════════════════════════════════════════════════════════
+Name: Aymen Belkadi
+Title: Full Stack Developer
+Email: aymenbelkadi1012005@gmail.com
+Portfolio: https://aymenbelkadiptfl.netlify.app
+GitHub: github.com/rh0kzy
+Location: Algiers,Algeria
+
+PROFESSIONAL SUMMARY
+═══════════════════════════════════════════════════════════════════════════════
+Full Stack Developer with hands-on experience building scalable web applications 
+and desktop software. Specialized in React ecosystem, Next.js, and Java 
+development with a proven track record of delivering 8+ complete projects across 
+various domains including healthcare, e-commerce, entertainment, and education. 
+Strong foundation in both frontend and backend development with expertise in 
+modern web technologies and cloud deployment.
+
+
+TECHNICAL SKILLS
+═══════════════════════════════════════════════════════════════════════════════
+
+Frontend Development:
+  • Next.js 15 (with Turbopack)
+  • React 19 (Hooks, Context API, Component Design)
+  • TypeScript
+  • Tailwind CSS 4
+  • HTML5 / CSS3
+  • JavaScript ES6+
+  • Responsive Design & Mobile-First Approach
+
+Backend Development:
+  • Node.js
+  • Express.js
+  • Nodemailer (Email Integration)
+  • RESTful API Development
+  • Netlify Functions (Serverless)
+
+Database & Cloud:
+  • Firebase Realtime Database
+  • Firebase Authentication
+  • MySQL
+  • File-based Data Storage
+
+Desktop Development:
+  • Java SE & Java Swing (GUI Applications)
+  • Python (PyQt6 Framework)
+
+Tools & Technologies:
+  • Git & GitHub (Version Control)
+  • Netlify (Deployment & CI/CD)
+  • Firebase Console
+  • npm / Node Package Manager
+  • ESLint (Code Quality)
+
+Programming Languages:
+  • JavaScript / TypeScript (Advanced)
+  • Java (Intermediate)
+  • Python (Intermediate)
+  • C (Basic)
+  • HTML/CSS (Advanced)
+
+Architecture & Patterns:
+  • MVC (Model-View-Controller)
+  • Component-Based Architecture
+  • Server-Side Rendering (SSR)
+  • Static Site Generation (SSG)
+  • Object-Oriented Programming (OOP)
+
+
+PROFESSIONAL PROJECTS
+═══════════════════════════════════════════════════════════════════════════════
+
+1. PERSONAL PORTFOLIO WEBSITE
+   Live: https://aymenbelkadiptfl.netlify.app
+   
+   Description:
+   Modern, responsive portfolio showcasing 8 projects with integrated contact 
+   system and admin dashboard.
+   
+   Technologies:
+   • Next.js 15, React 19, TypeScript
+   • Tailwind CSS 4
+   • Firebase Realtime Database & Authentication
+   • Nodemailer (Email automation)
+   • Netlify Functions
+   • Netlify Deployment
+   
+   Key Features:
+   • Responsive dark theme design with smooth animations
+   • Multi-language support (English/French/Arabic)
+   • Automated contact form with email notifications
+   • Secure admin dashboard for message management
+   • Real-time database integration
+   • Authentication system with Firebase Auth
+   • CRUD operations (Create, Read, Update, Delete)
+   
+   Achievements:
+   • Successfully deployed with CI/CD pipeline
+   • Implemented serverless email system
+   • Created secure admin panel with authentication
+   • Optimized performance with Next.js best practices
+
+
+2. TEACHER MANAGEMENT SYSTEM (Gestion des Profs)
+   Repository: https://github.com/rh0kzy/teacher-management
+   
+   Description:
+   Web-based application for academic administration and teaching resource 
+   allocation with real-time analytics and data visualization.
+   
+   Technologies:
+   • React.js
+   • JavaScript
+   • MySQL Database
+   • Node.js Backend
+   
+   Key Features:
+   • Role-based access control (Admin/Chief Admin)
+   • Teacher database with detailed profiles
+   • Module assignment and tracking
+   • Workload analytics and visualization
+   • Session management
+   • Real-time data updates
+   
+   Achievements:
+   • Streamlined teacher-module assignment process
+   • Implemented comprehensive analytics dashboard
+   • Reduced administrative overhead by automating workflows
+
+
+3. FILMFLOCK - MOVIE TICKET BOOKING SYSTEM
+   Repository: https://github.com/rh0kzy/filmflock-cinema
+   
+   Description:
+   Comprehensive cinema management system with customer booking interface and 
+   administrative controls.
+   
+   Technologies:
+   • Java (MVC Architecture)
+   • Java Swing (GUI)
+   • File-based data storage
+   
+   Key Features:
+   • Movie browsing with detailed information
+   • Interactive seat selection with real-time availability
+   • Payment processing with validation
+   • Admin panel for cinema management
+   • Screening schedule management
+   • Customer booking history
+   
+   Achievements:
+   • Designed and implemented full MVC architecture
+   • Created intuitive GUI with Java Swing
+   • Developed complex booking algorithm with seat management
+
+
+4. MEDICAL CLINIC MANAGEMENT SYSTEM
+   Repository: https://github.com/rh0kzy/medical-clinic
+   
+   Description:
+   Desktop application for healthcare professionals to manage clinic operations, 
+   patient records, and appointments.
+   
+   Technologies:
+   • Java
+   • Java Swing
+   • OOP Design Patterns
+   • File Management
+   
+   Key Features:
+   • Patient record management
+   • Appointment scheduling
+   • Medical condition tracking
+   • Administrative task automation
+   • Secure data handling
+   
+   Achievements:
+   • Developed comprehensive healthcare management solution
+   • Implemented secure patient data handling
+   • Created user-friendly interface for medical staff
+
+
+5. EDEN PARFUM - E-COMMERCE WEBSITE
+   Repository: https://github.com/rh0kzy/eden-parfum
+   
+   Description:
+   Sophisticated e-commerce platform for luxury perfume retailer showcasing 
+   507+ premium fragrances.
+   
+   Technologies:
+   • HTML5, CSS3
+   • JavaScript (Vanilla)
+   • Responsive Design
+   • AVIF Image Optimization
+   
+   Key Features:
+   • Premium product catalog with 507+ items
+   • Mobile-first responsive design
+   • Performance-optimized images
+   • Smooth animations and transitions
+   • Cross-browser compatibility
+   
+   Achievements:
+   • Delivered luxury e-commerce experience
+   • Optimized performance for fast loading
+   • Implemented responsive design for all devices
+
+
+6. POLAR & SPHERICAL DATA VISUALIZER
+   Repository: https://github.com/rh0kzy/radiation-analyzer
+   
+   Description:
+   Scientific desktop application for electromagnetic field analysis and antenna 
+   design visualization.
+   
+   Technologies:
+   • Python
+   • PyQt6 (GUI Framework)
+   • Scientific Computing Libraries
+   
+   Key Features:
+   • Polar coordinate visualization
+   • Spherical coordinate visualization
+   • Radiation pattern analysis
+   • Interactive data plotting
+   
+   Achievements:
+   • Collaborated in team of 4 developers
+   • Implemented complex scientific visualization
+   • Delivered tool for antenna design analysis
+
+
+7. FILE MANAGEMENT SYSTEM
+   Repository: https://github.com/rh0kzy/file-management-system
+   
+   Description:
+   Desktop application for organizing and managing files efficiently.
+   
+   Technologies:
+   • Java
+   • File I/O Operations
+   • OOP Principles
+   
+   Key Features:
+   • File organization and categorization
+   • Search and filter functionality
+   • Batch operations
+   
+   Achievements:
+   • Designed efficient file handling system
+   • Implemented user-friendly interface
+
+
+8. UNO CARD GAME
+   Repository: https://github.com/rh0kzy/uno-game
+   
+   Description:
+   Digital implementation of the classic UNO card game.
+   
+   Technologies:
+   • Java
+   • Game Logic Development
+   • GUI Programming
+   
+   Key Features:
+   • Complete UNO game rules implementation
+   • Player vs Computer gameplay
+   • Interactive card interface
+   
+   Achievements:
+   • Implemented complex game logic
+   • Created engaging user interface
+
+
+EDUCATION
+═══════════════════════════════════════════════════════════════════════════════
+[Add your actual education details here]
+Examples:
+• Bachelor's/Master's in Computer Science
+• Engineering Degree in Software Engineering
+• Technical Diploma in IT
+
+
+SOFT SKILLS
+═══════════════════════════════════════════════════════════════════════════════
+• Problem-solving and analytical thinking
+• Self-motivated learner with continuous skill development
+• Team collaboration (demonstrated in team projects)
+• Project management and deadline adherence
+• Attention to detail in code quality and design
+• Adaptability to new technologies and frameworks
+• Strong documentation and communication skills
+
+
+LANGUAGES
+═══════════════════════════════════════════════════════════════════════════════
+[Add your language proficiencies]
+Examples:
+• Arabic: Native
+• French: Professional proficiency
+• English: Professional proficiency
+
+
+ACHIEVEMENTS & HIGHLIGHTS
+═══════════════════════════════════════════════════════════════════════════════
+• Successfully deployed 8+ complete projects across various domains
+• Built and deployed modern portfolio with CI/CD pipeline
+• Implemented automated email notification system with serverless architecture
+• Developed secure authentication and admin dashboard systems
+• Created applications used in real business contexts (EDEN PARFUM)
+• Demonstrated expertise in multiple programming paradigms (OOP, Functional)
+• Mastered both frontend and backend development
+• Experience with scientific computing and data visualization
+
+
+PROFESSIONAL INTERESTS
+═══════════════════════════════════════════════════════════════════════════════
+• Full Stack Web Development
+• Cloud Computing & Serverless Architecture
+• Modern JavaScript Frameworks (React, Next.js)
+• Database Design & Optimization
+• UI/UX Design & Responsive Development
+• Software Architecture & Design Patterns
+• DevOps & CI/CD Practices
+
+
+REFERENCES
+═══════════════════════════════════════════════════════════════════════════════
+Available upon request
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                        PORTFOLIO SHOWCASE SUMMARY
+═══════════════════════════════════════════════════════════════════════════════
+
+Total Projects: 8
+Domains Covered: Healthcare, E-commerce, Entertainment, Education, Scientific
+Development Types: Web Applications, Desktop Software, Scientific Tools
+Architecture Patterns: MVC, Component-Based, Object-Oriented
+Deployment Experience: Netlify, Firebase, CI/CD Pipelines
+
+Portfolio Link: https://aymenbelkadiptfl.netlify.app
+GitHub Profile: github.com/rh0kzy
+Email: aymenbelkadi1012005@gmail.com
+
+═══════════════════════════════════════════════════════════════════════════════

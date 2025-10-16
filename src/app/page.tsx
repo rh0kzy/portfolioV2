@@ -89,18 +89,50 @@ export default function Home() {
       {/* Header Navigation */}
       <header className="header">
         <div className="container">
-          <nav className="nav">
+          <nav className="nav" style={{ justifyContent: 'space-between', display: 'flex', alignItems: 'center', width: '100%' }}>
             <div className="nav-brand">
               <span className="portfolio-title"></span>
             </div>
-            <ul className="nav-menu">
+            <ul className="nav-menu" style={{ flex: '0 0 auto' }}>
               <li><a href="#home" className="nav-link">{t('nav.home')}</a></li>
               <li><a href="#projects" className="nav-link">{t('nav.projects')}</a></li>
               <li><a href="#about" className="nav-link">{t('nav.about')}</a></li>
               <li><a href="#skills" className="nav-link">{t('nav.skills')}</a></li>
               <li><a href="#contact" className="nav-link">{t('nav.contact')}</a></li>
             </ul>
-            <LanguageSwitcher />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginLeft: 'auto' }}>
+              <a 
+                href="/Aymen Belkadi - Full Stack Developer CV.pdf" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={{
+                  background: 'linear-gradient(45deg, #667eea, #764ba2)',
+                  color: 'white',
+                  padding: '10px 20px',
+                  borderRadius: '25px',
+                  textDecoration: 'none',
+                  fontSize: '14px',
+                  fontWeight: '600',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  transition: 'all 0.3s ease',
+                  boxShadow: '0 4px 15px rgba(102, 126, 234, 0.3)',
+                  whiteSpace: 'nowrap',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                  e.currentTarget.style.boxShadow = '0 6px 20px rgba(102, 126, 234, 0.4)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 4px 15px rgba(102, 126, 234, 0.3)';
+                }}
+              >
+                <span>📄</span>
+                Resume
+              </a>
+            </div>
           </nav>
         </div>
       </header>
