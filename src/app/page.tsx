@@ -278,6 +278,29 @@ export default function Home() {
 
             <div className="project-card">
               <div className="project-image">
+                <img src="/projects/usthb-recours/Screenshot 2025-11-07 163307.png" alt="USTHB Recours" />
+                <div className="project-overlay">
+                  <a href="/projects/usthb-recours" className="btn btn-primary">View Details</a>
+                  <a href="https://usthbrecours.netlify.app/" target="_blank" className="btn btn-secondary">
+                    <i className="fas fa-external-link-alt"></i>
+                    Live Site
+                  </a>
+                </div>
+              </div>
+              <div className="project-content">
+                <h3>USTHB Recours</h3>
+                <p>Student specialty change request management system with advanced security, real-time admin dashboard, and automated processing.</p>
+                <div className="project-tags">
+                  <span className="tag">Next.js</span>
+                  <span className="tag">TypeScript</span>
+                  <span className="tag">PostgreSQL</span>
+                  <span className="tag">JWT/2FA</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="project-card">
+              <div className="project-image">
                 <img src="/projects/teacher-management/profLogo.png" alt="Teacher Management" />
                 <div className="project-overlay">
                   <a href="/projects/teacher-management" className="btn btn-primary">View Details</a>

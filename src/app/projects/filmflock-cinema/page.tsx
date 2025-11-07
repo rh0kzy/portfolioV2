@@ -3,6 +3,7 @@
 import Script from "next/script";
 import Link from "next/link";
 import { useLanguage } from '../../../../lib/language-context';
+import ImageGallery from '../../components/ImageGallery';
 
 export default function FilmFlockCinema() {
   const { language } = useLanguage();
@@ -216,29 +217,15 @@ export default function FilmFlockCinema() {
         </div>
 
         {/* Screenshots */}
-        <div style={{
-          background: '#161b22',
-          padding: '40px',
-          borderRadius: '20px',
-          border: '1px solid #30363d',
-          marginBottom: '30px'
-        }}>
-          <h2 style={{fontSize: '1.8rem', fontWeight: '700', marginBottom: '20px', color: '#e6edf3', display: 'flex', alignItems: 'center', gap: '15px'}}>
-            <i className="fas fa-images" style={{color: '#58a6ff'}}></i> 
-            Screenshots
-          </h2>
-          <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '30px', marginTop: '40px'}}>
-            <div style={{borderRadius: '16px', overflow: 'hidden', boxShadow: '0 12px 40px rgba(0,0,0,0.4)'}}>
-              <img src="/projects/filmflock-cinema/cinema1.png" alt="FilmFlock Cinema Dashboard" style={{width: '100%', height: 'auto', display: 'block'}} />
-            </div>
-            <div style={{borderRadius: '16px', overflow: 'hidden', boxShadow: '0 12px 40px rgba(0,0,0,0.4)'}}>
-              <img src="/projects/filmflock-cinema/cinema2.png" alt="FilmFlock Cinema Booking" style={{width: '100%', height: 'auto', display: 'block'}} />
-            </div>
-            <div style={{borderRadius: '16px', overflow: 'hidden', boxShadow: '0 12px 40px rgba(0,0,0,0.4)'}}>
-              <img src="/projects/filmflock-cinema/cinema3.png" alt="FilmFlock Cinema Management" style={{width: '100%', height: 'auto', display: 'block'}} />
-            </div>
-          </div>
-        </div>
+        <ImageGallery 
+          images={[
+            { src: '/projects/filmflock-cinema/cinema1.png', alt: 'FilmFlock Cinema Dashboard' },
+            { src: '/projects/filmflock-cinema/cinema2.png', alt: 'FilmFlock Cinema Booking' },
+            { src: '/projects/filmflock-cinema/cinema3.png', alt: 'FilmFlock Cinema Management' }
+          ]}
+          language={language as 'en' | 'fr'}
+          title={language === 'fr' ? 'Galerie du Projet' : 'Screenshots'}
+        />
       </div>
 
       <Script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js" />

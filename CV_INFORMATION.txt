@@ -16,10 +16,10 @@ PROFESSIONAL SUMMARY
 ═══════════════════════════════════════════════════════════════════════════════
 Full Stack Developer with hands-on experience building scalable web applications 
 and desktop software. Specialized in React ecosystem, Next.js, and Java 
-development with a proven track record of delivering 8+ complete projects across 
-various domains including healthcare, e-commerce, entertainment, and education. 
-Strong foundation in both frontend and backend development with expertise in 
-modern web technologies and cloud deployment.
+development with a proven track record of delivering 9 complete projects across 
+various domains including student management, healthcare, e-commerce, 
+entertainment, and education. Strong foundation in both frontend and backend 
+development with expertise in modern web technologies and cloud deployment.
 
 
 TECHNICAL SKILLS
@@ -76,11 +76,72 @@ Architecture & Patterns:
 PROFESSIONAL PROJECTS
 ═══════════════════════════════════════════════════════════════════════════════
 
-1. PERSONAL PORTFOLIO WEBSITE
+1. USTHB RECOURS - STUDENT SPECIALTY CHANGE REQUEST MANAGEMENT
+   Repository: https://github.com/rh0kzy/recours
+   Status: In Production
+   
+   Description:
+   Modern and secure web application to digitalize and automate the student 
+   specialty change request process at USTHB. Provides an intuitive student portal 
+   and comprehensive admin dashboard with advanced security features.
+   
+   Technologies:
+   • Next.js 15.5.4 (with Turbopack)
+   • React 19.1.0
+   • TypeScript 5
+   • Tailwind CSS 4
+   • PostgreSQL (Supabase)
+   • Redis (ioredis)
+   • JWT & 2FA Authentication
+   • bcryptjs & Nodemailer
+   • Recharts (Analytics)
+   • Netlify Deployment
+   
+   Key Features:
+   • Secure JWT authentication with 2FA for Super Admins
+   • Student portal for specialty change requests
+   • Intelligent search with auto-completion (matricule lookup)
+   • Admin dashboard with real-time statistics
+   • Interactive charts and analytics (request trends, approval rates)
+   • Granular permission system (4 roles, 14 permissions)
+   • Rate limiting (5 attempts/15 minutes)
+   • Session timeout (30 minutes) with automatic JWT refresh
+   • Trusted devices with 2FA bypass (30 days)
+   • Complete audit logs for traceability
+   • Automatic student transfer processing
+   • Email notifications (confirmation, decision, transfer)
+   • Advanced filtering and sorting
+   • Bulk action processing
+   • Responsive design (mobile, tablet, desktop)
+   
+   Security Features:
+   • Bcrypt password hashing
+   • HTTPS encryption
+   • CSRF protection
+   • Account lockdown after failed attempts
+   • Error handling without sensitive information leakage
+   • Secure password reset with temporary tokens
+   
+   Achievements:
+   • Full-stack production-ready application
+   • Reduced request processing time by 80%
+   • Implemented enterprise-grade security measures
+   • Automated workflow eliminating manual processes
+   • Dashboard with comprehensive KPIs
+   • Complete type-safety with TypeScript
+   
+   Performance Optimization:
+   • Next.js 15 with Turbopack for ultra-fast compilation
+   • Redis caching for optimal query performance
+   • Lazy loading and component optimization
+   • Efficient database queries with indexes
+
+
+2. PERSONAL PORTFOLIO WEBSITE
    Live: https://aymenbelkadiptfl.netlify.app
    
    Description:
-   Modern, responsive portfolio showcasing 8 projects with integrated contact 
+   Modern, responsive portfolio showcasing 9 projects with integrated contact 
    system and admin dashboard.
    
    Technologies:
@@ -107,7 +168,7 @@ PROFESSIONAL PROJECTS
    • Optimized performance with Next.js best practices
 
 
-2. TEACHER MANAGEMENT SYSTEM (Gestion des Profs)
+3. TEACHER MANAGEMENT SYSTEM (Gestion des Profs)
    Repository: https://github.com/rh0kzy/teacher-management
    
    Description:
@@ -134,7 +195,7 @@ PROFESSIONAL PROJECTS
    • Reduced administrative overhead by automating workflows
 
 
-3. FILMFLOCK - MOVIE TICKET BOOKING SYSTEM
+4. FILMFLOCK - MOVIE TICKET BOOKING SYSTEM
    Repository: https://github.com/rh0kzy/filmflock-cinema
    
    Description:
@@ -160,7 +221,7 @@ PROFESSIONAL PROJECTS
    • Developed complex booking algorithm with seat management
 
 
-4. MEDICAL CLINIC MANAGEMENT SYSTEM
+5. MEDICAL CLINIC MANAGEMENT SYSTEM
    Repository: https://github.com/rh0kzy/medical-clinic
    
    Description:
@@ -186,7 +247,7 @@ PROFESSIONAL PROJECTS
    • Created user-friendly interface for medical staff
 
 
-5. EDEN PARFUM - E-COMMERCE WEBSITE
+6. EDEN PARFUM - E-COMMERCE WEBSITE
    Repository: https://github.com/rh0kzy/eden-parfum
    
    Description:
@@ -212,7 +273,7 @@ PROFESSIONAL PROJECTS
    • Implemented responsive design for all devices
 
 
-6. POLAR & SPHERICAL DATA VISUALIZER
+7. POLAR & SPHERICAL DATA VISUALIZER
    Repository: https://github.com/rh0kzy/radiation-analyzer
    
    Description:
@@ -236,7 +297,7 @@ PROFESSIONAL PROJECTS
    • Delivered tool for antenna design analysis
 
 
-7. FILE MANAGEMENT SYSTEM
+8. FILE MANAGEMENT SYSTEM
    Repository: https://github.com/rh0kzy/file-management-system
    
    Description:
@@ -257,7 +318,7 @@ PROFESSIONAL PROJECTS
    • Implemented user-friendly interface
 
 
-8. UNO CARD GAME
+9. UNO CARD GAME
    Repository: https://github.com/rh0kzy/uno-game
    
    Description:
@@ -309,10 +370,11 @@ Examples:
 
 ACHIEVEMENTS & HIGHLIGHTS
 ═══════════════════════════════════════════════════════════════════════════════
-• Successfully deployed 8+ complete projects across various domains
+• Successfully deployed 9 complete projects across various domains
 • Built and deployed modern portfolio with CI/CD pipeline
 • Implemented automated email notification system with serverless architecture
 • Developed secure authentication and admin dashboard systems
+• Created production-ready system with advanced security features (JWT, 2FA, Rate Limiting)
 • Created applications used in real business contexts (EDEN PARFUM)
 • Demonstrated expertise in multiple programming paradigms (OOP, Functional)
 • Mastered both frontend and backend development
@@ -339,11 +401,11 @@ Available upon request
                         PORTFOLIO SHOWCASE SUMMARY
 ═══════════════════════════════════════════════════════════════════════════════
 
-Total Projects: 8
-Domains Covered: Healthcare, E-commerce, Entertainment, Education, Scientific
+Total Projects: 9
+Domains Covered: Student Management, Education, Healthcare, E-commerce, Entertainment, Education, Scientific
 Development Types: Web Applications, Desktop Software, Scientific Tools
-Architecture Patterns: MVC, Component-Based, Object-Oriented
-Deployment Experience: Netlify, Firebase, CI/CD Pipelines
+Architecture Patterns: MVC, Component-Based, Object-Oriented, Full-Stack
+Deployment Experience: Netlify, Firebase, CI/CD Pipelines, Production Systems
 
 Portfolio Link: https://aymenbelkadiptfl.netlify.app
 GitHub Profile: github.com/rh0kzy

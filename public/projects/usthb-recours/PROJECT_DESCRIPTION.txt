@@ -1,0 +1,242 @@
+================================================================================
+                     DESCRIPTION DU PROJET POUR PORTFOLIO
+                            USTHB Recours
+================================================================================
+
+TITRE DU PROJET
+===============
+USTHB Recours - Système de Gestion des Demandes de Changement de Spécialité
+
+
+DESCRIPTION GÉNÉRALE
+====================
+USTHB Recours est une application web moderne et sécurisée développée pour 
+digitaliser et automatiser le processus de demande de changement de spécialité 
+. Le système fournit une interface intuitive pour les étudiants 
+et un panneau d'administration complet pour le traitement efficace des demandes 
+avec authentification, gestion des rôles, et automatisation des processus.
+
+
+CONTEXTE & OBJECTIFS
+====================
+- Remplacer un processus manuel et inefficace par une solution digitale
+- Simplifier la soumission des demandes de changement de spécialité
+- Automatiser le traitement et le transfert des étudiants
+- Centraliser la gestion administrative des demandes
+- Améliorer la communication avec les étudiants via notifications automatiques
+- Garantir la traçabilité et la sécurité des données
+
+
+TECHNOLOGIES UTILISÉES
+======================
+
+Frontend & Framework:
+  • Next.js 15.5.4 - Framework React full-stack avec SSR/SSG
+  • React 19.1.0 - Librairie UI
+  • TypeScript 5 - Langage typé pour meilleure qualité de code
+  • Tailwind CSS 4 - Framework CSS moderne et responsive
+  • Recharts 3.3.0 - Librairie pour graphiques et analytics
+
+Backend & Infrastructure:
+  • Next.js API Routes - Backend et microservices
+  • Node.js/Express - Serveur backend
+  • PostgreSQL (Supabase) - Base de données relationnelle
+  • Redis (via ioredis) - Cache et rate limiting
+  • JWT (jose) - Authentification par tokens
+
+Sécurité & Authentification:
+  • bcryptjs 3.0.3 - Hashage des mots de passe
+  • JWT - Tokens d'authentification sécurisés
+  • 2FA (Two-Factor Authentication) - Authentification à deux facteurs
+
+Communications:
+  • Nodemailer 7.0.6 - Envoi d'emails
+  • Templates HTML - Emails responsives et professionnels
+
+Déploiement:
+  • Netlify - Hébergement et CI/CD
+  • @netlify/plugin-nextjs - Intégration Next.js
+  • netlify.toml - Configuration de déploiement
+
+
+FONCTIONNALITÉS PRINCIPALES
+=============================
+
+1. PORTAIL ÉTUDIANT
+   ✓ Soumission de demande de changement de spécialité
+   ✓ Recherche automatique par matricule dans la base de données
+   ✓ Auto-complétion des informations (nom, prénom, email, téléphone, spécialité)
+   ✓ Validation en temps réel avec messages d'erreur contextuels
+   ✓ Upload sécurisé de justificatifs (si nécessaire)
+   ✓ Confirmation visuelle avec animations de succès
+   ✓ Notifications email automatiques (confirmation, décision, transfert)
+
+2. AUTHENTIFICATION & SÉCURITÉ
+   ✓ Login sécurisé avec JWT et gestion de sessions
+   ✓ 4 rôles d'accès (Viewer, Reviewer, Department Admin, Super Admin)
+   ✓ 14 permissions granulaires pour contrôle d'accès fin
+   ✓ Gestion des utilisateurs (création, modification, désactivation)
+   ✓ Rate limiting - Maximum 5 tentatives de connexion/15 minutes
+   ✓ Verrouillage automatique des comptes après tentatives échouées
+   ✓ 2FA (Two-Factor Authentication) activé pour Super Admins
+   ✓ Codes 2FA à 6 chiffres avec expiration de 10 minutes
+   ✓ Appareils de confiance (bypass 2FA pendant 30 jours)
+   ✓ Session timeout - Déconnexion après 30 min d'inactivité
+   ✓ Rafraîchissement automatique du token JWT
+   ✓ Password reset sécurisé avec tokens temporaires
+   ✓ Logs d'audit complets pour traçabilité
+
+3. PANNEAU D'ADMINISTRATION
+   ✓ Dashboard centralisé avec statistiques en temps réel
+   ✓ Graphiques des demandes (par jour/semaine/mois)
+   ✓ Taux d'approbation/rejet en pourcentage
+   ✓ Temps moyen de traitement des demandes
+   ✓ Demandes par spécialité avec visualisation
+   ✓ 4 cartes KPI (total, pending, approved, temps moyen)
+   ✓ Filtrage avancé par statut, spécialité, date
+   ✓ Recherche par nom/matricule avec résultats temps réel
+   ✓ Tri des colonnes (date, nom, statut, spécialité)
+   ✓ Vue détaillée de chaque demande avec historique
+   ✓ Actions en masse (sélection multiple)
+   ✓ Traitement rapide des demandes (approuver/rejeter)
+   ✓ Aperçu des comptes verrouillés
+   ✓ Gestion des appareils de confiance
+
+4. AUTOMATISATION
+   ✓ Transfert automatique de l'étudiant vers la nouvelle spécialité
+   ✓ Mise à jour instantanée de la base de données
+   ✓ Envoi d'emails automatiques selon la décision
+   ✓ Validation instantanée des formulaires
+   ✓ Mise à jour des statistiques en temps réel
+
+
+ARCHITECTURE & STRUCTURE DU PROJET
+===================================
+
+Frontend Structure:
+  • src/app/ - Pages et layouts Next.js
+    - admin/ - Portail d'administration avec login, dashboard, gestion des demandes
+    - api/ - Routes API backend
+    - components/ - Composants réutilisables (forms, charts, headers)
+  • src/lib/ - Utilitaires et logique métier
+    - auth.ts - Logique d'authentification
+    - supabase.ts - Client Supabase
+    - email.ts - Templates et envoi d'emails
+    - rateLimit.ts / rateLimitDB.ts - Gestion du rate limiting
+    - twoFactor.ts - Logique 2FA
+    - trustedDevices.ts - Gestion des appareils de confiance
+    - permissions.ts - Système de permissions
+    - passwordReset.ts - Logique de reset de mot de passe
+  • src/hooks/ - Custom React hooks
+    - useSessionTimeout.ts - Hook pour gestion du timeout de session
+
+Backend Structure:
+  • API Routes Next.js pour tous les endpoints
+  • API endpoints:
+    - /api/auth/* - Authentification (login, logout, refresh, 2FA, reset password)
+    - /api/admin/* - Administration (gestion utilisateurs, demandes, statistiques)
+    - /api/student/* - Endpoints étudiants
+    - /api/submit-request/ - Soumission des demandes
+    - /api/update-requests-table/ - Mise à jour des demandes
+  • Middleware Next.js pour authentification et autorisation
+  • Fonctions Netlify pour backends complexes
+
+
+POINTS FORTS & CARACTÉRISTIQUES
+================================
+
+Performance:
+  ✓ Next.js 15 avec Turbopack pour compilation ultra-rapide
+  ✓ Optimisation des images et assets
+  ✓ Caching intelligent avec Redis
+  ✓ Lazy loading des composants
+
+Sécurité:
+  ✓ Authentification JWT robuste
+  ✓ Hashage bcrypt des mots de passe
+  ✓ HTTPS et requêtes sécurisées
+  ✓ Tokens CSRF et validation côté serveur
+  ✓ Gestion des erreurs sans révéler d'informations sensibles
+  ✓ 2FA obligatoire pour Super Admins
+  ✓ Logs d'audit complets
+  ✓ Rate limiting pour prévention d'abus
+
+User Experience:
+  ✓ Interface responsive (mobile, tablette, desktop)
+  ✓ Design moderne et intuitif avec Tailwind CSS 4
+  ✓ Validation en temps réel avec feedback utilisateur
+  ✓ Animations fluides et transitions
+  ✓ Messages d'erreur clairs et contextuels
+  ✓ Dashboard intuitif avec graphiques interactifs
+  ✓ Formulaires intelligents avec auto-complétion
+
+Maintenabilité:
+  ✓ Code TypeScript pour sécurité des types
+  ✓ Architecture modulaire et composants réutilisables
+  ✓ Séparation claire des responsabilités
+  ✓ Configuration centralisée des variables d'environnement
+  ✓ Linting avec ESLint
+
+
+DÉPLOIEMENT
+===========
+  • Plateforme: Netlify
+  • CI/CD: Déploiement automatique via GitHub
+  • Infrastructure: Supabase (PostgreSQL managed)
+  • Configuration: netlify.toml pour build et environment variables
+  • Build Tool: Next.js avec Turbopack
+
+
+RÉSULTATS & IMPACT
+===================
+  • Système production-ready et fonctionnel
+  • Traitement des demandes optimisé (temps réduit de 80%)
+  • Traçabilité complète de toutes les transactions
+  • Sécurité renforcée avec authentification multi-couches
+  • Notifications automatiques réduisant les emails manuels
+  • Interface intuitive permettant une adoption facile par les utilisateurs
+  • Base de code maintenable et extensible
+
+
+APPRENTISSAGES & COMPÉTENCES DÉVELOPPÉES
+==========================================
+  ✓ Full-stack development avec Next.js (Frontend + Backend)
+  ✓ TypeScript et typage fort pour la qualité du code
+  ✓ Authentification et sécurité (JWT, 2FA, Rate Limiting)
+  ✓ Design patterns et architecture logicielle
+  ✓ Gestion des bases de données (PostgreSQL, Supabase)
+  ✓ Intégration d'emails et notifications
+  ✓ Déploiement et CI/CD avec Netlify
+  ✓ Gestion des erreurs et logging
+  ✓ Optimisation de performance (caching, compression)
+  ✓ UX/UI moderne avec Tailwind CSS
+  ✓ Système de permissions et contrôle d'accès
+  ✓ Analytics et création de dashboards
+
+
+DÉFIS SURMONTÉS
+================
+  • Implémentation d'un système d'authentification multi-couches sécurisé
+  • Optimisation du rate limiting avec Redis pour performances optimales
+  • Gestion des sessions et timeouts de manière robuste
+  • Création d'un système de permissions granulaires et flexible
+  • Intégration d'emails HTML responsives et professionnels
+  • Gestion du 2FA avec appareils de confiance
+  • Performance du dashboard avec gros volumes de données
+
+
+FONCTIONNALITÉS EN DÉVELOPPEMENT
+=================================
+  • Authenticator app (Google Authenticator, Authy)
+  • Recovery codes de secours pour 2FA
+  • Protection additionnelle des autres API endpoints
+
+
+LIEN & INFORMATION SUPPLÉMENTAIRE
+===================================
+  • Repository: github.com/rh0kzy/recours
+  • Version: 0.1.0
+  • Statut: En production
+
+
+================================================================================

@@ -3,6 +3,7 @@
 import Script from "next/script";
 import Link from "next/link";
 import { useLanguage } from '../../../../lib/language-context';
+import ImageGallery from '../../components/ImageGallery';
 
 export default function UnoGame() {
   const { language } = useLanguage();
@@ -202,11 +203,13 @@ export default function UnoGame() {
             <i className="fas fa-images" style={{color: '#58a6ff'}}></i> 
             Screenshots
           </h2>
-          <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '30px', marginTop: '40px'}}>
-            <div style={{borderRadius: '16px', overflow: 'hidden', boxShadow: '0 12px 40px rgba(0,0,0,0.4)'}}>
-              <img src="/projects/uno-game/uno_screenshot.png" alt="UNO Game Interface" style={{width: '100%', height: 'auto', display: 'block'}} />
-            </div>
-          </div>
+          <ImageGallery 
+            images={[
+              { src: '/projects/uno-game/uno_screenshot.png', alt: 'UNO Game Interface' }
+            ]}
+            language={language as 'en' | 'fr'}
+            title="UNO Game Screenshots"
+          />
         </div>
       </div>
 

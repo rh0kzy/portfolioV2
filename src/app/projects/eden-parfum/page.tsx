@@ -2,10 +2,25 @@
 
 import Script from "next/script";
 import Link from "next/link";
+import { useState, useEffect } from 'react';
 import { useLanguage } from '../../../../lib/language-context';
 
 export default function EdenParfum() {
   const { language } = useLanguage();
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  useEffect(() => {
+    const handleEscKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setSelectedImage(null);
+      }
+    };
+
+    if (selectedImage) {
+      window.addEventListener('keydown', handleEscKey);
+      return () => window.removeEventListener('keydown', handleEscKey);
+    }
+  }, [selectedImage]);
   const translations = language === 'fr' ? 
     {
       backToProjects: '← Retour aux Projets',
@@ -228,23 +243,104 @@ export default function EdenParfum() {
             Screenshots
           </h2>
           <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '30px', marginTop: '40px'}}>
-            <div style={{borderRadius: '16px', overflow: 'hidden', boxShadow: '0 12px 40px rgba(0,0,0,0.4)'}}>
-              <img src="/projects/eden-parfum/Eden1.png" alt="Eden Parfum Homepage" style={{width: '100%', height: 'auto', display: 'block'}} />
-            </div>
-            <div style={{borderRadius: '16px', overflow: 'hidden', boxShadow: '0 12px 40px rgba(0,0,0,0.4)'}}>
-              <img src="/projects/eden-parfum/eden2.png" alt="Eden Parfum Products" style={{width: '100%', height: 'auto', display: 'block'}} />
-            </div>
-            <div style={{borderRadius: '16px', overflow: 'hidden', boxShadow: '0 12px 40px rgba(0,0,0,0.4)'}}>
-              <img src="/projects/eden-parfum/eden4.png" alt="Eden Parfum Product Details" style={{width: '100%', height: 'auto', display: 'block'}} />
-            </div>
-            <div style={{borderRadius: '16px', overflow: 'hidden', boxShadow: '0 12px 40px rgba(0,0,0,0.4)'}}>
-              <img src="/projects/eden-parfum/eden5.png" alt="Eden Parfum Shopping Cart" style={{width: '100%', height: 'auto', display: 'block'}} />
-            </div>
-            <div style={{borderRadius: '16px', overflow: 'hidden', boxShadow: '0 12px 40px rgba(0,0,0,0.4)'}}>
-              <img src="/projects/eden-parfum/eden6.png" alt="Eden Parfum Checkout" style={{width: '100%', height: 'auto', display: 'block'}} />
+            {[
+              { src: '/projects/eden-parfum/Eden1.png', alt: 'Eden Parfum Homepage' },
+              { src: '/projects/eden-parfum/eden2.png', alt: 'Eden Parfum Products' },
+              { src: '/projects/eden-parfum/eden4.png', alt: 'Eden Parfum Product Details' },
+              { src: '/projects/eden-parfum/eden5.png', alt: 'Eden Parfum Shopping Cart' },
+              { src: '/projects/eden-parfum/eden6.png', alt: 'Eden Parfum Checkout' }
+            ].map((image, index) => (
+              <div 
+                key={index}
+                style={{borderRadius: '16px', overflow: 'hidden', boxShadow: '0 12px 40px rgba(0,0,0,0.4)', cursor: 'pointer', transition: 'transform 0.3s ease'}}
+                onClick={() => setSelectedImage(image.src)}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.02)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'scale(1)';
+                }}>
+                <img src={image.src} alt={image.alt} style={{width: '100%', height: 'auto', display: 'block'}} />
+              </div>
+            ))}
+          </div>
+          <p style={{color: '#8b949e', marginTop: '20px', fontSize: '0.9rem', textAlign: 'center'}}>
+            👆 Click on any image to enlarge it
+          </p>
+        </div>
+
+        {/* Image Modal */}
+        {selectedImage && (
+          <div 
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: 'rgba(0, 0, 0, 0.95)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              zIndex: 9999,
+              padding: '20px',
+              cursor: 'pointer'
+            }}
+            onClick={() => setSelectedImage(null)}
+          >
+            <div 
+              style={{
+                position: 'relative',
+                maxWidth: '90vw',
+                maxHeight: '90vh',
+                cursor: 'auto'
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img 
+                src={selectedImage} 
+                alt="Full screen" 
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain',
+                  borderRadius: '12px'
+                }}
+              />
+              <button
+                onClick={() => setSelectedImage(null)}
+                style={{
+                  position: 'absolute',
+                  top: '-50px',
+                  right: '0',
+                  background: 'none',
+                  border: 'none',
+                  color: '#e6edf3',
+                  fontSize: '2rem',
+                  cursor: 'pointer',
+                  padding: '10px',
+                  transition: 'color 0.2s ease'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = '#667eea';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = '#e6edf3';
+                }}
+              >
+                ✕
+              </button>
+              <p style={{
+                color: '#8b949e',
+                textAlign: 'center',
+                marginTop: '20px',
+                fontSize: '0.9rem'
+              }}>
+                Click to close or press Escape
+              </p>
             </div>
           </div>
-        </div>
+        )}
       </div>
 
       <Script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js" />
