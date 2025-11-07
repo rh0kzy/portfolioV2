@@ -5,7 +5,6 @@ import { useState } from 'react';
 import { database } from '../../lib/firebase';
 import { ref, set, push } from 'firebase/database';
 import { useLanguage } from '../../lib/language-context';
-import LanguageSwitcher from '../../components/LanguageSwitcher';
 
 export default function Home() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
