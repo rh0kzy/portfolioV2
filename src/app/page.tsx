@@ -193,6 +193,28 @@ export default function Home() {
           <div className="projects-grid">
             <div className="project-card">
               <div className="project-image">
+                <img src="/projects/Doxa-Ai-Agent/Screenshot%202025-12-29%20014859.png" alt="Doxa AI Agent" />
+                <div className="project-overlay" style={{ display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'center', justifyContent: 'center' }}>
+                  <a href="/projects/doxa-ai-agent" className="btn btn-primary" style={{ width: '150px', justifyContent: 'center' }}>{t('projects.viewDetails')}</a>
+                  <a href="https://github.com/rh0kzy/AiTC12" target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ width: '150px', justifyContent: 'center', color: 'white', borderColor: 'white' }}>
+                    <i className="fab fa-github"></i>
+                    GitHub
+                  </a>
+                </div>
+              </div>
+              <div className="project-content">
+                <h3>{t('projects.doxaAiAgent.title')}</h3>
+                <p>{t('projects.doxaAiAgent.description')}</p>
+                <div className="project-tags">
+                  <span className="tag">Next.js 16</span>
+                  <span className="tag">FastAPI</span>
+                  <span className="tag">Mistral AI</span>
+                  <span className="tag">ChromaDB</span>
+                </div>
+              </div>
+            </div>
+            <div className="project-card">
+              <div className="project-image">
                 <img src="/projects/uno-game/UNO_Logo.svg.png" alt="UNO Game" />
                 <div className="project-overlay">
                   <a href="/projects/uno-game" className="btn btn-primary">{t('projects.viewDetails')}</a>

@@ -107,6 +107,10 @@ const getTranslations = (language: Language) => {
         unoGame: {
           title: 'UNO Game',
           description: 'Multiplayer card game implementation with real-time gameplay and interactive user interface.'
+        },
+        doxaAiAgent: {
+          title: 'Doxa AI Agent',
+          description: 'Intelligent support ticket system using RAG to automate regulatory and operational inquiries.'
         }
       },
       projectPages: {
@@ -114,6 +118,23 @@ const getTranslations = (language: Language) => {
         technologies: 'Technologies Used',
         features: 'Key Features',
         screenshots: 'Screenshots',
+        livePreview: 'Live Preview',
+        githubRepo: 'GitHub Repository',
+        doxaAiAgent: {
+          title: 'Doxa AI Agent',
+          subtitle: 'AI-Powered Support Ticket Management System',
+          description: 'An intelligent support ticket management system and AI agent designed to automate and streamline regulatory and operational inquiries using RAG.',
+          overview: 'This project showcases a complete full-stack architecture featuring an AI-driven orchestration engine. It automates the processing of user tickets and support requests by analyzing regulatory documents (DOXA) and generating intelligent, context-aware responses.',
+          techStack: 'Next.js 16, FastAPI, Mistral AI, ChromaDB, Tailwind CSS 4',
+          keyFeatures: [
+            'AI-Orchestrated Pipeline (Precheck, PII Detection, RAG Search)',
+            'RAG (Retrieval-Augmented Generation) with ChromaDB',
+            'Intelligent Feedback & Confidence Thresholds',
+            'Advanced Security: JWT & Regex PII Sanitization',
+            'Granular Role-Based Access Control (4 roles)',
+            'Real-time Admin Dashboard & SMTP Notifications'
+          ]
+        },
         edenParfum: {
           title: 'Eden Parfum',
           subtitle: 'Luxury Perfume E-commerce Platform',
@@ -313,6 +334,10 @@ const getTranslations = (language: Language) => {
         unoGame: {
           title: 'Jeu UNO',
           description: 'Implémentation de jeu de cartes multijoueur avec gameplay en temps réel et interface utilisateur interactive.'
+        },
+        doxaAiAgent: {
+          title: 'Doxa AI Agent',
+          description: 'Système intelligent de tickets de support utilisant le RAG pour automatiser les demandes réglementaires et opérationnelles.'
         }
       },
       projectPages: {
@@ -320,6 +345,23 @@ const getTranslations = (language: Language) => {
         technologies: 'Technologies Utilisées',
         features: 'Fonctionnalités Clés',
         screenshots: 'Captures d\'Écran',
+        livePreview: 'Démo en Ligne',
+        githubRepo: 'Dépôt GitHub',
+        doxaAiAgent: {
+          title: 'Doxa AI Agent',
+          subtitle: 'Système de Gestion de Tickets de Support par IA',
+          description: 'Système intelligent de gestion de tickets de support et agent IA conçu pour automatiser et simplifier les demandes réglementaires et opérationnelles via RAG.',
+          overview: 'Ce projet présente une architecture full-stack complète avec un moteur d\'orchestration piloté par l\'IA. Il automatise le traitement des tickets d\'utilisateurs et des demandes de support en analysant les documents réglementaires (DOXA) et en générant des réponses intelligentes et contextuelles.',
+          techStack: 'Next.js 16, FastAPI, Mistral AI, ChromaDB, Tailwind CSS 4',
+          keyFeatures: [
+            'Pipeline Orchestré par l\'IA (Pré-vérification, Détection PII, Recherche RAG)',
+            'RAG (Génération Augmentée par Récupération) avec ChromaDB',
+            'Évaluation Intelligente et Seuils de Confiance',
+            'Sécurité Avancée : JWT et Désinfection PII par Regex',
+            'Contrôle d\'Accès granulaire basé sur les rôles (4 rôles)',
+            'Tableau de Bord Admin en temps réel et Notifications SMTP'
+          ]
+        },
         edenParfum: {
           title: 'Eden Parfum',
           subtitle: 'Plateforme E-commerce de Parfums de Luxe',

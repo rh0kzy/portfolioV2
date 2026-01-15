@@ -1,0 +1,68 @@
+Doxa AI Agent
+An intelligent support ticket management system and AI agent designed to automate and streamline regulatory and operational inquiries using RAG.
+
+Tech Stack:
+- Next.js 16.1 (App Router)
+- FastAPI / Python
+- TypeScript 5
+- Tailwind CSS 4
+- ChromaDB (Vector Search)
+- Mistral AI Integration
+- JWT Authentication
+
+Project Description:
+This project showcases a complete full-stack architecture featuring an AI-driven orchestration engine. It automates the processing of user tickets and support requests by analyzing regulatory documents (DOXA) and generating intelligent, context-aware responses. The system includes a robust FastAPI backend and a high-performance Next.js 16 frontend for both users and administrators.
+
+Key Features:
+- ✓ AI-Orchestrated Pipeline: Multi-step request processing (Precheck, PII Detection, RAG Search).
+- ✓ RAG (Retrieval-Augmented Generation): Uses ChromaDB to search through indexed DOXA documentation for accurate, policy-based answers.
+- ✓ Intelligent Feedback Evaluation: Deterministic confidence scoring to automatically respond or escalate to human agents.
+- ✓ Advanced Security: Secure JWT authentication with regex-based PII (Personally Identifiable Information) scanning before any LLM interaction.
+- ✓ Granular Role System: Comprehensive access control with 4 distinct roles (Admin, Agents, and tiered Clients).
+- ✓ Admin Dashboard: Real-time management of tickets, users, and automated response quality tracking.
+- ✓ Automated Email Notifications: Integrated SMTP service for real-time status updates via email.
+- ✓ Resilient Architecture: Implemented Circuit Breakers and structured logging for production-grade reliability.
+
+Technology Stack Details:
+
+Frontend:
+- Next.js 16.1.0
+- React 19.2.3
+- TypeScript 5
+- Tailwind CSS 4
+
+Backend / AI:
+- FastAPI (Python)
+- SQLAlchemy (ORM)
+- Mistral AI (LLM)
+- ChromaDB (Vector Database)
+- SMTP (Email Service)
+- Structlog (Structured Logging)
+
+Security:
+- JWT (python-jose)
+- Bcrypt (Password Hashing)
+- Regex-based Data Sanitization
+- Role-Based Access Control (RBAC)
+
+Project Highlights:
+
+🔒 AI PII Protection
+Advanced security layer that scans and masks sensitive user data (like credit card numbers or contact info) before sending queries to LLMs.
+
+🤖 RAG Orchestration
+Sophisticated AI agent pipeline that ingests complex PDF documentation (DOXA) to provide legally and procedurally accurate answers to user requests.
+
+📊 Automated Escalation
+Intelligent "Confidence Thresholds" that detect when a request is too complex for AI and automatically assign it to a human agent.
+
+⚡ Modern Performance
+Built with the latest Next.js 16 and Tailwind CSS 4, ensuring sub-second page loads and a fully responsive mobile interface.
+
+🏗️ Clean Architecture
+Decoupled system design separating Python-based AI services, a RESTful API backend, and a reactive TypeScript frontend.
+
+Project Links:
+- GitHub Repository: https://github.com/BMA91/TC_PROJECT
+
+Version: 0.1.0 | Status: In development
